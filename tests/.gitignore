@@ -13,12 +13,6 @@
 /**/backup/
 /**/tmp/
 
-#Python + stuptools + sphinx
-/**/build/
-/**/dist/
-/**/jsondata.egg-info/
-
-
 # by default these are copies only, the source are in components 
 # and/or src if required set individually
 /**/repos/
@@ -181,3 +175,5 @@ ide/eclipse/.metadata/.plugins/org.eclipse.core.runtime/*
 !.gitignore
 
 
+# generated only
+/**/data
