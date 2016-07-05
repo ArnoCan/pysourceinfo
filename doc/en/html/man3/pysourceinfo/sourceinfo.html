@@ -1,0 +1,204 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>‘PySourceInfo’ - RTTI for Source Code &mdash; pysourceinfo 0.1.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pysourceinfo 0.1.1 documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">pysourceinfo 0.1.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="pysourceinfo-rtti-for-source-code">
+<h1>&#8216;PySourceInfo&#8217; - RTTI for Source Code<a class="headerlink" href="#pysourceinfo-rtti-for-source-code" title="Permalink to this headline">¶</a></h1>
+<p>The package &#8216;pysourceinfo&#8217; supports beneath the hierarchical
+navigation on filesystems, also utilities as helpers for
+source code analysis at runtime.
+This is based on the standard package &#8216;inspect&#8217; and provides a
+flat call interface with additional correlation where required.</p>
+<p>The provided runtime structure information on Python sources is
+covered with basically one single type of interface</p>
+<blockquote>
+<div><div class="highlight-python"><pre>def getCaller&lt;Interface&gt;(spos=1):
+   """ Stack position:
+      spos==0 =&gt; caller(0==CallInterface)
+      spos==1 =&gt; caller(1)
+      spos==N =&gt; caller(N==level N)
+   """
+   pass
+
+def getModule&lt;Interface&gt;(spos=1):
+   pass
+
+def getPythonPath&lt;Interface&gt;(spos=1):
+   pass</pre>
+</div>
+</div></blockquote>
+<p>Which gathers information on the defined &#8216;&lt;Intefrace&gt;&#8217; from
+the call stack, loaded modules, or search path &#8216;PYTHONPATH&#8217;/&#8217;sys.path&#8217;.</p>
+<p>The covered structural dynamic elements based on the call stackk are:</p>
+<ul class="simple">
+<li>package</li>
+<li>module</li>
+<li>function</li>
+<li>class/method</li>
+<li>namespaces - global/local</li>
+</ul>
+<p>With additional functions covering mostly static information:</p>
+<ul class="simple">
+<li>loaded module</li>
+<li>sys.path - actual OID and load path</li>
+</ul>
+<p>The target is to simplify the call interface of &#8216;inspect&#8217; for the most
+common calls.</p>
+<p>A typical application is the drop-in design of regression and
+unit tests.</p>
+<div class="section" id="information-on-specific-objects">
+<h2>Information on Specific objects<a class="headerlink" href="#information-on-specific-objects" title="Permalink to this headline">¶</a></h2>
+<p>Although the &#8216;inspect&#8217; package provides a wide variety of information
+some are still not available.
+Therefore the missing is extracted from combination of multiple sources
+and rules.</p>
+<p>In general the main sources of information are given by the
+targte type.</p>
+<ul>
+<li><p class="first">getCaller...</p>
+<blockquote>
+<div><p>This type works on the frame stack of &#8216;inspect&#8217;
+Some data, which is not directly provided, like
+the actual used PYTHONPATH item, are calculated
+by combination of multiple sources.</p>
+</div></blockquote>
+</li>
+<li><p class="first">getModule...</p>
+<blockquote>
+<div><p>This type works on the module information mainly
+based on &#8216;__file__&#8217;, and &#8216;__name__&#8217;.</p>
+</div></blockquote>
+</li>
+<li><p class="first">getPythonPath...</p>
+<blockquote>
+<div><p>This type correlates PYTHONPATH/sys.path with
+provided path and file names.</p>
+</div></blockquote>
+</li>
+</ul>
+<p>The objects for which the information could be requested are
+mainly categorised as follows.</p>
+<ul>
+<li><p class="first">function names and filepathnames</p>
+<blockquote>
+<div><p>Provided by inspect and the module object.</p>
+</div></blockquote>
+</li>
+<li><p class="first">module names and filepathnames</p>
+<blockquote>
+<div><p>Provided by inspect and the module object.</p>
+</div></blockquote>
+</li>
+<li><p class="first">package names and filepathnames</p>
+<blockquote>
+<div><p>Derived from the module information including
+the global namespace, and the the current content
+of &#8216;sys.path&#8217;. Thus this could be unreliable under
+some circumstances.</p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/pysourceinfo-64x64.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">&#8216;PySourceInfo&#8217; - RTTI for Source Code</a><ul>
+<li><a class="reference internal" href="#information-on-specific-objects">Information on Specific objects</a></li>
+</ul>
+</li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/sourceinfo.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="index.html">pysourceinfo 0.1.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, Arno-Can Uestuensoez.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

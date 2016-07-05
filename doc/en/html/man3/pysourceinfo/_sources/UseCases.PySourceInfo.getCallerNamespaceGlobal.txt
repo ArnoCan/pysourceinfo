@@ -1,0 +1,11 @@
+getCallerNamespaceGlobal Package
+================================
+
+:mod:`CallCase` Module
+----------------------
+
+.. automodule:: UseCases.PySourceInfo.getCallerNamespaceGlobal.CallCase
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

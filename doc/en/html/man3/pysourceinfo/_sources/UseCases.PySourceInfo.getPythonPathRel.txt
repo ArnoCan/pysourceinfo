@@ -1,0 +1,11 @@
+getPythonPathRel Package
+========================
+
+:mod:`CallCase` Module
+----------------------
+
+.. automodule:: UseCases.PySourceInfo.getPythonPathRel.CallCase
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

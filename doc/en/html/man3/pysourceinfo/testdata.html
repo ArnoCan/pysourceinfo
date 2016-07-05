@@ -1,0 +1,505 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>testdata Package &mdash; pysourceinfo 0.1.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pysourceinfo 0.1.1 documentation" href="index.html" />
+    <link rel="next" title="a Package" href="testdata.a.html" />
+    <link rel="prev" title="dummymodules Package" href="tests.dummymodules.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="testdata.a.html" title="a Package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="tests.dummymodules.html" title="dummymodules Package"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">pysourceinfo 0.1.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="testdata-package">
+<h1>testdata Package<a class="headerlink" href="#testdata-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2><tt class="xref py py-mod docutils literal"><span class="pre">testdata</span></tt> Package<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-testdata.__init__"></span><div class="section" id="common-test-data-for-use-cases">
+<h3>Common test data for Use-Cases<a class="headerlink" href="#common-test-data-for-use-cases" title="Permalink to this headline">¶</a></h3>
+<p>Common data for &#8216;UseCases&#8217; and &#8216;tests&#8217;. Refer to the package by PYTHONPATH.
+The global variable &#8216;testdata.mypath&#8217; provides the pathname into &#8216;testdata&#8217;.</p>
+<dl class="docutils">
+<dt>The following directory tree is provided:</dt>
+<dd><div class="first last highlight-python"><pre>testdata
+`a
+ |-- a.sh
+ |-- a.smod
+ |-- A.txt
+ |-- b
+ |   |-- b.pl
+ |   |-- b.pm
+ |   |-- b.pod
+ |   |-- b.py
+ |   |-- b.pyc
+ |   |-- b.sh
+ |   |-- b.smod
+ |   |-- B.txt
+ |   |-- c
+ |   |   |-- c.pl
+ |   |   |-- c.pm
+ |   |   |-- c.pod
+ |   |   |-- c.py
+ |   |   |-- c.pyc
+ |   |   |-- c.sh
+ |   |   |-- c.smod
+ |   |   |-- C.txt
+ |   |   |-- d
+ |   |   |   |-- d.pl
+ |   |   |   |-- d.pm
+ |   |   |   |-- d.pod
+ |   |   |   |-- d.py
+ |   |   |   |-- d.pyc
+ |   |   |   |-- d.sh
+ |   |   |   |-- d.smod
+ |   |   |   |-- D.txt
+ |   |   |   |-- __init__.py
+ |   |   |   `-- __init__.pyc
+ |   |   |-- __init__.py
+ |   |   `-- __init__.pyc
+ |   |-- __init__.py
+ |   |-- __init__.pyc
+ |   `-- libb.sh
+ |-- b0
+ |   |-- b0.pl
+ |   |-- b0.pm
+ |   |-- b0.pod
+ |   |-- b0.py
+ |   |-- b0.pyc
+ |   |-- b0.sh
+ |   |-- b0.smod
+ |   |-- B.txt
+ |   |-- c
+ |   |   |-- c.pl
+ |   |   |-- c.pm
+ |   |   |-- c.pod
+ |   |   |-- c.py
+ |   |   |-- c.pyc
+ |   |   |-- c.sh
+ |   |   |-- c.smod
+ |   |   |-- C.txt
+ |   |   |-- d
+ |   |   |   |-- d.pl
+ |   |   |   |-- d.pm
+ |   |   |   |-- d.pod
+ |   |   |   |-- d.py
+ |   |   |   |-- d.pyc
+ |   |   |   |-- d.sh
+ |   |   |   |-- d.smod
+ |   |   |   |-- D.txt
+ |   |   |   |-- __init__.py
+ |   |   |   `-- __init__.pyc
+ |   |   |-- __init__.py
+ |   |   `-- __init__.pyc
+ |   |-- __init__.py
+ |   |-- __init__.pyc
+ |   `-- libb0.sh
+ |-- b1
+ |   |-- b1.pl
+ |   |-- b1.pm
+ |   |-- b1.pod
+ |   |-- b1.py
+ |   |-- b1.pyc
+ |   |-- b1.sh
+ |   |-- b1.smod
+ |   |-- B1.txt
+ |   |-- c1
+ |   |   |-- c1.pl
+ |   |   |-- c1.pm
+ |   |   |-- c1.pod
+ |   |   |-- c1.py
+ |   |   |-- c1.pyc
+ |   |   |-- c1.sh
+ |   |   |-- c1.smod
+ |   |   |-- C1.txt
+ |   |   |-- d1
+ |   |   |   |-- d1.pl
+ |   |   |   |-- d1.pm
+ |   |   |   |-- d1.pod
+ |   |   |   |-- d1.py
+ |   |   |   |-- d1.pyc
+ |   |   |   |-- d1.sh
+ |   |   |   |-- d1.smod
+ |   |   |   |-- D1.txt
+ |   |   |   |-- __init__.py
+ |   |   |   `-- __init__.pyc
+ |   |   |-- __init__.py
+ |   |   `-- __init__.pyc
+ |   |-- __init__.py
+ |   |-- __init__.pyc
+ |   `-- libb1.sh
+ |-- b2
+ |   |-- b2.pl
+ |   |-- b2.pm
+ |   |-- b2.pod
+ |   |-- b2.py
+ |   |-- b2.pyc
+ |   |-- b2.sh
+ |   |-- b2.smod
+ |   |-- B.txt
+ |   |-- c
+ |   |   |-- c.pl
+ |   |   |-- c.pm
+ |   |   |-- c.pod
+ |   |   |-- c.py
+ |   |   |-- c.pyc
+ |   |   |-- c.sh
+ |   |   |-- c.smod
+ |   |   |-- C.txt
+ |   |   |-- d
+ |   |   |   |-- d.pl
+ |   |   |   |-- d.pm
+ |   |   |   |-- d.pod
+ |   |   |   |-- d.py
+ |   |   |   |-- d.pyc
+ |   |   |   |-- d.sh
+ |   |   |   |-- d.smod
+ |   |   |   |-- D.txt
+ |   |   |   |-- __init__.py
+ |   |   |   `-- __init__.pyc
+ |   |   |-- __init__.py
+ |   |   `-- __init__.pyc
+ |   |-- c0
+ |   |   |-- c0.pl
+ |   |   |-- c0.pm
+ |   |   |-- c0.pod
+ |   |   |-- c0.py
+ |   |   |-- c0.pyc
+ |   |   |-- c0.sh
+ |   |   |-- c0.smod
+ |   |   |-- C.txt
+ |   |   |-- d
+ |   |   |   |-- d.pl
+ |   |   |   |-- d.pm
+ |   |   |   |-- d.pod
+ |   |   |   |-- d.py
+ |   |   |   |-- d.pyc
+ |   |   |   |-- d.sh
+ |   |   |   |-- d.smod
+ |   |   |   |-- D.txt
+ |   |   |   |-- __init__.py
+ |   |   |   `-- __init__.pyc
+ |   |   |-- __init__.py
+ |   |   `-- __init__.pyc
+ |   |-- c1
+ |   |   |-- c1.pl
+ |   |   |-- c1.pm
+ |   |   |-- c1.pod
+ |   |   |-- c1.py
+ |   |   |-- c1.pyc
+ |   |   |-- c1.sh
+ |   |   |-- c1.smod
+ |   |   |-- C.txt
+ |   |   |-- d1
+ |   |   |   |-- d1.pl
+ |   |   |   |-- d1.pm
+ |   |   |   |-- d1.pod
+ |   |   |   |-- d1.py
+ |   |   |   |-- d1.pyc
+ |   |   |   |-- d1.sh
+ |   |   |   |-- d1.smod
+ |   |   |   |-- D.txt
+ |   |   |   |-- __init__.py
+ |   |   |   `-- __init__.pyc
+ |   |   |-- __init__.py
+ |   |   `-- __init__.pyc
+ |   |-- c2
+ |   |   |-- c2.pl
+ |   |   |-- c2.pm
+ |   |   |-- c2.pod
+ |   |   |-- c2.py
+ |   |   |-- c2.pyc
+ |   |   |-- c2.sh
+ |   |   |-- c2.smod
+ |   |   |-- C.txt
+ |   |   |-- d
+ |   |   |   |-- D1.txt
+ |   |   |   |-- D2.txt
+ |   |   |   |-- d.pl
+ |   |   |   |-- d.pm
+ |   |   |   |-- d.pod
+ |   |   |   |-- d.py
+ |   |   |   |-- d.pyc
+ |   |   |   |-- d.sh
+ |   |   |   |-- d.smod
+ |   |   |   |-- D.txt
+ |   |   |   |-- __init__.py
+ |   |   |   `-- __init__.pyc
+ |   |   |-- __init__.py
+ |   |   `-- __init__.pyc
+ |   |-- __init__.py
+ |   |-- __init__.pyc
+ |   `-- libb2.sh
+ |-- b3
+ |   |-- libb0.sh
+ |   |-- libb3
+ |   |   |-- a.sh
+ |   |   |-- b.sh
+ |   |   `-- libb3.sh
+ |   |-- libb4
+ |   |   |-- a.sh
+ |   |   |-- b.sh
+ |   |   `-- hook.sh
+ |   `-- smods
+ |       |-- a
+ |       |   |-- a.smod
+ |       |   |-- b.smod
+ |       |   |-- c
+ |       |   |   |-- a.smod
+ |       |   |   |-- help.smod
+ |       |   |   |-- h.smod
+ |       |   |   `-- self.smod
+ |       |   |-- help.smod
+ |       |   |-- h.smod
+ |       |   `-- self.smod
+ |       |-- a.smod
+ |       |-- b
+ |       |   |-- c
+ |       |   |   |-- a.smod
+ |       |   |   |-- help.smod
+ |       |   |   |-- h.smod
+ |       |   |   `-- self.smod
+ |       |   |-- c.smod
+ |       |   |-- help.smod
+ |       |   |-- h.smod
+ |       |   `-- self.smod
+ |       |-- b.smod
+ |       |-- c
+ |       |   |-- c
+ |       |   |   |-- a.smod
+ |       |   |   |-- d
+ |       |   |   |   |-- a.smod
+ |       |   |   |   |-- e
+ |       |   |   |   |   |-- a.smod
+ |       |   |   |   |   |-- help.smod
+ |       |   |   |   |   |-- h.smod
+ |       |   |   |   |   `-- self.smod
+ |       |   |   |   |-- help.smod
+ |       |   |   |   |-- h.smod
+ |       |   |   |   `-- self.smod
+ |       |   |   |-- help.smod
+ |       |   |   |-- h.smod
+ |       |   |   `-- self.smod
+ |       |   |-- c.smod
+ |       |   |-- d
+ |       |   |   |-- a.smod
+ |       |   |   |-- help.smod
+ |       |   |   |-- h.smod
+ |       |   |   `-- self.smod
+ |       |   |-- help.smod
+ |       |   |-- h.smod
+ |       |   `-- self.smod
+ |       `-- c.smod
+ |-- __init__.py
+ `-- __init__.pyc</pre>
+</div>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="testdata.a.html">a Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="testdata.a.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="testdata.a.b.html">b Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="testdata.a.b.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="testdata.a.b.c.html">c Package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="testdata.a.b.c.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="testdata.a.b.c.d.html">d Package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="testdata.a.b0.html">b0 Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="testdata.a.b0.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="testdata.a.b0.c.html">c Package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="testdata.a.b0.c.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="testdata.a.b0.c.d.html">d Package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="testdata.a.b1.html">b1 Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="testdata.a.b1.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="testdata.a.b1.c1.html">c1 Package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="testdata.a.b1.c1.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="testdata.a.b1.c1.d1.html">d1 Package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="testdata.a.b2.html">b2 Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="testdata.a.b2.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="testdata.a.b2.c.html">c Package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="testdata.a.b2.c.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="testdata.a.b2.c.d.html">d Package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="testdata.a.b2.c0.html">c0 Package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="testdata.a.b2.c0.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="testdata.a.b2.c0.d.html">d Package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="testdata.a.b2.c1.html">c1 Package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="testdata.a.b2.c1.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="testdata.a.b2.c1.d1.html">d1 Package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="testdata.a.b2.c2.html">c2 Package</a><ul>
+<li class="toctree-l6"><a class="reference internal" href="testdata.a.b2.c2.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l7"><a class="reference internal" href="testdata.a.b2.c2.d.html">d Package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/pysourceinfo-64x64.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">testdata Package</a><ul>
+<li><a class="reference internal" href="#id1"><tt class="docutils literal"><span class="pre">testdata</span></tt> Package</a><ul>
+<li><a class="reference internal" href="#common-test-data-for-use-cases">Common test data for Use-Cases</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="tests.dummymodules.html"
+                        title="previous chapter">dummymodules Package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="testdata.a.html"
+                        title="next chapter">a Package</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/testdata.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="testdata.a.html" title="a Package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="tests.dummymodules.html" title="dummymodules Package"
+             >previous</a> |</li>
+        <li><a href="index.html">pysourceinfo 0.1.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, Arno-Can Uestuensoez.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

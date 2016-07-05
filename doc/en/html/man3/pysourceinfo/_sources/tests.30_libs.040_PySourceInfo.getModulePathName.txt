@@ -1,0 +1,11 @@
+getModulePathName Package
+=========================
+
+:mod:`CallCase` Module
+----------------------
+
+.. automodule:: tests.30_libs.040_PySourceInfo.getModulePathName.CallCase
+    :members:
+    :undoc-members:
+    :show-inheritance:
+

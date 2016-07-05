@@ -1,0 +1,711 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pysourceinfo.PySourceInfo &mdash; pysourceinfo 0.1.1 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="pysourceinfo 0.1.1 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">pysourceinfo 0.1.1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for pysourceinfo.PySourceInfo</h1><div class="highlight"><pre>
+<span class="c"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;PySourceInfo - runtime type information on Python source location: package, module, and caller.</span>
+
+<span class="sd">This modules provides for the location of Python execution</span>
+<span class="sd">by means of the package &#39;inspect&#39; extended by additional sources</span>
+<span class="sd">for a simple API.</span>
+
+<span class="sd">The stack frame of inspect is in particular reduced to the common</span>
+<span class="sd">parameter &#39;spos&#39;, which is an abstraction of the &#39;stack-position&#39;</span>
+<span class="sd">representing the level of history within the caller level.</span>
+<span class="sd">The value &#39;spos==0&#39; is the function itself, whereas &#39;spos==1&#39; is the</span>
+<span class="sd">first level caller. Consequently &#39;spos==2&#39; is the caller of the caller,</span>
+<span class="sd">etc.</span>
+
+<span class="sd">The categories of provided RTTI comprise:</span>
+
+<span class="sd">* **packages** - Python packages.</span>
+
+<span class="sd">* **modules** - Python modules - a.k.a. source files.</span>
+
+<span class="sd">* **callers** - Python functions and class/object methods.</span>
+
+
+<span class="sd">Where the following attributes are available:</span>
+
+<span class="sd">* name(package, module, function)</span>
+
+<span class="sd">* OID - dotted relative path to matching item of sys.path</span>
+
+<span class="sd">* filename</span>
+
+<span class="sd">* filepathname</span>
+
+<span class="sd">* item of sys.path</span>
+
+<span class="sd">* relative path to item of sys.path</span>
+
+<span class="sd">* line number</span>
+
+<span class="sd">Dependent on the call context, some of the attribute values may</span>
+<span class="sd">not be available.</span>
+<span class="sd">E.g. when called from within the python/ipython shell, or &#39;main&#39;.</span>
+
+<span class="sd">The API is designed here as a collection of slim functions</span>
+<span class="sd">only in order to avoid any overhead for generic application.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">absolute_import</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s">&#39;Arno-Can Uestuensoez&#39;</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s">&quot;Artistic-License-2.0 + Forced-Fairplay-Constraints&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s">&quot;Copyright (C) 2010-2016 Arno-Can Uestuensoez @Ingenieurbuero Arno-Can Uestuensoez&quot;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s">&#39;0.1.1&#39;</span>
+<span class="n">__uuid__</span><span class="o">=</span><span class="s">&#39;9de52399-7752-4633-9fdc-66c87a9200b8&#39;</span>
+
+<span class="n">__docformat__</span> <span class="o">=</span> <span class="s">&quot;restructuredtext en&quot;</span>
+
+<span class="kn">import</span> <span class="nn">os</span><span class="o">,</span><span class="nn">sys</span>
+<span class="n">version</span> <span class="o">=</span> <span class="s">&#39;{0}.{1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+<span class="k">if</span> <span class="n">version</span> <span class="o">&lt;</span> <span class="s">&#39;2.7&#39;</span><span class="p">:</span> <span class="c"># pragma: no cover</span>
+    <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;Requires Python-2.7.* or higher&quot;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">inspect</span><span class="o">,</span><span class="nn">re</span>
+
+
+<span class="k">class</span> <span class="nc">PySourceInfoException</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+<div class="viewcode-block" id="getCallerFileName"><a class="viewcode-back" href="../../pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerFileName">[docs]</a><span class="k">def</span> <span class="nf">getCallerFileName</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the filename of caller source file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spos: Caller position in the stack.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the filename.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">getCallerFilePathName</span><span class="p">(</span><span class="n">spos</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="getCallerFilePathName"><a class="viewcode-back" href="../../pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerFilePathName">[docs]</a><span class="k">def</span> <span class="nf">getCallerFilePathName</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the pathname of caller source file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spos: Caller position in the stack.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the filepathname.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">inspect</span><span class="o">.</span><span class="n">stack</span><span class="p">()[</span><span class="n">spos</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="getCallerFuncName"><a class="viewcode-back" href="../../pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerFuncName">[docs]</a><span class="k">def</span> <span class="nf">getCallerFuncName</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the name of caller function.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spos: Caller position in the stack.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the filepathname.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">inspect</span><span class="o">.</span><span class="n">stack</span><span class="p">()[</span><span class="n">spos</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="getCallerLinenumber"><a class="viewcode-back" href="../../pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerLinenumber">[docs]</a><span class="k">def</span> <span class="nf">getCallerLinenumber</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the line number of caller.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spos: Caller position in the stack.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the filepathname.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">inspect</span><span class="o">.</span><span class="n">stack</span><span class="p">()[</span><span class="n">spos</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="getCallerModule"><a class="viewcode-back" href="../../pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerModule">[docs]</a><span class="k">def</span> <span class="nf">getCallerModule</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the caller module.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spos: Caller position in the stack.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the caller module.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_sf</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_sf</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">spos</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="k">return</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmodule</span><span class="p">(</span><span class="n">_sf</span><span class="p">[</span><span class="n">spos</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+</div>
+<div class="viewcode-block" id="getCallerModuleFilePathName"><a class="viewcode-back" href="../../pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerModuleFilePathName">[docs]</a><span class="k">def</span> <span class="nf">getCallerModuleFilePathName</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the filepathname of the module.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spos: Caller position in the stack.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the filepathname of the caller module.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_sf</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_sf</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">spos</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmodule</span><span class="p">(</span><span class="n">_sf</span><span class="p">[</span><span class="n">spos</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">module</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">module</span><span class="o">.</span><span class="n">__file__</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s">&#39;.py&#39;</span><span class="p">:</span> 
+            <span class="k">return</span> <span class="n">module</span><span class="o">.</span><span class="n">__file__</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">module</span><span class="o">.</span><span class="n">__file__</span>
+</div>
+<div class="viewcode-block" id="getCallerModuleName"><a class="viewcode-back" href="../../pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerModuleName">[docs]</a><span class="k">def</span> <span class="nf">getCallerModuleName</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the name of the caller module.</span>
+
+<span class="sd">    Both approaches for evaluation the actual relative</span>
+<span class="sd">    module name seem to have their own challenges,</span>
+<span class="sd">    module.__name__ and inspect.getmodulename.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spos: Caller position in the stack.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the name of caller module.</span>
+<span class="sd">        The dotted object path is relative to</span>
+<span class="sd">        the actual used sys.path item.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_sf</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_sf</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">spos</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmodule</span><span class="p">(</span><span class="n">_sf</span><span class="p">[</span><span class="n">spos</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">module</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">module</span><span class="o">.</span><span class="n">__name__</span> <span class="c"># seems to be more accurate than inspect.getmodulename</span>
+</div>
+<div class="viewcode-block" id="getCallerModulePathName"><a class="viewcode-back" href="../../pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerModulePathName">[docs]</a><span class="k">def</span> <span class="nf">getCallerModulePathName</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the pathname of the module.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spos: Caller position in the stack.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the filepathname of module.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">getCallerModuleFilePathName</span><span class="p">(</span><span class="n">spos</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="getCallerModulePythonPath"><a class="viewcode-back" href="../../pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerModulePythonPath">[docs]</a><span class="k">def</span> <span class="nf">getCallerModulePythonPath</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the prefix item from sys.path used for the caller module based on &#39;inspect&#39;.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spos: Caller position in the stack.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the name of caller module.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">ur&quot;.[^.]+$&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">getCallerModuleName</span><span class="p">(</span><span class="n">spos</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">)</span>
+    <span class="k">if</span> <span class="n">_m</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">ur&quot;&quot;&quot;[/\\\\]*&quot;&quot;&quot;</span><span class="o">+</span><span class="n">_m</span><span class="o">+</span><span class="s">&quot;&quot;&quot;[/</span><span class="se">\\\\</span><span class="s">]*$&quot;&quot;&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="n">getCallerModulePathName</span><span class="p">(</span><span class="n">spos</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>                     
+    <span class="k">return</span> <span class="n">getCallerModulePathName</span><span class="p">(</span><span class="n">spos</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="getCallerName"><a class="viewcode-back" href="../../pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerName">[docs]</a><span class="k">def</span> <span class="nf">getCallerName</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the name of the caller.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spos: Caller position in the stack.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the filepathname.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">inspect</span><span class="o">.</span><span class="n">stack</span><span class="p">()[</span><span class="n">spos</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span>
+</div>
+<div class="viewcode-block" id="getCallerNamespaceGlobal"><a class="viewcode-back" href="../../pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerNamespaceGlobal">[docs]</a><span class="k">def</span> <span class="nf">getCallerNamespaceGlobal</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the global namespace of the caller.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spos: Caller position in the stack.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns a reference to the callers global namespace.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">inspect</span><span class="o">.</span><span class="n">stack</span><span class="p">()[</span><span class="n">spos</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">f_globals</span>
+</div>
+<div class="viewcode-block" id="getCallerNamespaceLocal"><a class="viewcode-back" href="../../pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerNamespaceLocal">[docs]</a><span class="k">def</span> <span class="nf">getCallerNamespaceLocal</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the local namespace of the caller.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spos: Caller position in the stack.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns a reference to the callers local namespace.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">inspect</span><span class="o">.</span><span class="n">stack</span><span class="p">()[</span><span class="n">spos</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">f_locals</span>
+</div>
+<div class="viewcode-block" id="getCallerNameOID"><a class="viewcode-back" href="../../pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerNameOID">[docs]</a><span class="k">def</span> <span class="nf">getCallerNameOID</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the name of the caller in dotted notation.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spos: Caller position in the stack.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the package name.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_spos</span> <span class="o">=</span> <span class="n">spos</span>
+    <span class="n">_sf</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_sf</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">_spos</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="n">_pf</span> <span class="o">=</span> <span class="n">_sf</span><span class="p">[</span><span class="n">_spos</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">_coid</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmodule</span><span class="p">(</span><span class="n">_pf</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">_coid</span><span class="p">:</span>
+        <span class="n">_coid</span> <span class="o">=</span> <span class="n">_coid</span><span class="o">.</span><span class="n">__name__</span>
+    <span class="k">if</span> <span class="s">&#39;self&#39;</span> <span class="ow">in</span> <span class="n">_pf</span><span class="o">.</span><span class="n">f_locals</span><span class="p">:</span>
+        <span class="n">_coid</span> <span class="o">+=</span> <span class="s">&quot;.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">_pf</span><span class="o">.</span><span class="n">f_locals</span><span class="p">[</span><span class="s">&#39;self&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">_pf</span><span class="o">.</span><span class="n">f_code</span><span class="o">.</span><span class="n">co_name</span> <span class="o">!=</span> <span class="s">&#39;&lt;module&gt;&#39;</span><span class="p">:</span>
+        <span class="n">_coid</span> <span class="o">+=</span> <span class="s">&quot;.&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">_pf</span><span class="o">.</span><span class="n">f_code</span><span class="o">.</span><span class="n">co_name</span><span class="p">)</span>
+    <span class="k">del</span> <span class="n">_pf</span>
+    <span class="k">return</span> <span class="n">_coid</span>
+</div>
+<div class="viewcode-block" id="getCallerPackageFilePathName"><a class="viewcode-back" href="../../pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerPackageFilePathName">[docs]</a><span class="k">def</span> <span class="nf">getCallerPackageFilePathName</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the filepathname of the package containing the caller.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spos: Caller position in the stack.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the package name.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">m0</span> <span class="o">=</span> <span class="n">getCallerModuleName</span><span class="p">(</span><span class="n">spos</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">p0</span> <span class="o">=</span> <span class="n">getCallerModuleFilePathName</span><span class="p">(</span><span class="n">spos</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">m0</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s">&#39;.&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">p0</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">:]</span> <span class="o">==</span> <span class="s">&#39;.pyc&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">p0</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">pp0</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">m0</span><span class="o">+</span><span class="s">&quot;.py[co]*$&quot;</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="s">ur&quot;&quot;</span><span class="o">+</span><span class="n">p0</span><span class="p">)</span>
+    <span class="n">pp0</span> <span class="o">+=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">r&#39;^([^.]+).*&#39;</span><span class="p">,</span><span class="s">r&#39;\1&#39;</span><span class="p">,</span><span class="n">m0</span><span class="p">)</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="s">&#39;__init__.py&#39;</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">pp0</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">pp0</span>
+    <span class="k">return</span> <span class="n">p0</span>
+</div>
+<div class="viewcode-block" id="getCallerPackageName"><a class="viewcode-back" href="../../pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerPackageName">[docs]</a><span class="k">def</span> <span class="nf">getCallerPackageName</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the name of the first matching package containing the caller.</span>
+
+<span class="sd">    Relies on &#39;inspect&#39;.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        spos: Caller position in the stack.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the package name when defined, else None.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_sf</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_sf</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">spos</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmodule</span><span class="p">(</span><span class="n">_sf</span><span class="p">[</span><span class="n">spos</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">module</span> <span class="ow">and</span> <span class="n">module</span><span class="o">.</span><span class="n">__package__</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">module</span><span class="o">.</span><span class="n">__package__</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c">#FIXME:4TEST:</span>
+<span class="c">#        a = getCallerModuleName(spos+1)</span>
+<span class="c">#        print &quot;4TEST:a=&quot;+str(a)</span>
+<span class="c">#         b = &quot;^([^.]+).*&quot;</span>
+<span class="c">#         c = re.sub(&quot;^([^.]+).*&quot;,r&#39;\1&#39;,getCallerModuleName(spos+1))</span>
+<span class="c">#         print &quot;4TEST:c=&quot;+str(c)</span>
+        <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">&quot;^([^.]+).*&quot;</span><span class="p">,</span><span class="s">r&#39;\1&#39;</span><span class="p">,</span><span class="n">getCallerModuleName</span><span class="p">(</span><span class="n">spos</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="getCallerPackagePathName"><a class="viewcode-back" href="../../pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerPackagePathName">[docs]</a><span class="k">def</span> <span class="nf">getCallerPackagePathName</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the pathname to the first matching package directory of the caller.</span>
+
+<span class="sd">    Relies on &#39;inspect&#39;.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spos: Caller position in the stack.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the path name to the package.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_sf</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_sf</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">spos</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmodule</span><span class="p">(</span><span class="n">_sf</span><span class="p">[</span><span class="n">spos</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">module</span> <span class="ow">and</span> <span class="n">module</span><span class="o">.</span><span class="n">__package__</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">module</span><span class="o">.</span><span class="n">__file__</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">ur&quot;&quot;</span><span class="o">+</span><span class="n">getCallerModuleName</span><span class="p">(</span><span class="n">spos</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s">&#39;.py[co]*$&#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">,</span><span class="n">getCallerModuleFilePathName</span><span class="p">(</span><span class="n">spos</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="getCallerPackagePythonPath"><a class="viewcode-back" href="../../pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerPackagePythonPath">[docs]</a><span class="k">def</span> <span class="nf">getCallerPackagePythonPath</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the python path for first matching package of the caller.</span>
+
+<span class="sd">    Relies on &#39;inspect&#39;.</span>
+
+<span class="sd">    Intentionally the same as &#39;getCallerPackagePathName&#39;.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spos: Caller position in the stack.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the path name to the package.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">getCallerPackagePathName</span><span class="p">(</span><span class="n">spos</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="getCallerSysPathPackageName"><a class="viewcode-back" href="../../pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerSysPathPackageName">[docs]</a><span class="k">def</span> <span class="nf">getCallerSysPathPackageName</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the name of the first matching package on sys.path.</span>
+
+<span class="sd">    Evaluates &#39;sys.path&#39; first, else switches to &#39;inspect&#39;.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        spos: Caller position in the stack.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the package name when defined, else None.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">getCallerModuleFilePathName</span><span class="p">(</span><span class="n">spos</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="c">#TODO: check for normpath</span>
+    <span class="k">for</span> <span class="n">si</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+        <span class="n">si</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">si</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">ax</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">si</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">ur&quot;&quot;</span><span class="o">+</span><span class="n">si</span><span class="o">+</span><span class="s">ur&quot;[/</span><span class="se">\\</span><span class="s">]*([^/</span><span class="se">\\</span><span class="s">]+)(((!(.py[oc]*))|([/</span><span class="se">\\</span><span class="s">])([/</span><span class="se">\\</span><span class="s">]*).*$)|(.py[oc]*)$)&quot;</span><span class="p">,</span><span class="s">ur&quot;\1&quot;</span><span class="p">,</span><span class="n">ax</span><span class="p">)</span>
+
+    <span class="n">_sf</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_sf</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">spos</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmodule</span><span class="p">(</span><span class="n">_sf</span><span class="p">[</span><span class="n">spos</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">module</span> <span class="ow">and</span> <span class="n">module</span><span class="o">.</span><span class="n">__package__</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">module</span><span class="o">.</span><span class="n">__package__</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">&quot;^([^.]+).*&quot;</span><span class="p">,</span><span class="s">r&#39;\1&#39;</span><span class="p">,</span><span class="n">getCallerModuleName</span><span class="p">(</span><span class="n">spos</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="getCallerSysPathPackageSysPathName"><a class="viewcode-back" href="../../pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerSysPathPackageSysPathName">[docs]</a><span class="k">def</span> <span class="nf">getCallerSysPathPackageSysPathName</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the pathname to the first matching package directory of the caller.</span>
+
+<span class="sd">    Evaluates &#39;sys.path&#39; first, else switches to &#39;inspect&#39;.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spos: Caller position in the stack.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the path name to the package.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">getCallerModuleFilePathName</span><span class="p">(</span><span class="n">spos</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span> <span class="c">#TODO: check for normpath</span>
+    <span class="k">for</span> <span class="n">si</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+        <span class="n">si</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">si</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ax</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">si</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">si</span>
+
+    <span class="n">_sf</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_sf</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">spos</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">None</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getmodule</span><span class="p">(</span><span class="n">_sf</span><span class="p">[</span><span class="n">spos</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">module</span> <span class="ow">and</span> <span class="n">module</span><span class="o">.</span><span class="n">__package__</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">module</span><span class="o">.</span><span class="n">__file__</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">ur&quot;&quot;</span><span class="o">+</span><span class="n">getCallerModuleName</span><span class="p">(</span><span class="n">spos</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="s">&#39;.py[co]*$&#39;</span><span class="p">,</span><span class="s">&#39;&#39;</span><span class="p">,</span><span class="n">getCallerModuleFilePathName</span><span class="p">(</span><span class="n">spos</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+</div>
+<span class="k">def</span> <span class="nf">getCallerSysPathPackagePathNameRel</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the pathname to the first matching package directory of the caller.</span>
+
+<span class="sd">    Evaluates &#39;sys.path&#39; first, else switches to &#39;inspect&#39;.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spos: Caller position in the stack.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the path name to the package.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">getCallerModuleFilePathName</span><span class="p">(</span><span class="n">spos</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span> <span class="c">#TODO: check for normpath</span>
+    <span class="k">for</span> <span class="n">si</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+        <span class="n">si</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">si</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ax</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">si</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">ur&quot;&quot;</span><span class="o">+</span><span class="n">si</span><span class="o">+</span><span class="s">ur&quot;[/</span><span class="se">\\</span><span class="s">]*([^/</span><span class="se">\\</span><span class="s">]+)[/</span><span class="se">\\</span><span class="s">]*[^/</span><span class="se">\\</span><span class="s">]+.py[oc]*$&quot;</span><span class="p">,</span><span class="s">ur&quot;\1&quot;</span><span class="p">,</span><span class="n">ax</span><span class="p">)</span>
+            <span class="k">break</span>
+
+    <span class="c">#FIXME: TODO!!!</span>
+<span class="c">#     _sf = inspect.stack()</span>
+<span class="c">#     if len(_sf) &lt; spos:</span>
+<span class="c">#         return None</span>
+<span class="c">#     module = inspect.getmodule(_sf[spos][0])</span>
+<span class="c">#     if module and module.__package__:</span>
+<span class="c">#         return module.__package__</span>
+<span class="c">#     else:</span>
+<span class="c">#         return re.sub(&quot;^([^.]+).*&quot;,r&#39;\1&#39;,getCallerModuleName(spos+1))</span>
+
+
+<div class="viewcode-block" id="getCallerSysPathPackagePythonPath"><a class="viewcode-back" href="../../pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerSysPathPackagePythonPath">[docs]</a><span class="k">def</span> <span class="nf">getCallerSysPathPackagePythonPath</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the python path for first matching package of the caller.</span>
+
+<span class="sd">    Evaluates &#39;sys.path&#39; first, else switches to &#39;inspect&#39;.</span>
+
+<span class="sd">    Intentionally the same as &#39;getCallerPackagePathName&#39;.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spos: Caller position in the stack.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the path name to the package.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">getCallerPackagePathName</span><span class="p">(</span><span class="n">spos</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="getCallerPathName"><a class="viewcode-back" href="../../pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerPathName">[docs]</a><span class="k">def</span> <span class="nf">getCallerPathName</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the pathname of caller source file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spos: Caller position in the stack.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the filename.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">getCallerFilePathName</span><span class="p">(</span><span class="n">spos</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="getModuleFilePathName"><a class="viewcode-back" href="../../pysourceinfo.html#pysourceinfo.PySourceInfo.getModuleFilePathName">[docs]</a><span class="k">def</span> <span class="nf">getModuleFilePathName</span><span class="p">(</span><span class="n">mod</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the filepathname of the loaded module.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mod: Reference to a loaded module.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the filepathname of the loaded module.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">mod</span> <span class="ow">and</span> <span class="n">inspect</span><span class="o">.</span><span class="n">ismodule</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isbuiltin</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span> <span class="p">:</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">mod</span><span class="o">.</span><span class="n">__file__</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">mod</span><span class="o">.</span><span class="n">__file__</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="getModulePathName"><a class="viewcode-back" href="../../pysourceinfo.html#pysourceinfo.PySourceInfo.getModulePathName">[docs]</a><span class="k">def</span> <span class="nf">getModulePathName</span><span class="p">(</span><span class="n">mod</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the pathname of the loaded module.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mod: Reference to a loaded module.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the pathname of the loaded module.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">mod</span> <span class="ow">and</span> <span class="n">inspect</span><span class="o">.</span><span class="n">ismodule</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isbuiltin</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span> <span class="p">:</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">mod</span><span class="o">.</span><span class="n">__file__</span><span class="p">))</span>
+</div>
+<div class="viewcode-block" id="getModuleSourceFilePathName"><a class="viewcode-back" href="../../pysourceinfo.html#pysourceinfo.PySourceInfo.getModuleSourceFilePathName">[docs]</a><span class="k">def</span> <span class="nf">getModuleSourceFilePathName</span><span class="p">(</span><span class="n">mod</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the filepathname of the source code for loaded module.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mod: Reference to a loaded module.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the filepathname of the source for the loaded module,</span>
+<span class="sd">        else None.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">mod</span> <span class="ow">and</span> <span class="n">inspect</span><span class="o">.</span><span class="n">ismodule</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">inspect</span><span class="o">.</span><span class="n">isbuiltin</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span> <span class="p">:</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">mod</span><span class="o">.</span><span class="n">__file__</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s">&#39;.py&#39;</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>        
+            <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> 
+</div>
+<div class="viewcode-block" id="getPythonPathFromSysPath"><a class="viewcode-back" href="../../pysourceinfo.html#pysourceinfo.PySourceInfo.getPythonPathFromSysPath">[docs]</a><span class="k">def</span> <span class="nf">getPythonPathFromSysPath</span><span class="p">(</span><span class="n">pname</span><span class="p">,</span><span class="n">plist</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Gets the first matching prefix from sys.path.</span>
+
+<span class="sd">    Foreseen to be used for canonical base reference in unit tests.</span>
+<span class="sd">    This enables in particular for generic tests of filesystem positions</span>
+<span class="sd">    where originally absolute pathnames were required.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        pname: Pathname.</span>
+
+<span class="sd">        plist: List of possible python paths.</span>
+<span class="sd">            default := sys.path</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the first matching path prefix from sys.path.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">plist</span><span class="p">:</span>
+        <span class="n">plist</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span>
+    <span class="n">_fp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">pname</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">_sp</span> <span class="ow">in</span> <span class="n">plist</span><span class="p">:</span>
+        <span class="n">_sp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">_sp</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">_fp</span> <span class="ow">and</span> <span class="n">_fp</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">_sp</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">_sp</span>
+</div>
+<div class="viewcode-block" id="getPythonPathRel"><a class="viewcode-back" href="../../pysourceinfo.html#pysourceinfo.PySourceInfo.getPythonPathRel">[docs]</a><span class="k">def</span> <span class="nf">getPythonPathRel</span><span class="p">(</span><span class="n">fpname</span><span class="p">,</span><span class="n">plist</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the relative path name for the first match on plist.</span>
+
+<span class="sd">    REMARK: Refer also to &#39;getCallerNameSpceGlobal&#39;.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        fpname: The filepathname.</span>
+
+<span class="sd">        plist: List of possible python paths.</span>
+<span class="sd">            default := sys.path</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the path postfix for fpname when found,</span>
+<span class="sd">        else &#39;None&#39;.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">plist</span><span class="p">:</span>
+        <span class="n">plist</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span>
+        
+    <span class="c">#FIXME:</span>
+    <span class="n">_fp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">fpname</span><span class="p">))</span> <span class="c"># for now dirs with terminating os.sep</span>
+    <span class="n">_fp</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">_fp</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">_sp</span> <span class="ow">in</span> <span class="n">plist</span><span class="p">:</span>
+
+        <span class="c">#FIXME:</span>
+        <span class="n">_sp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">_sp</span><span class="p">))</span>
+        <span class="n">_sp</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">_sp</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">_fp</span> <span class="ow">and</span> <span class="n">_fp</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">_sp</span><span class="p">):</span>
+            <span class="n">_r</span> <span class="o">=</span> <span class="n">_fp</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">_sp</span><span class="p">,</span><span class="s">&quot;&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">_r</span> <span class="ow">and</span> <span class="n">_r</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">r&#39;</span><span class="se">\\</span><span class="s">(.)&#39;</span><span class="p">,</span> <span class="s">r&#39;\1&#39;</span><span class="p">,</span> <span class="n">_r</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
+            <span class="k">elif</span> <span class="n">_r</span> <span class="ow">and</span> <span class="n">_r</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">r&#39;</span><span class="se">\\</span><span class="s">(.)&#39;</span><span class="p">,</span> <span class="s">r&#39;\1&#39;</span><span class="p">,</span> <span class="n">_r</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">_r</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s">&#39;.&#39;</span>
+            <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s">r&#39;</span><span class="se">\\</span><span class="s">(.)&#39;</span><span class="p">,</span> <span class="s">r&#39;\1&#39;</span><span class="p">,</span> <span class="n">_r</span><span class="p">)</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/pysourceinfo-64x64.png" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../index.html">pysourceinfo 0.1.1 documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, Arno-Can Uestuensoez.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

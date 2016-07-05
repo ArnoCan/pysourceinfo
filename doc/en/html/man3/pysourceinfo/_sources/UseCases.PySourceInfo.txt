@@ -1,0 +1,38 @@
+PySourceInfo Package
+====================
+
+:mod:`PySourceInfo_check` Module
+--------------------------------
+
+.. automodule:: UseCases.PySourceInfo.PySourceInfo_check
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    UseCases.PySourceInfo.getCallerFileName
+    UseCases.PySourceInfo.getCallerFilePathName
+    UseCases.PySourceInfo.getCallerFuncName
+    UseCases.PySourceInfo.getCallerLinenumber
+    UseCases.PySourceInfo.getCallerModuleFilePathName
+    UseCases.PySourceInfo.getCallerModuleName
+    UseCases.PySourceInfo.getCallerModulePathName
+    UseCases.PySourceInfo.getCallerModulePythonPath
+    UseCases.PySourceInfo.getCallerName
+    UseCases.PySourceInfo.getCallerNameOID
+    UseCases.PySourceInfo.getCallerNamespaceGlobal
+    UseCases.PySourceInfo.getCallerNamespaceLocal
+    UseCases.PySourceInfo.getCallerPackageFilePathName
+    UseCases.PySourceInfo.getCallerPackageName
+    UseCases.PySourceInfo.getCallerPackagePathName
+    UseCases.PySourceInfo.getCallerPackagePythonPath
+    UseCases.PySourceInfo.getCallerPathName
+    UseCases.PySourceInfo.getCallerSysPathPackageName
+    UseCases.PySourceInfo.getCallerSysPathPackageSysPathName
+    UseCases.PySourceInfo.getPythonPathFromSysPath
+    UseCases.PySourceInfo.getPythonPathRel
+

@@ -1,0 +1,288 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Abstract &mdash; pysourceinfo 0.1.1 documentation</title>
+    
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pysourceinfo 0.1.1 documentation" href="#" />
+    <link rel="next" title="API Shortcuts - pysourceinfo" href="shortcuts.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="shortcuts.html" title="API Shortcuts - pysourceinfo"
+             accesskey="N">next</a> |</li>
+        <li><a href="#">pysourceinfo 0.1.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="abstract">
+<h1>Abstract<a class="headerlink" href="#abstract" title="Permalink to this headline">¶</a></h1>
+<p>The &#8216;pysourceinfo&#8217; package provides basic runtime information on executed sourcefiles
+based on &#8216;inspect&#8217; and additional sources <a class="reference external" href="shortcuts.html#">[shortcuts]</a>.</p>
+<ul>
+<li><p class="first"><strong>Runtime Type Information on Packages, Modules, and Calls</strong></p>
+<p>A basic coverage of the &#8216;inspect&#8217; package is provided for the
+simplified gathering of information on packages, modules, and files based
+on the call stack.</p>
+<ul>
+<li><p class="first">Python source information:
+<a class="reference external" href="sourceinfo.html">Python Source Structures</a></p>
+</li>
+<li><p class="first">Programming Interface:
+<a class="reference external" href="shortcuts.html#pysourceinfo-pysourceinfo">API</a></p>
+<p>.</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>The provided feature modules comprise the following list.</p>
+<ul>
+<li><dl class="first docutils">
+<dt><a class="reference external" href="pysourceinfo.html">PySourceInfo</a> :</dt>
+<dd><p class="first last">Provides runtime type information on Python source components: packages, modules, and callers  - <em>pysourceinfo.PySourceInfo</em>.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>For code examples refer to the souce code of &#8216;pysourceinfo.UseCases&#8217;
+and &#8216;pysourceinfo.tests&#8217;.</p>
+</div>
+<div class="section" id="id2">
+<h1><a class="reference external" href="shortcuts.html">Shortcuts</a><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference external" href="shortcuts.html">API-Shortcuts - Programming Interface</a></li>
+</ul>
+</div>
+<div class="section" id="table-of-contents">
+<h1>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="shortcuts.html">API Shortcuts - pysourceinfo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="shortcuts.html#pysourceinfo-pysourceinfo">pysourceinfo.PySourceInfo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pysourceinfo.html">&#8216;pysourceinfo.PySourceInfo&#8217; - Module</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pysourceinfo.html#functions">Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="pysourceinfo.html#getcallerfilename">getCallerFileName</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysourceinfo.html#getcallerfilepathname">getCallerFilePathName</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysourceinfo.html#getcallerfuncname">getCallerFuncName</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysourceinfo.html#getcallerlinenumber">getCallerLinenumber</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysourceinfo.html#getcallermodule">getCallerModule</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysourceinfo.html#getcallermodulefilepathname">getCallerModuleFilePathName</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysourceinfo.html#getcallermodulename">getCallerModuleName</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysourceinfo.html#getcallermodulepathname">getCallerModulePathName</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysourceinfo.html#getcallermodulepythonpath">getCallerModulePythonPath</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysourceinfo.html#getcallername">getCallerName</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysourceinfo.html#getcallernameoid">getCallerNameOID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysourceinfo.html#getcallernamespaceglobal">getCallerNamespaceGlobal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysourceinfo.html#getcallernamespacelocal">getCallerNamespaceLocal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysourceinfo.html#getcallerpackagefilepathname">getCallerPackageFilePathName</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysourceinfo.html#getcallerpackagename">getCallerPackageName</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysourceinfo.html#getcallerpackagepathname">getCallerPackagePathName</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysourceinfo.html#getcallerpackagepythonpath">getCallerPackagePythonPath</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysourceinfo.html#getcallersyspathpackagename">getCallerSysPathPackageName</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysourceinfo.html#getcallersyspathpackagesyspathname">getCallerSysPathPackageSysPathName</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysourceinfo.html#getcallersyspathpackagesyspathnamerel">getCallerSysPathPackageSysPathNameRel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysourceinfo.html#getcallersyspathpackagepythonpath">getCallerSysPathPackagePythonPath</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysourceinfo.html#getcallerpathname">getCallerPathName</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysourceinfo.html#getmodulefilepathname">getModuleFilePathName</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysourceinfo.html#getmodulepathname">getModulePathName</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysourceinfo.html#getmodulesourcefilepathname">getModuleSourceFilePathName</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysourceinfo.html#getpythonpathfromsyspath">getPythonPathFromSysPath</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pysourceinfo.html#getpythonpathrel">getPythonPathRel</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="UseCases.html">UseCases Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="UseCases.html#id1"><tt class="docutils literal"><span class="pre">UseCases</span></tt> Package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UseCases.html#module-UseCases.CallCase"><tt class="docutils literal"><span class="pre">CallCase</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="UseCases.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="UseCases.PySourceInfo.html">PySourceInfo Package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tests.html">tests Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tests.html#id1"><tt class="docutils literal"><span class="pre">tests</span></tt> Package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tests.html#libs">30_libs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="tests.html#module-tests.CallCase"><tt class="docutils literal"><span class="pre">CallCase</span></tt> Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tests.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tests.30_libs.html">30_libs Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="tests.dummymodules.html">dummymodules Package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="testdata.html">testdata Package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="testdata.html#id1"><tt class="docutils literal"><span class="pre">testdata</span></tt> Package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="testdata.html#common-test-data-for-use-cases">Common test data for Use-Cases</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="testdata.html#subpackages">Subpackages</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="testdata.a.html">a Package</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<ul>
+<li><p class="first">setup.py</p>
+<p>For help on extensions to standard options call onlinehelp:</p>
+<div class="highlight-python"><pre>python setup.py --help-pysourceinfo</pre>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+<div class="section" id="resources">
+<h1>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h1>
+<p>For available downloads refer to:</p>
+<ul class="simple">
+<li>Python Package Index: <a class="reference external" href="https://pypi.python.org/pypi/pysourceinfo">https://pypi.python.org/pypi/pysourceinfo</a></li>
+<li>Sourceforge.net: <a class="reference external" href="https://sourceforge.net/projects/pysourceinfo/">https://sourceforge.net/projects/pysourceinfo/</a></li>
+<li>github.com: <a class="reference external" href="https://github.com/ArnoCan/pysourceinfo/">https://github.com/ArnoCan/pysourceinfo/</a></li>
+</ul>
+<p>For Licenses refer to enclosed documents:</p>
+<ul class="simple">
+<li>Artistic-License-2.0(base license): <a class="reference external" href="_static/ArtisticLicense20.html">ArtisticLicense20.html</a></li>
+<li>Forced-Fairplay-Constraints(amendments): <a class="reference external" href="_static/licenses-amendments.txt">licenses-amendments.txt</a> / <a class="reference external" href="http://xkcd.com/1303/">Protect OpenSource Authors</a></li>
+</ul>
+<p>Project data summary:</p>
+<ul>
+<li><p class="first">PROJECT=pysourceinfo</p>
+</li>
+<li><p class="first">MISSION=Support easy access to RTTI on Python source files.</p>
+</li>
+<li><p class="first">AUTHOR=Arno-Can Uestuensoez</p>
+</li>
+<li><p class="first">COPYRIGHT=Copyright (C) 2010,2011,2015-2016 Arno-Can Uestuensoez &#64;Ingenieurbuero Arno-Can Uestuensoez</p>
+</li>
+<li><p class="first">LICENSE=Artistic-License-2.0 + Forced-Fairplay-Constraints</p>
+</li>
+<li><p class="first">VERSION=0.1.1</p>
+</li>
+<li><p class="first">RELEASE=0.1.1</p>
+</li>
+<li><p class="first">STATUS=alpha</p>
+</li>
+<li><p class="first">NICKNAME=Mimisbrunnr</p>
+<p>Internal information on the Python call stack by Mimisbrunnr, see <a class="reference external" href="https://en.wikipedia.org/wiki/Mimisbrunnr">Mimisbrunnr
+- located beneath the world tree Yggdrasil, the water of the well
+contains much wisdom, and Odin&#8217;s eye sacrifice to the well was in exchange
+for a drink from it...</a></p>
+</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="#">
+              <img class="logo" src="_static/pysourceinfo-64x64.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Abstract</a></li>
+<li><a class="reference internal" href="#id2">Shortcuts</a></li>
+<li><a class="reference internal" href="#table-of-contents">Table of Contents</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+<li><a class="reference internal" href="#resources">Resources</a></li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="shortcuts.html"
+                        title="next chapter">API Shortcuts - pysourceinfo</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="shortcuts.html" title="API Shortcuts - pysourceinfo"
+             >next</a> |</li>
+        <li><a href="#">pysourceinfo 0.1.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2016, Arno-Can Uestuensoez.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

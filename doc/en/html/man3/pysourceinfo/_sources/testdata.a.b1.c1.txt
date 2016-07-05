@@ -1,0 +1,10 @@
+c1 Package
+==========
+
+Subpackages
+-----------
+
+.. toctree::
+
+    testdata.a.b1.c1.d1
+

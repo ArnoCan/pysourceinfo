@@ -1,0 +1,1473 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>pysourceinfo.PySourceInfo</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pysourceinfo-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="pysourceinfo-module.html">Package&nbsp;pysourceinfo</a> ::
+        Module&nbsp;PySourceInfo
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="pysourceinfo.PySourceInfo-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module PySourceInfo</h1><p class="nomargin-top"><span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html">source&nbsp;code</a></span></p>
+<p>PySourceInfo - runtime type information on Python source location: package, module, and caller.</p>
+<p>This modules provides for the location of Python execution
+by means of the package 'inspect' extended by additional sources
+for a simple API.</p>
+<p>The stack frame of inspect is in particular reduced to the common
+parameter 'spos', which is an abstraction of the 'stack-position'
+representing the level of history within the caller level.
+The value 'spos==0' is the function itself, whereas 'spos==1' is the
+first level caller. Consequently 'spos==2' is the caller of the caller,
+etc.</p>
+<p>The categories of provided RTTI comprise:</p>
+<ul class="rst-simple">
+<li><strong>packages</strong> - Python packages.</li>
+<li><strong>modules</strong> - Python modules - a.k.a. source files.</li>
+<li><strong>callers</strong> - Python functions and class/object methods.</li>
+</ul>
+<p>Where the following attributes are available:</p>
+<ul class="rst-simple">
+<li>name(package, module, function)</li>
+<li>OID - dotted relative path to matching item of sys.path</li>
+<li>filename</li>
+<li>filepathname</li>
+<li>item of sys.path</li>
+<li>relative path to item of sys.path</li>
+<li>line number</li>
+</ul>
+<p>Dependent on the call context, some of the attribute values may
+not be available.
+E.g. when called from within the python/ipython shell, or 'main'.</p>
+<p>The API is designed here as a collection of slim functions
+only in order to avoid any overhead for generic application.</p>
+
+<hr />
+<div class="fields">      <p><strong>Version:</strong>
+        0.1.1
+      </p>
+      <p><strong>Author:</strong>
+        Arno-Can Uestuensoez
+      </p>
+      <p><strong>Copyright:</strong>
+        Copyright (C) 2010-2016 Arno-Can Uestuensoez @Ingenieurbuero 
+        Arno-Can Uestuensoez
+      </p>
+      <p><strong>License:</strong>
+        Artistic-License-2.0 + Forced-Fairplay-Constraints
+      </p>
+</div><!-- ==================== CLASSES ==================== -->
+<a name="section-Classes"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Classes</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Classes"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="pysourceinfo.PySourceInfo.PySourceInfoException-class.html" class="summary-name">PySourceInfoException</a>
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysourceinfo.PySourceInfo-module.html#getCallerFileName" class="summary-sig-name">getCallerFileName</a>(<span class="summary-sig-arg">spos</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Returns the filename of caller source file.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerFileName">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysourceinfo.PySourceInfo-module.html#getCallerFilePathName" class="summary-sig-name">getCallerFilePathName</a>(<span class="summary-sig-arg">spos</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Returns the pathname of caller source file.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerFilePathName">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysourceinfo.PySourceInfo-module.html#getCallerFuncName" class="summary-sig-name">getCallerFuncName</a>(<span class="summary-sig-arg">spos</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Returns the name of caller function.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerFuncName">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysourceinfo.PySourceInfo-module.html#getCallerLinenumber" class="summary-sig-name">getCallerLinenumber</a>(<span class="summary-sig-arg">spos</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Returns the line number of caller.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerLinenumber">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysourceinfo.PySourceInfo-module.html#getCallerModule" class="summary-sig-name">getCallerModule</a>(<span class="summary-sig-arg">spos</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Returns the caller module.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerModule">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysourceinfo.PySourceInfo-module.html#getCallerModuleFilePathName" class="summary-sig-name">getCallerModuleFilePathName</a>(<span class="summary-sig-arg">spos</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Returns the filepathname of the module.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerModuleFilePathName">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysourceinfo.PySourceInfo-module.html#getCallerModuleName" class="summary-sig-name">getCallerModuleName</a>(<span class="summary-sig-arg">spos</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Returns the name of the caller module.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerModuleName">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysourceinfo.PySourceInfo-module.html#getCallerModulePathName" class="summary-sig-name">getCallerModulePathName</a>(<span class="summary-sig-arg">spos</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Returns the pathname of the module.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerModulePathName">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysourceinfo.PySourceInfo-module.html#getCallerModulePythonPath" class="summary-sig-name">getCallerModulePythonPath</a>(<span class="summary-sig-arg">spos</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Returns the prefix item from sys.path used for the caller module based on 'inspect'.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerModulePythonPath">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysourceinfo.PySourceInfo-module.html#getCallerName" class="summary-sig-name">getCallerName</a>(<span class="summary-sig-arg">spos</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Returns the name of the caller.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerName">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysourceinfo.PySourceInfo-module.html#getCallerNamespaceGlobal" class="summary-sig-name">getCallerNamespaceGlobal</a>(<span class="summary-sig-arg">spos</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Returns the global namespace of the caller.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerNamespaceGlobal">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysourceinfo.PySourceInfo-module.html#getCallerNamespaceLocal" class="summary-sig-name">getCallerNamespaceLocal</a>(<span class="summary-sig-arg">spos</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Returns the local namespace of the caller.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerNamespaceLocal">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysourceinfo.PySourceInfo-module.html#getCallerNameOID" class="summary-sig-name">getCallerNameOID</a>(<span class="summary-sig-arg">spos</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Returns the name of the caller in dotted notation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerNameOID">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysourceinfo.PySourceInfo-module.html#getCallerPackageFilePathName" class="summary-sig-name">getCallerPackageFilePathName</a>(<span class="summary-sig-arg">spos</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Returns the filepathname of the package containing the caller.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerPackageFilePathName">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysourceinfo.PySourceInfo-module.html#getCallerPackageName" class="summary-sig-name">getCallerPackageName</a>(<span class="summary-sig-arg">spos</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Returns the name of the first matching package containing the caller.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerPackageName">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysourceinfo.PySourceInfo-module.html#getCallerPackagePathName" class="summary-sig-name">getCallerPackagePathName</a>(<span class="summary-sig-arg">spos</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Returns the pathname to the first matching package directory of the caller.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerPackagePathName">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysourceinfo.PySourceInfo-module.html#getCallerPackagePythonPath" class="summary-sig-name">getCallerPackagePythonPath</a>(<span class="summary-sig-arg">spos</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Returns the python path for first matching package of the caller.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerPackagePythonPath">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysourceinfo.PySourceInfo-module.html#getCallerSysPathPackageName" class="summary-sig-name">getCallerSysPathPackageName</a>(<span class="summary-sig-arg">spos</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Returns the name of the first matching package on sys.path.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerSysPathPackageName">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysourceinfo.PySourceInfo-module.html#getCallerSysPathPackageSysPathName" class="summary-sig-name">getCallerSysPathPackageSysPathName</a>(<span class="summary-sig-arg">spos</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Returns the pathname to the first matching package directory of the caller.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerSysPathPackageSysPathName">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysourceinfo.PySourceInfo-module.html#getCallerSysPathPackagePathNameRel" class="summary-sig-name">getCallerSysPathPackagePathNameRel</a>(<span class="summary-sig-arg">spos</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Returns the pathname to the first matching package directory of the caller.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerSysPathPackagePathNameRel">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysourceinfo.PySourceInfo-module.html#getCallerSysPathPackagePythonPath" class="summary-sig-name">getCallerSysPathPackagePythonPath</a>(<span class="summary-sig-arg">spos</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Returns the python path for first matching package of the caller.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerSysPathPackagePythonPath">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysourceinfo.PySourceInfo-module.html#getCallerPathName" class="summary-sig-name">getCallerPathName</a>(<span class="summary-sig-arg">spos</span>=<span class="summary-sig-default">1</span>)</span><br />
+      Returns the pathname of caller source file.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerPathName">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysourceinfo.PySourceInfo-module.html#getModuleFilePathName" class="summary-sig-name">getModuleFilePathName</a>(<span class="summary-sig-arg">mod</span>)</span><br />
+      Returns the filepathname of the loaded module.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getModuleFilePathName">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysourceinfo.PySourceInfo-module.html#getModulePathName" class="summary-sig-name">getModulePathName</a>(<span class="summary-sig-arg">mod</span>)</span><br />
+      Returns the pathname of the loaded module.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getModulePathName">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysourceinfo.PySourceInfo-module.html#getModuleSourceFilePathName" class="summary-sig-name">getModuleSourceFilePathName</a>(<span class="summary-sig-arg">mod</span>)</span><br />
+      Returns the filepathname of the source code for loaded module.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getModuleSourceFilePathName">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysourceinfo.PySourceInfo-module.html#getPythonPathFromSysPath" class="summary-sig-name">getPythonPathFromSysPath</a>(<span class="summary-sig-arg">pname</span>,
+        <span class="summary-sig-arg">plist</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Gets the first matching prefix from sys.path.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getPythonPathFromSysPath">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="pysourceinfo.PySourceInfo-module.html#getPythonPathRel" class="summary-sig-name">getPythonPathRel</a>(<span class="summary-sig-arg">fpname</span>,
+        <span class="summary-sig-arg">plist</span>=<span class="summary-sig-default">None</span>)</span><br />
+      Returns the relative path name for the first match on plist.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getPythonPathRel">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__uuid__"></a><span class="summary-name">__uuid__</span> = <code title="'9de52399-7752-4633-9fdc-66c87a9200b8'"><code class="variable-quote">'</code><code class="variable-string">9de52399-7752-4633-9fdc-66c87a9200b8</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="version"></a><span class="summary-name">version</span> = <code title="'2.7'"><code class="variable-quote">'</code><code class="variable-string">2.7</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="__package__"></a><span class="summary-name">__package__</span> = <code title="None">None</code>
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="getCallerFileName"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getCallerFileName</span>(<span class="sig-arg">spos</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerFileName">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the filename of caller source file.</p>
+<dl class="rst-docutils">
+<dt>Args:</dt>
+<dd>spos: Caller position in the stack.</dd>
+<dt>Returns:</dt>
+<dd>Returns the filename.</dd>
+<dt>Raises:</dt>
+<dd>passed through exceptions:</dd>
+</dl>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="getCallerFilePathName"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getCallerFilePathName</span>(<span class="sig-arg">spos</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerFilePathName">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the pathname of caller source file.</p>
+<dl class="rst-docutils">
+<dt>Args:</dt>
+<dd>spos: Caller position in the stack.</dd>
+<dt>Returns:</dt>
+<dd>Returns the filepathname.</dd>
+<dt>Raises:</dt>
+<dd>passed through exceptions:</dd>
+</dl>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="getCallerFuncName"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getCallerFuncName</span>(<span class="sig-arg">spos</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerFuncName">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the name of caller function.</p>
+<dl class="rst-docutils">
+<dt>Args:</dt>
+<dd>spos: Caller position in the stack.</dd>
+<dt>Returns:</dt>
+<dd>Returns the filepathname.</dd>
+<dt>Raises:</dt>
+<dd>passed through exceptions:</dd>
+</dl>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="getCallerLinenumber"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getCallerLinenumber</span>(<span class="sig-arg">spos</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerLinenumber">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the line number of caller.</p>
+<dl class="rst-docutils">
+<dt>Args:</dt>
+<dd>spos: Caller position in the stack.</dd>
+<dt>Returns:</dt>
+<dd>Returns the filepathname.</dd>
+<dt>Raises:</dt>
+<dd>passed through exceptions:</dd>
+</dl>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="getCallerModule"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getCallerModule</span>(<span class="sig-arg">spos</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerModule">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the caller module.</p>
+<dl class="rst-docutils">
+<dt>Args:</dt>
+<dd>spos: Caller position in the stack.</dd>
+<dt>Returns:</dt>
+<dd>Returns the caller module.</dd>
+<dt>Raises:</dt>
+<dd>passed through exceptions:</dd>
+</dl>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="getCallerModuleFilePathName"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getCallerModuleFilePathName</span>(<span class="sig-arg">spos</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerModuleFilePathName">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the filepathname of the module.</p>
+<dl class="rst-docutils">
+<dt>Args:</dt>
+<dd>spos: Caller position in the stack.</dd>
+<dt>Returns:</dt>
+<dd>Returns the filepathname of the caller module.</dd>
+<dt>Raises:</dt>
+<dd>passed through exceptions:</dd>
+</dl>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="getCallerModuleName"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getCallerModuleName</span>(<span class="sig-arg">spos</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerModuleName">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the name of the caller module.</p>
+<p>Both approaches for evaluation the actual relative
+module name seem to have their own challenges,
+module.__name__ and inspect.getmodulename.</p>
+<dl class="rst-docutils">
+<dt>Args:</dt>
+<dd>spos: Caller position in the stack.</dd>
+<dt>Returns:</dt>
+<dd>Returns the name of caller module.
+The dotted object path is relative to
+the actual used sys.path item.</dd>
+<dt>Raises:</dt>
+<dd>passed through exceptions:</dd>
+</dl>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="getCallerModulePathName"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getCallerModulePathName</span>(<span class="sig-arg">spos</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerModulePathName">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the pathname of the module.</p>
+<dl class="rst-docutils">
+<dt>Args:</dt>
+<dd>spos: Caller position in the stack.</dd>
+<dt>Returns:</dt>
+<dd>Returns the filepathname of module.</dd>
+<dt>Raises:</dt>
+<dd>passed through exceptions:</dd>
+</dl>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="getCallerModulePythonPath"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getCallerModulePythonPath</span>(<span class="sig-arg">spos</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerModulePythonPath">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the prefix item from sys.path used for the caller module based on 'inspect'.</p>
+<dl class="rst-docutils">
+<dt>Args:</dt>
+<dd>spos: Caller position in the stack.</dd>
+<dt>Returns:</dt>
+<dd>Returns the name of caller module.</dd>
+<dt>Raises:</dt>
+<dd>passed through exceptions:</dd>
+</dl>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="getCallerName"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getCallerName</span>(<span class="sig-arg">spos</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerName">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the name of the caller.</p>
+<dl class="rst-docutils">
+<dt>Args:</dt>
+<dd>spos: Caller position in the stack.</dd>
+<dt>Returns:</dt>
+<dd>Returns the filepathname.</dd>
+<dt>Raises:</dt>
+<dd>passed through exceptions:</dd>
+</dl>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="getCallerNamespaceGlobal"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getCallerNamespaceGlobal</span>(<span class="sig-arg">spos</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerNamespaceGlobal">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the global namespace of the caller.</p>
+<dl class="rst-docutils">
+<dt>Args:</dt>
+<dd>spos: Caller position in the stack.</dd>
+<dt>Returns:</dt>
+<dd>Returns a reference to the callers global namespace.</dd>
+<dt>Raises:</dt>
+<dd>passed through exceptions:</dd>
+</dl>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="getCallerNamespaceLocal"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getCallerNamespaceLocal</span>(<span class="sig-arg">spos</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerNamespaceLocal">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the local namespace of the caller.</p>
+<dl class="rst-docutils">
+<dt>Args:</dt>
+<dd>spos: Caller position in the stack.</dd>
+<dt>Returns:</dt>
+<dd>Returns a reference to the callers local namespace.</dd>
+<dt>Raises:</dt>
+<dd>passed through exceptions:</dd>
+</dl>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="getCallerNameOID"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getCallerNameOID</span>(<span class="sig-arg">spos</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerNameOID">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the name of the caller in dotted notation.</p>
+<dl class="rst-docutils">
+<dt>Args:</dt>
+<dd>spos: Caller position in the stack.</dd>
+<dt>Returns:</dt>
+<dd>Returns the package name.</dd>
+<dt>Raises:</dt>
+<dd>passed through exceptions:</dd>
+</dl>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="getCallerPackageFilePathName"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getCallerPackageFilePathName</span>(<span class="sig-arg">spos</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerPackageFilePathName">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the filepathname of the package containing the caller.</p>
+<dl class="rst-docutils">
+<dt>Args:</dt>
+<dd>spos: Caller position in the stack.</dd>
+<dt>Returns:</dt>
+<dd>Returns the package name.</dd>
+<dt>Raises:</dt>
+<dd>passed through exceptions:</dd>
+</dl>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="getCallerPackageName"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getCallerPackageName</span>(<span class="sig-arg">spos</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerPackageName">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the name of the first matching package containing the caller.</p>
+<p>Relies on 'inspect'.</p>
+<dl class="rst-docutils">
+<dt>Args:</dt>
+<dd>spos: Caller position in the stack.</dd>
+<dt>Returns:</dt>
+<dd>Returns the package name when defined, else None.</dd>
+<dt>Raises:</dt>
+<dd>passed through exceptions:</dd>
+</dl>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="getCallerPackagePathName"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getCallerPackagePathName</span>(<span class="sig-arg">spos</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerPackagePathName">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the pathname to the first matching package directory of the caller.</p>
+<p>Relies on 'inspect'.</p>
+<dl class="rst-docutils">
+<dt>Args:</dt>
+<dd>spos: Caller position in the stack.</dd>
+<dt>Returns:</dt>
+<dd>Returns the path name to the package.</dd>
+<dt>Raises:</dt>
+<dd>passed through exceptions:</dd>
+</dl>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="getCallerPackagePythonPath"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getCallerPackagePythonPath</span>(<span class="sig-arg">spos</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerPackagePythonPath">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the python path for first matching package of the caller.</p>
+<p>Relies on 'inspect'.</p>
+<p>Intentionally the same as 'getCallerPackagePathName'.</p>
+<dl class="rst-docutils">
+<dt>Args:</dt>
+<dd>spos: Caller position in the stack.</dd>
+<dt>Returns:</dt>
+<dd>Returns the path name to the package.</dd>
+<dt>Raises:</dt>
+<dd>passed through exceptions:</dd>
+</dl>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="getCallerSysPathPackageName"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getCallerSysPathPackageName</span>(<span class="sig-arg">spos</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerSysPathPackageName">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the name of the first matching package on sys.path.</p>
+<p>Evaluates 'sys.path' first, else switches to 'inspect'.</p>
+<dl class="rst-docutils">
+<dt>Args:</dt>
+<dd>spos: Caller position in the stack.</dd>
+<dt>Returns:</dt>
+<dd>Returns the package name when defined, else None.</dd>
+<dt>Raises:</dt>
+<dd>passed through exceptions:</dd>
+</dl>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="getCallerSysPathPackageSysPathName"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getCallerSysPathPackageSysPathName</span>(<span class="sig-arg">spos</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerSysPathPackageSysPathName">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the pathname to the first matching package directory of the caller.</p>
+<p>Evaluates 'sys.path' first, else switches to 'inspect'.</p>
+<dl class="rst-docutils">
+<dt>Args:</dt>
+<dd>spos: Caller position in the stack.</dd>
+<dt>Returns:</dt>
+<dd>Returns the path name to the package.</dd>
+<dt>Raises:</dt>
+<dd>passed through exceptions:</dd>
+</dl>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="getCallerSysPathPackagePathNameRel"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getCallerSysPathPackagePathNameRel</span>(<span class="sig-arg">spos</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerSysPathPackagePathNameRel">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the pathname to the first matching package directory of the caller.</p>
+<p>Evaluates 'sys.path' first, else switches to 'inspect'.</p>
+<dl class="rst-docutils">
+<dt>Args:</dt>
+<dd>spos: Caller position in the stack.</dd>
+<dt>Returns:</dt>
+<dd>Returns the path name to the package.</dd>
+<dt>Raises:</dt>
+<dd>passed through exceptions:</dd>
+</dl>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="getCallerSysPathPackagePythonPath"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getCallerSysPathPackagePythonPath</span>(<span class="sig-arg">spos</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerSysPathPackagePythonPath">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the python path for first matching package of the caller.</p>
+<p>Evaluates 'sys.path' first, else switches to 'inspect'.</p>
+<p>Intentionally the same as 'getCallerPackagePathName'.</p>
+<dl class="rst-docutils">
+<dt>Args:</dt>
+<dd>spos: Caller position in the stack.</dd>
+<dt>Returns:</dt>
+<dd>Returns the path name to the package.</dd>
+<dt>Raises:</dt>
+<dd>passed through exceptions:</dd>
+</dl>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="getCallerPathName"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getCallerPathName</span>(<span class="sig-arg">spos</span>=<span class="sig-default">1</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getCallerPathName">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the pathname of caller source file.</p>
+<dl class="rst-docutils">
+<dt>Args:</dt>
+<dd>spos: Caller position in the stack.</dd>
+<dt>Returns:</dt>
+<dd>Returns the filename.</dd>
+<dt>Raises:</dt>
+<dd>passed through exceptions:</dd>
+</dl>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="getModuleFilePathName"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getModuleFilePathName</span>(<span class="sig-arg">mod</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getModuleFilePathName">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the filepathname of the loaded module.</p>
+<dl class="rst-docutils">
+<dt>Args:</dt>
+<dd>mod: Reference to a loaded module.</dd>
+<dt>Returns:</dt>
+<dd>Returns the filepathname of the loaded module.</dd>
+<dt>Raises:</dt>
+<dd>passed through exceptions:</dd>
+</dl>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="getModulePathName"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getModulePathName</span>(<span class="sig-arg">mod</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getModulePathName">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the pathname of the loaded module.</p>
+<dl class="rst-docutils">
+<dt>Args:</dt>
+<dd>mod: Reference to a loaded module.</dd>
+<dt>Returns:</dt>
+<dd>Returns the pathname of the loaded module.</dd>
+<dt>Raises:</dt>
+<dd>passed through exceptions:</dd>
+</dl>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="getModuleSourceFilePathName"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getModuleSourceFilePathName</span>(<span class="sig-arg">mod</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getModuleSourceFilePathName">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the filepathname of the source code for loaded module.</p>
+<dl class="rst-docutils">
+<dt>Args:</dt>
+<dd>mod: Reference to a loaded module.</dd>
+<dt>Returns:</dt>
+<dd>Returns the filepathname of the source for the loaded module,
+else None.</dd>
+<dt>Raises:</dt>
+<dd>passed through exceptions:</dd>
+</dl>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="getPythonPathFromSysPath"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getPythonPathFromSysPath</span>(<span class="sig-arg">pname</span>,
+        <span class="sig-arg">plist</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getPythonPathFromSysPath">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Gets the first matching prefix from sys.path.</p>
+<p>Foreseen to be used for canonical base reference in unit tests.
+This enables in particular for generic tests of filesystem positions
+where originally absolute pathnames were required.</p>
+<dl class="rst-docutils">
+<dt>Args:</dt>
+<dd><p class="rst-first">pname: Pathname.</p>
+<dl class="rst-last rst-docutils">
+<dt>plist: List of possible python paths.</dt>
+<dd>default := sys.path</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd>Returns the first matching path prefix from sys.path.</dd>
+<dt>Raises:</dt>
+<dd>passed through exceptions:</dd>
+</dl>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="getPythonPathRel"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">getPythonPathRel</span>(<span class="sig-arg">fpname</span>,
+        <span class="sig-arg">plist</span>=<span class="sig-default">None</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="pysourceinfo.PySourceInfo-pysrc.html#getPythonPathRel">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns the relative path name for the first match on plist.</p>
+<p>REMARK: Refer also to 'getCallerNameSpceGlobal'.</p>
+<dl class="rst-docutils">
+<dt>Args:</dt>
+<dd><p class="rst-first">fpname: The filepathname.</p>
+<dl class="rst-last rst-docutils">
+<dt>plist: List of possible python paths.</dt>
+<dd>default := sys.path</dd>
+</dl>
+</dd>
+<dt>Returns:</dt>
+<dd>Returns the path postfix for fpname when found,
+else 'None'.</dd>
+<dt>Raises:</dt>
+<dd>passed through exceptions:</dd>
+</dl>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="pysourceinfo-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Tue Jul  5 12:40:30 2016
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

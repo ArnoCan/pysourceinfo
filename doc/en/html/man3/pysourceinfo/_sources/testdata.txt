@@ -1,0 +1,18 @@
+testdata Package
+================
+
+:mod:`testdata` Package
+-----------------------
+
+.. automodule:: testdata.__init__
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    testdata.a
+

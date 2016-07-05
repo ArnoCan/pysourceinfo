@@ -1,0 +1,18 @@
+30_libs Package
+===============
+
+:mod:`30_libs` Package
+----------------------
+
+.. automodule:: tests.30_libs
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    tests.30_libs.040_PySourceInfo
+

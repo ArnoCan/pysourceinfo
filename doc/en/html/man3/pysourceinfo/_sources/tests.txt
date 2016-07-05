@@ -1,0 +1,27 @@
+tests Package
+=============
+
+:mod:`tests` Package
+--------------------
+
+.. automodule:: tests.__init__
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+:mod:`CallCase` Module
+----------------------
+
+.. automodule:: tests.CallCase
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+
+    tests.30_libs
+    tests.dummymodules
+

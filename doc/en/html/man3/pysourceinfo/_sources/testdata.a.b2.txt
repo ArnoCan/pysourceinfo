@@ -1,0 +1,13 @@
+b2 Package
+==========
+
+Subpackages
+-----------
+
+.. toctree::
+
+    testdata.a.b2.c
+    testdata.a.b2.c0
+    testdata.a.b2.c1
+    testdata.a.b2.c2
+
