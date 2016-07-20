@@ -1,6 +1,6 @@
 PROJECT='pysourceinfo'
-VERSION="0.1.1"
-RELEASE="0.1.1"
+VERSION="0.1.5"
+RELEASE="0.1.5"
 NICKNAME="Mimisbrunnr"
 AUTHOR='Arno-Can Uestuensoez'
 COPYRIGHT='Copyright (C) 2010,2011,2015-2016 Arno-Can Uestuensoez @Ingenieurbuero Arno-Can Uestuensoez'
@@ -35,7 +35,8 @@ STATIC="${OUTDIR}/apidoc/sphinx/_static"
 
 # source entities
 FILEDIRS=""
-FILEDIRS="${INDIR}epydoc"
+FILEDIRS="${INDIR}dosrc"
+FILEDIRS="$FILEDIRS ${INDIR}pysourceinfo"
 FILEDIRS="$FILEDIRS ${INDIR}UseCases"
 FILEDIRS="$FILEDIRS ${INDIR}tests"
 FILEDIRS="$FILEDIRS ${INDIR}testdata"

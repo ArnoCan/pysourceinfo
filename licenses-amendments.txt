@@ -9,8 +9,8 @@ TITLE: Forced-Fairplay-Constraints
 SUBTITLE: Enforcement of Fairplay for Opensource Licenses - Con-Trolls
 AUTHOR: Arno-Can Uestuensoez - @Ingenieurbuero Arno-Can Uestuensoez
 COPYRIGHT: [2007,2008,2010,2013,2014,2015, 2016] Arno-Can Uestuensoez
-VERSION: 00.01.001
-RELEASE: 00.01.001
+VERSION: 00.01.002
+RELEASE: 00.01.002
 DATE: 2016-03-04
 UUID: 6fb5eecc-310c-4147-98e4-7a41698113f4
 SCOPE: This release replaces and obsoletes any previous version.

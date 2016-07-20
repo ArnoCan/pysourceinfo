@@ -45,7 +45,7 @@ __author__ = 'Arno-Can Uestuensoez'
 __author_email__ = 'acue_sf2@sourceforge.net'
 __license__ = "Artistic-License-2.0 + Forced-Fairplay-Constraints"
 __copyright__ = "Copyright (C) 2015-2016 Arno-Can Uestuensoez @Ingenieurbuero Arno-Can Uestuensoez"
-__version__ = '0.1.1'
+__version__ = '0.1.5'
 __uuid__='efed42d3-f801-4fbb-abfd-bd598d683a82'
 
 _NAME = 'pysourceinfo'
@@ -157,6 +157,54 @@ if 'build_epydoc' in sys.argv:
     print "Called/Finished callDocEpydoc.sh => exit="+str(exit_code)
     sys.argv.remove('build_epydoc')
 
+# # call of complete test suite by 'discover'
+if 'install_doc' in sys.argv:
+    print "#"
+    idx = 0
+    for i in sys.argv: 
+        if i == 'install_doc': break
+        idx += 1
+    print "# install_doc.sh..."
+    # src    
+    src = os.path.normpath("doc/en/html/man3/"+str(_NAME))
+
+    # set platform
+    if sys.platform in ('win32'):
+        dst = os.path.expandvars("%APPDATA%/Python/doc/")
+    else:
+        dst = os.path.expanduser("~/.local/")
+    dst = os.path.normpath(dst+src)
+
+
+    print "#"
+
+    # copy sphinx
+    if os.path.exists(dst):
+        shutil.rmtree(dst)
+    shutil.copytree(src, dst)
+    print "# "+str(_NAME)
+    print "#   from        : "+str(src)
+    print "#   to          : "+str(dst)
+    print "#   display with: firefox -P preview.simple "+dst+"/index.html"
+    
+    # copy epydoc
+    src += '.epydoc'
+    dst += '.epydoc'
+    if os.path.exists(src):
+        if os.path.exists(dst):
+            shutil.rmtree(dst)
+        shutil.copytree(src, dst)
+        print "#"
+        print "# "+str(_NAME)+".epydoc"
+        print "#   from        : "+str(src)
+        print "#   to          : "+str(dst)
+        print "#   display with: firefox -P preview.simple "+dst+"/index.html"
+
+    print "#"
+    print "Called/Finished PyUnit tests => exit="+str(exit_code)
+    print "exit setup.py now: exit="+str(exit_code)
+    sys.exit(exit_code)
+
 # call of complete test suite by 'discover'
 if 'tests' in sys.argv or 'test' in sys.argv:
     if os.path.dirname(__file__)+os.pathsep not in os.environ['PATH']:
@@ -207,55 +255,6 @@ if 'usecases' in sys.argv or 'usecase' in sys.argv:
         sys.argv.remove('usecases')
     except:
         pass
-
-# # call of complete test suite by 'discover'
-if 'install_doc' in sys.argv:
-    print "#"
-    idx = 0
-    for i in sys.argv: 
-        if i == 'install_doc': break
-        idx += 1
-    print "# install_doc.sh..."
-    # src    
-    src = os.path.normpath("doc/en/html/man3/"+str(_NAME))
-
-    # set platform
-    if sys.platform in ('win32'):
-        dst = os.path.expandvars("%APPDATA%/Python/doc/")
-    else:
-        dst = os.path.expanduser("~/.local/")
-    dst = os.path.normpath(dst+src)
-
-
-    print "#"
-
-    # copy sphinx
-    if os.path.exists(dst):
-        shutil.rmtree(dst)
-    shutil.copytree(src, dst)
-    print "# "+str(_NAME)
-    print "#   from        : "+str(src)
-    print "#   to          : "+str(dst)
-    print "#   display with: firefox -P preview.simple "+dst+"/index.html"
-    
-    # copy epydoc
-    src += '.epydoc'
-    dst += '.epydoc'
-    if os.path.exists(src):
-        if os.path.exists(dst):
-            shutil.rmtree(dst)
-        shutil.copytree(src, dst)
-        print "#"
-        print "# "+str(_NAME)+".epydoc"
-        print "#   from        : "+str(src)
-        print "#   to          : "+str(dst)
-        print "#   display with: firefox -P preview.simple "+dst+"/index.html"
-
-    print "#"
-    print "Called/Finished PyUnit tests => exit="+str(exit_code)
-    print "exit setup.py now: exit="+str(exit_code)
-    sys.exit(exit_code)
-
 
 # Intentional HACK: ignore (online) dependencies, mainly foreseen for developement
 __no_install_requires = False

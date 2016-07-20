@@ -46,7 +46,7 @@ class CallUnits(unittest.TestCase):
         fxn = PySourceInfo_check_tests.check_callback(pysourceinfo.PySourceInfo.getCallerModuleName,1)
         if fxn == 'PySourceInfo_check_tests':
             fpn = os.path.dirname(PySourceInfo_check_tests.__file__)
-            fpn = os.path.normpath(fpn)
+            fpn = os.path.abspath(os.path.normpath(fpn))
         else:
             fpn = os.path.splitext(os.path.normpath(PySourceInfo_check_tests.__file__))[0]
             import re

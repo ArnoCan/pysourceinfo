@@ -50,7 +50,7 @@ from __future__ import absolute_import
 __author__ = 'Arno-Can Uestuensoez'
 __license__ = "Artistic-License-2.0 + Forced-Fairplay-Constraints"
 __copyright__ = "Copyright (C) 2010-2016 Arno-Can Uestuensoez @Ingenieurbuero Arno-Can Uestuensoez"
-__version__ = '0.1.1'
+__version__ = '0.1.5'
 __uuid__='9de52399-7752-4633-9fdc-66c87a9200b8'
 
 __docformat__ = "restructuredtext en"
@@ -70,7 +70,7 @@ def getCallerFileName(spos=1):
     """Returns the filename of caller source file.
 
     Args:
-        spos: Caller position in the stack.
+        spos: Caller position on the stack.
 
     Returns:
         Returns the filename.
@@ -84,7 +84,7 @@ def getCallerFilePathName(spos=1):
     """Returns the pathname of caller source file.
 
     Args:
-        spos: Caller position in the stack.
+        spos: Caller position on the stack.
 
     Returns:
         Returns the filepathname.
@@ -92,13 +92,13 @@ def getCallerFilePathName(spos=1):
     Raises:
         passed through exceptions:
     """
-    return inspect.stack()[spos][1]
+    return os.path.abspath(inspect.stack()[spos][1])
 
 def getCallerFuncName(spos=1):
     """Returns the name of caller function.
 
     Args:
-        spos: Caller position in the stack.
+        spos: Caller position on the stack.
 
     Returns:
         Returns the filepathname.
@@ -112,7 +112,7 @@ def getCallerLinenumber(spos=1):
     """Returns the line number of caller.
 
     Args:
-        spos: Caller position in the stack.
+        spos: Caller position on the stack.
 
     Returns:
         Returns the filepathname.
@@ -126,7 +126,7 @@ def getCallerModule(spos=1):
     """Returns the caller module.
 
     Args:
-        spos: Caller position in the stack.
+        spos: Caller position on the stack.
 
     Returns:
         Returns the caller module.
@@ -143,7 +143,7 @@ def getCallerModuleFilePathName(spos=1):
     """Returns the filepathname of the module.
 
     Args:
-        spos: Caller position in the stack.
+        spos: Caller position on the stack.
 
     Returns:
         Returns the filepathname of the caller module.
@@ -157,8 +157,8 @@ def getCallerModuleFilePathName(spos=1):
     module = inspect.getmodule(_sf[spos][0])
     if module:
         if module.__file__[-4:-1] == '.py': 
-            return module.__file__[:-1]
-        return module.__file__
+            return os.path.abspath(module.__file__[:-1])
+        return os.path.abspath(module.__file__)
 
 def getCallerModuleName(spos=1):
     """Returns the name of the caller module.
@@ -168,7 +168,7 @@ def getCallerModuleName(spos=1):
     module.__name__ and inspect.getmodulename.
 
     Args:
-        spos: Caller position in the stack.
+        spos: Caller position on the stack.
 
     Returns:
         Returns the name of caller module.
@@ -189,7 +189,7 @@ def getCallerModulePathName(spos=1):
     """Returns the pathname of the module.
 
     Args:
-        spos: Caller position in the stack.
+        spos: Caller position on the stack.
 
     Returns:
         Returns the filepathname of module.
@@ -203,7 +203,7 @@ def getCallerModulePythonPath(spos=1):
     """Returns the prefix item from sys.path used for the caller module based on 'inspect'.
 
     Args:
-        spos: Caller position in the stack.
+        spos: Caller position on the stack.
 
     Returns:
         Returns the name of caller module.
@@ -220,7 +220,7 @@ def getCallerName(spos=1):
     """Returns the name of the caller.
 
     Args:
-        spos: Caller position in the stack.
+        spos: Caller position on the stack.
 
     Returns:
         Returns the filepathname.
@@ -234,7 +234,7 @@ def getCallerNamespaceGlobal(spos=1):
     """Returns the global namespace of the caller.
 
     Args:
-        spos: Caller position in the stack.
+        spos: Caller position on the stack.
 
     Returns:
         Returns a reference to the callers global namespace.
@@ -248,7 +248,7 @@ def getCallerNamespaceLocal(spos=1):
     """Returns the local namespace of the caller.
 
     Args:
-        spos: Caller position in the stack.
+        spos: Caller position on the stack.
 
     Returns:
         Returns a reference to the callers local namespace.
@@ -262,7 +262,7 @@ def getCallerNameOID(spos=1):
     """Returns the name of the caller in dotted notation.
 
     Args:
-        spos: Caller position in the stack.
+        spos: Caller position on the stack.
 
     Returns:
         Returns the package name.
@@ -289,7 +289,7 @@ def getCallerPackageFilePathName(spos=1):
     """Returns the filepathname of the package containing the caller.
 
     Args:
-        spos: Caller position in the stack.
+        spos: Caller position on the stack.
 
     Returns:
         Returns the package name.
@@ -314,7 +314,7 @@ def getCallerPackageName(spos=1):
     Relies on 'inspect'.
     
     Args:
-        spos: Caller position in the stack.
+        spos: Caller position on the stack.
 
     Returns:
         Returns the package name when defined, else None.
@@ -329,12 +329,6 @@ def getCallerPackageName(spos=1):
     if module and module.__package__:
         return module.__package__
     else:
-        #FIXME:4TEST:
-#        a = getCallerModuleName(spos+1)
-#        print "4TEST:a="+str(a)
-#         b = "^([^.]+).*"
-#         c = re.sub("^([^.]+).*",r'\1',getCallerModuleName(spos+1))
-#         print "4TEST:c="+str(c)
         return re.sub("^([^.]+).*",r'\1',getCallerModuleName(spos+1))
 
 def getCallerPackagePathName(spos=1):
@@ -343,7 +337,7 @@ def getCallerPackagePathName(spos=1):
     Relies on 'inspect'.
 
     Args:
-        spos: Caller position in the stack.
+        spos: Caller position on the stack.
 
     Returns:
         Returns the path name to the package.
@@ -367,7 +361,7 @@ def getCallerPackagePythonPath(spos=1):
     Intentionally the same as 'getCallerPackagePathName'.
 
     Args:
-        spos: Caller position in the stack.
+        spos: Caller position on the stack.
 
     Returns:
         Returns the path name to the package.
@@ -383,7 +377,7 @@ def getCallerSysPathPackageName(spos=1):
     Evaluates 'sys.path' first, else switches to 'inspect'.
     
     Args:
-        spos: Caller position in the stack.
+        spos: Caller position on the stack.
 
     Returns:
         Returns the package name when defined, else None.
@@ -412,7 +406,7 @@ def getCallerSysPathPackageSysPathName(spos=1):
     Evaluates 'sys.path' first, else switches to 'inspect'.
 
     Args:
-        spos: Caller position in the stack.
+        spos: Caller position on the stack.
 
     Returns:
         Returns the path name to the package.
@@ -440,7 +434,7 @@ def getCallerSysPathPackagePathNameRel(spos=1):
     Evaluates 'sys.path' first, else switches to 'inspect'.
 
     Args:
-        spos: Caller position in the stack.
+        spos: Caller position on the stack.
 
     Returns:
         Returns the path name to the package.
@@ -474,7 +468,7 @@ def getCallerSysPathPackagePythonPath(spos=1):
     Intentionally the same as 'getCallerPackagePathName'.
 
     Args:
-        spos: Caller position in the stack.
+        spos: Caller position on the stack.
 
     Returns:
         Returns the path name to the package.
@@ -488,7 +482,7 @@ def getCallerPathName(spos=1):
     """Returns the pathname of caller source file.
 
     Args:
-        spos: Caller position in the stack.
+        spos: Caller position on the stack.
 
     Returns:
         Returns the filename.
@@ -512,7 +506,7 @@ def getModuleFilePathName(mod):
     """
     if mod and inspect.ismodule(mod) and not inspect.isbuiltin(mod) :
         if os.path.exists(mod.__file__):
-            return os.path.normpath(mod.__file__)
+            return os.path.abspath(os.path.normpath(mod.__file__))
 
 def getModulePathName(mod):
     """Returns the pathname of the loaded module.
@@ -527,7 +521,7 @@ def getModulePathName(mod):
         passed through exceptions:
     """
     if mod and inspect.ismodule(mod) and not inspect.isbuiltin(mod) :
-        return os.path.normpath(os.path.dirname(mod.__file__))
+        return os.path.abspath(os.path.normpath(os.path.dirname(mod.__file__)))
 
 def getModuleSourceFilePathName(mod):
     """Returns the filepathname of the source code for loaded module.
@@ -545,7 +539,7 @@ def getModuleSourceFilePathName(mod):
     if mod and inspect.ismodule(mod) and not inspect.isbuiltin(mod) :
         f = os.path.splitext(mod.__file__)[0]+'.py'
         if os.path.exists(f):        
-            return os.path.normpath(f) 
+            return os.path.abspath(os.path.normpath(f)) 
 
 def getPythonPathFromSysPath(pname,plist=None):
     """Gets the first matching prefix from sys.path.

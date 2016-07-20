@@ -46,7 +46,7 @@ class CallUnits(unittest.TestCase):
         sys.path.insert(0,os.path.dirname(__file__)+os.sep+'..')
         import PySourceInfo_check_tests #@UnresolvedImport
         
-        fpn = os.path.normpath(os.path.dirname(__file__))
+        fpn = os.path.abspath(os.path.normpath(os.path.dirname(__file__)))
         fx = PySourceInfo_check_tests.check_callback(pysourceinfo.PySourceInfo.getCallerModulePathName,2)
 
         [ sys.path.pop() for x in range(len(sys.path)) ] #@UnusedVariable

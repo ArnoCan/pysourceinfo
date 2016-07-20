@@ -17,7 +17,7 @@ class CallUnits(unittest.TestCase):
         sys.path.insert(0,os.path.dirname(__file__)+os.sep+'..')
         import PySourceInfo_check_tests #@UnresolvedImport
 
-        fpn = os.path.normpath(os.path.dirname(pysourceinfo.__file__)+os.sep+"..")
+        fpn = os.path.abspath(os.path.normpath(os.path.dirname(pysourceinfo.__file__)+os.sep+".."))
         fx = PySourceInfo_check_tests.check_callback(pysourceinfo.PySourceInfo.getCallerPackagePythonPath,0)
         fx = os.path.normpath(fx)
         assert fx == fpn
@@ -37,10 +37,10 @@ class CallUnits(unittest.TestCase):
         sys.path.insert(0,os.path.normpath(os.path.dirname(__file__)))
         import PySourceInfo_check_tests #@UnresolvedImport
 
-        fpn0 = os.path.normpath(os.path.dirname(__file__)+os.sep+'..')
-        fpn = os.path.normpath(os.path.dirname(PySourceInfo_check_tests.__file__))
+        fpn0 = os.path.abspath(os.path.normpath(os.path.dirname(__file__)+os.sep+'..'))
+        fpn = os.path.abspath(os.path.normpath(os.path.dirname(PySourceInfo_check_tests.__file__)))
 
-        assert fpn0 == fpn
+        self.assertEqual(fpn0, fpn)
         
         fx = PySourceInfo_check_tests.check_callback(pysourceinfo.PySourceInfo.getCallerPackagePythonPath,1)
         assert fx is not None

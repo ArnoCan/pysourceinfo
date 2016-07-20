@@ -18,7 +18,7 @@ class CallUnits(unittest.TestCase):
         sys.path.insert(0,os.path.dirname(__file__)+os.sep+'..')
         import PySourceInfo_check_tests #@UnresolvedImport
 
-        fpn = os.path.normpath(os.path.dirname(pysourceinfo.__file__)+os.sep+"..")
+        fpn = os.path.abspath(os.path.normpath(os.path.dirname(pysourceinfo.__file__)+os.sep+".."))
         fx = PySourceInfo_check_tests.check_callback(pysourceinfo.PySourceInfo.getCallerPackagePathName,0)
         fx = os.path.normpath(fx)
         assert fx == fpn
@@ -33,13 +33,13 @@ class CallUnits(unittest.TestCase):
         sys.path.insert(0,os.path.dirname(__file__)+os.sep+'..')
         import PySourceInfo_check_tests #@UnresolvedImport
 
-        fx0 = os.path.normpath(os.path.dirname(PySourceInfo_check_tests.__file__))
-        fx1 = os.path.normpath(os.path.dirname(pysourceinfo.__file__)+os.sep+'..')
+        fx0 = os.path.abspath(os.path.normpath(os.path.dirname(PySourceInfo_check_tests.__file__)))
+        fx1 = os.path.abspath(os.path.normpath(os.path.dirname(pysourceinfo.__file__)+os.sep+'..'))
         
         fx = PySourceInfo_check_tests.check_callback(pysourceinfo.PySourceInfo.getCallerPackagePathName,1)
         fx = os.path.normpath(fx)
         
-        assert fx == fx0 or fx == fx1
+        assert fx == fx1 or fx == fx0 
 
         [ sys.path.pop() for x in range(len(sys.path)) ] #@UnusedVariable
         sys.path.extend(_s)

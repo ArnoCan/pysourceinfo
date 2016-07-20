@@ -53,7 +53,7 @@ class CallUnits(unittest.TestCase):
         sys.path.insert(0,os.path.dirname(__file__)+os.sep+'..')
         import PySourceInfo_check_tests #@UnresolvedImport
         
-        fpn = os.path.normpath(__file__)
+        fpn = os.path.abspath(os.path.normpath(__file__))
         if fpn[-4:-1] == '.py':
             fpn = fpn[:-1]
         

@@ -7,18 +7,10 @@ sourcefiles based on 'inspect' and additional sources.
 The provided feature modules comprise the following list.
 For code examples refer to 'pysourceinfo.UseCases'.
 
-For the compliance tests extracted from IETF and ECMA standards refer to the directories:
-
-* UseCases
- 
 **Downloads**:
 
-* Sourceforge.net: https://sourceforge.net/projects/pyfilesysobjetcs/files/
+* Sourceforge.net: https://sourceforge.net/projects/pysourceinfo/files/
   
-**REMARK**: The pathname on sourceforge.net is a little odd for now
-  because this could not changed on-the-fly: 'filesysobjeTCcs' instead 'filesysobjeCTs' 
-
-
 * Github: https://github.com/ArnoCan/pysourceinfo/
 
 **Online documentation**:
@@ -100,7 +92,7 @@ VERSIONS and RELEASES
 * RELEASE: 00.05.00x - Production: Various performance enhancements.
 
 
-**Current Release: 00.01.001 - Alpha:**
+**Current Release: 00.01.005 - Alpha:**
 
 OS-Support - Tested by PyUnit/Eclipse with Success:
 
@@ -123,7 +115,7 @@ OS-Support - ToDo: Going to follow soon.
 
 Major Changes:
 
-* Did some basic work for initial public release...
+* changed to return absolute paths due to platform differences
 
 Current test status:
 

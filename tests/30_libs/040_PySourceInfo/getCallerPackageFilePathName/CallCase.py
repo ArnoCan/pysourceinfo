@@ -39,11 +39,11 @@ class CallUnits(unittest.TestCase):
         sys.path.insert(0,os.path.dirname(__file__)+os.sep+'..')
         import PySourceInfo_check_tests #@UnresolvedImport
 
-        fx0 = os.path.normpath(PySourceInfo_check_tests.__file__)
+        fx0 = os.path.abspath(os.path.normpath(PySourceInfo_check_tests.__file__))
         if fx0[-4:-1] == '.py':
             fx0 = fx0[:-1]
 
-        fx1 = os.path.normpath(os.path.dirname(__file__)+os.sep+'..'+os.sep+'..'+os.sep+'..'+os.sep+'__init__.py')
+        fx1 = os.path.abspath(os.path.normpath(os.path.dirname(__file__)+os.sep+'..'+os.sep+'..'+os.sep+'..'+os.sep+'__init__.py'))
         fx = PySourceInfo_check_tests.check_callback(pysourceinfo.PySourceInfo.getCallerPackageFilePathName,1)
         fx = os.path.normpath(fx)
         
