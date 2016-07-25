@@ -46,11 +46,14 @@ only in order to avoid any overhead for generic application.
 
 """
 from __future__ import absolute_import
+from inspect import ismethod
+#from mpl_toolkits.axes_grid1.axes_size import Padded
+#from scipy.stats.distributions import instancemethod
 
 __author__ = 'Arno-Can Uestuensoez'
 __license__ = "Artistic-License-2.0 + Forced-Fairplay-Constraints"
 __copyright__ = "Copyright (C) 2010-2016 Arno-Can Uestuensoez @Ingenieurbuero Arno-Can Uestuensoez"
-__version__ = '0.1.5'
+__version__ = '0.1.6'
 __uuid__='9de52399-7752-4633-9fdc-66c87a9200b8'
 
 __docformat__ = "restructuredtext en"
@@ -93,6 +96,20 @@ def getCallerFilePathName(spos=1):
         passed through exceptions:
     """
     return os.path.abspath(inspect.stack()[spos][1])
+
+def getCallerFunc(spos=1):
+    """Returns the ID:=mem-address of caller function.
+
+    Args:
+        spos: Caller position on the stack.
+
+    Returns:
+        Returns the ID:=mem-address.
+
+    Raises:
+        passed through exceptions:
+    """
+    return inspect.stack()[spos][0]
 
 def getCallerFuncName(spos=1):
     """Returns the name of caller function.
@@ -459,7 +476,6 @@ def getCallerSysPathPackagePathNameRel(spos=1):
 #     else:
 #         return re.sub("^([^.]+).*",r'\1',getCallerModuleName(spos+1))
 
-
 def getCallerSysPathPackagePythonPath(spos=1):
     """Returns the python path for first matching package of the caller.
 
@@ -606,3 +622,175 @@ def getPythonPathRel(fpname,plist=None):
             if not _r:
                 return '.'
             return re.sub(r'\\(.)', r'\1', _r)
+
+def getStackFuncNameList(fromtop=False):
+    """Returns a list of current functions names on stack.
+
+    Args:
+        fromtop: If True, return the reversed list.
+            
+            default:=False
+
+    Returns:
+        Returns the list of function names on stack.
+
+            fromtop==False:   stack[0] == result[0],...
+
+            fromtop==True:    stack[0] == result[-1],... - reversed 
+
+    Raises:
+        passed through exceptions:
+
+    """
+    if fromtop:
+        return map(lambda x:x[3], reversed(inspect.stack()))
+    else:
+        return map(lambda x:x[3], inspect.stack())
+
+def getStackFuncList(fromtop=False):
+    """Returns a list of current mem-addresses on the stack.
+
+    Args:
+        fromtop: If True, return the reversed list.
+            
+            default:=False
+
+    Returns:
+        Returns the list of function names on stack.
+
+            fromtop==False:   stack[0] == result[0],...
+
+            fromtop==True:    stack[0] == result[-1],... - reversed 
+
+    Raises:
+        passed through exceptions:
+
+    """    
+    if fromtop:
+        return [ x[0] for x in reversed(inspect.stack())]
+    return [ x[0] for x in inspect.stack()]
+
+def getStackFuncMap(funp):
+    """Returns a list of mem-addresses for each call of funcp on the stack.
+
+    Args:
+        funp: Function pointer.
+            
+    Returns:
+        Returns the list of calls for the function on stack.
+
+    Raises:
+        passed through exceptions:
+
+    """    
+    _sl = inspect.stack()
+    _r = {}
+    for _s in _sl:
+
+        t0 = type(funp)
+        t1 = type(_s)
+        
+        if funp == _s[0]:
+            _r[_sl.index(_s)] = funp
+        elif type(funp) != type(_s) and ismethod(funp):
+            if _s[3] == funp.__name__:
+                _r[_sl.index(_s)] = funp
+        elif type(funp) != type(_s) and ismethod(_s):
+            if _s[3] == funp[3]:
+                _r[_sl.index(_s)] = funp
+        
+    return _r 
+
+def getStackFuncNameMap(fun):
+    """Returns a list of funcnames for each call of func on the stack.
+
+    Args:
+        fun: Function name as regexpr.
+            
+    Returns:
+        Returns the list of function names on stack.
+
+    Raises:
+        passed through exceptions:
+
+    """    
+    _c = re.compile(fun)
+    _sl = inspect.stack()
+    _r = {}
+    for _s in _sl:
+        if _c.match(_s[3]):
+            _r[_sl.index(_s)] = _s[3] 
+    return _r 
+
+def getStackLen():
+    """Returns the length of current stack.
+
+    Args:
+
+    Returns:
+        Returns the len of current stack.
+
+    Raises:
+        passed through exceptions:
+    """
+    return len(inspect.stack())
+
+def getStackSposForFunc(funp):
+    """Returns the id:=mem-address of the caller function.
+
+    The ID is independent over of the call context during
+    it's lifetime.
+
+    Args:
+        funp: Function on current stack.
+
+    Returns:
+        Returns the spos.
+
+    Raises:
+        passed through exceptions:
+
+    """
+    _sl = inspect.stack()
+    for _s in _sl:
+        if funp == _s[0]:
+            return _sl.index(_s) 
+    return None
+
+def getStackSposForFuncName(fun,fromtop=False):
+    """Returns the current stack position(spos) of the function name.
+
+    The position and it's content are specific to the call context.
+    When fromtop==False, the position is 'almost' static - for the
+    lifetime of the referenced object.
+ 
+    Args:
+        fun=(literal|regexpr): Caller function name on the stack.
+            literal: a literal name
+            regexpr: a regular expression for 're'
+
+        fromtop: If True, return the value as a topdown index for
+            the current stack, thus negative/<0.
+            
+            default:=False
+
+    Returns:
+        Returns the spos, for loops and validation use:
+
+            fromtop==False:   result >=0
+
+            fromtop==True:    result <0
+
+    Raises:
+        passed through exceptions:
+
+    """
+    _c = re.compile(fun)
+    _st = inspect.stack()
+    if fromtop:
+        _st = reversed(_st)
+    for _s in _st:
+        if _c.match(_s[3]):
+            return _st.index(_s) 
+    return -1
+

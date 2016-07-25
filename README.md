@@ -92,7 +92,7 @@ VERSIONS and RELEASES
 * RELEASE: 00.05.00x - Production: Various performance enhancements.
 
 
-**Current Release: 00.01.005 - Alpha:**
+**Current Release: 00.01.006 - Alpha:**
 
 OS-Support - Tested by PyUnit/Eclipse with Success:
 
@@ -115,13 +115,13 @@ OS-Support - ToDo: Going to follow soon.
 
 Major Changes:
 
-* changed to return absolute paths due to platform differences
+* added stack search functions:getStack\*
 
 Current test status:
 
-* UnitTests: >89
+* UnitTests: >100
 
 * Use-Cases as UnitTests: >43
 
-**Total**: >130
+**Total**: >140
 

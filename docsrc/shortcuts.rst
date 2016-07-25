@@ -36,6 +36,8 @@ Runtime Type Information for Python sources.
   +--------------------------------------------+---------------------------------------------------------+
   | `getCallerFilePathName`_                   | `PySourceInfo.getCallerFilePathName`_                   |
   +--------------------------------------------+---------------------------------------------------------+
+  | `getCallerFunc`_                           | `PySourceInfo.getCallerFunc`_                           |
+  +--------------------------------------------+---------------------------------------------------------+
   | `getCallerFuncName`_                       | `PySourceInfo.getCallerFuncName`_                       |
   +--------------------------------------------+---------------------------------------------------------+
   | `getCallerLinenumber`_                     | `PySourceInfo.getCallerLinenumber`_                     |
@@ -88,6 +90,8 @@ Runtime Type Information for Python sources.
 .. _PySourceInfo.getCallerFilePathName: _modules/pysourceinfo/PySourceInfo.html#getCallerFilePathName
 .. _getCallerFuncName: pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerFuncName
 .. _PySourceInfo.getCallerFuncName: _modules/pysourceinfo/PySourceInfo.html#getCallerFuncName
+.. _getCallerFunc: pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerFunc
+.. _PySourceInfo.getCallerFunc: _modules/pysourceinfo/PySourceInfo.html#getCallerFunc
 .. _getCallerLinenumber: pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerLinenumber
 .. _PySourceInfo.getCallerLinenumber: _modules/pysourceinfo/PySourceInfo.html#getCallerLinenumber
 .. _getCallerModuleFilePathName: pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerModuleFilePathName
@@ -117,13 +121,13 @@ Runtime Type Information for Python sources.
 .. _getCallerPathName: pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerPathName
 .. _PySourceInfo.getCallerPathName: _modules/pysourceinfo/PySourceInfo.html#getCallerPathName
 .. _getCallerSysPathPackageName: pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerSysPathPackageName
-.. _PySourceInfo.getCallerSysPathPackageName: _modules/pysourceinfo/PySourceInfo.html#getcallersyspathpackagename
+.. _PySourceInfo.getCallerSysPathPackageName: _modules/pysourceinfo/PySourceInfo.html#getCallerSysPathPackageName
 .. _getCallerSysPathPackageSysPathName: pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerSysPathPackageSysPathName
-.. _PySourceInfo.getCallerSysPathPackageSysPathName: _modules/pysourceinfo/PySourceInfo.html#getcallersyspathpackagesyspathname
+.. _PySourceInfo.getCallerSysPathPackageSysPathName: _modules/pysourceinfo/PySourceInfo.html#getCallerSysPathPackageSysPathName
 .. _getCallerSysPathPackageSysPathNameRel: pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerSysPathPackageSysPathNameRel
-.. _PySourceInfo.getCallerSysPathPackageSysPathNameRel: _modules/pysourceinfo/PySourceInfo.html#getcallersyspathpackagesyspathnamerel
+.. _PySourceInfo.getCallerSysPathPackageSysPathNameRel: _modules/pysourceinfo/PySourceInfo.html#getCallerSysPathPackageSysPathNameRel
 .. _getCallerSysPathPackagePythonPath: pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerSysPathPackagePythonPath
-.. _PySourceInfo.getCallerSysPathPackagePythonPath: _modules/pysourceinfo/PySourceInfo.html#getcallersyspathpackagepythonpath
+.. _PySourceInfo.getCallerSysPathPackagePythonPath: _modules/pysourceinfo/PySourceInfo.html#getCallerSysPathPackagePythonPath
 
 ..
    * Callstack - Module References
@@ -135,6 +139,45 @@ Runtime Type Information for Python sources.
 	 +=================================+=================================================+
 	 | ...                             | ...                                             |
 	 +---------------------------------+-------------------------------------------------+
+
+* Lists, and selective search for processing
+
+  Iterators may not work properly in any case because subcalls may change the stack.
+  Thus providing a snapshots as lists.
+
+  +---------------------------------+-------------------------------------------------+
+  | [docs]                          | [source]                                        | 
+  +=================================+=================================================+
+  | `getStackFuncList`_             | `PySourceInfo.getStackFuncList`_                |
+  +---------------------------------+-------------------------------------------------+
+  | `getStackFuncMap`_              | `PySourceInfo.getStackFuncMap`_                 |
+  +---------------------------------+-------------------------------------------------+
+  | `getStackFuncNameList`_         | `PySourceInfo.getStackFuncNameList`_            |
+  +---------------------------------+-------------------------------------------------+
+  | `getStackFuncNameMap`_          | `PySourceInfo.getStackFuncNameMap`_             |
+  +---------------------------------+-------------------------------------------------+
+  | `getStackLen`_                  | `PySourceInfo.getStackLen`_                     |
+  +---------------------------------+-------------------------------------------------+
+  | `getStackSposForFunc`_          | `PySourceInfo.getStackSposForFunc`_             |
+  +---------------------------------+-------------------------------------------------+
+  | `getStackSposForFuncName`_      | `PySourceInfo.getStackSposForFuncName`_         |
+  +---------------------------------+-------------------------------------------------+
+
+.. _getStackFuncList: pysourceinfo.html#pysourceinfo.PySourceInfo.getStackFuncList
+.. _PySourceInfo.getStackFuncList: _modules/pysourceinfo/PySourceInfo.html#getStackFuncList
+.. _getStackFuncNameList: pysourceinfo.html#pysourceinfo.PySourceInfo.getStackFuncNameList
+.. _PySourceInfo.getStackFuncNameList: _modules/pysourceinfo/PySourceInfo.html#getStackFuncNameList
+.. _getStackFuncMap: pysourceinfo.html#pysourceinfo.PySourceInfo.getStackFuncMap
+.. _PySourceInfo.getStackFuncMap: _modules/pysourceinfo/PySourceInfo.html#getStackFuncMap
+.. _getStackFuncNameMap: pysourceinfo.html#pysourceinfo.PySourceInfo.getStackFuncNameMap
+.. _PySourceInfo.getStackFuncNameMap: _modules/pysourceinfo/PySourceInfo.html#getStackFuncNameMap
+.. _getStackLen: pysourceinfo.html#pysourceinfo.PySourceInfo.getStackLen
+.. _PySourceInfo.getStackLen: _modules/pysourceinfo/PySourceInfo.html#getStackLen
+.. _getStackSposForFunc: pysourceinfo.html#pysourceinfo.PySourceInfo.getStackSposForFunc
+.. _PySourceInfo.getStackSposForFunc: _modules/pysourceinfo/PySourceInfo.html#getStackSposForFunc
+.. _getStackSposForFuncName: pysourceinfo.html#pysourceinfo.PySourceInfo.getStackSposForFuncName
+.. _PySourceInfo.getStackSposForFuncName: _modules/pysourceinfo/PySourceInfo.html#getStackSposForFuncName
+
 
 
 * Static runtime components

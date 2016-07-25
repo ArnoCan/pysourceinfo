@@ -115,3 +115,32 @@ getPythonPathFromSysPath
 getPythonPathRel
 ^^^^^^^^^^^^^^^^
 	.. autofunction:: getPythonPathRel
+
+getStackFuncList
+^^^^^^^^^^^^^^^^
+	.. autofunction:: getStackFuncList
+
+getStackFuncMap
+^^^^^^^^^^^^^^^
+	.. autofunction:: getStackFuncMap
+
+getStackFuncNameList
+^^^^^^^^^^^^^^^^^^^^
+	.. autofunction:: getStackFuncNameList
+
+getStackFuncNameMap
+^^^^^^^^^^^^^^^^^^^
+	.. autofunction:: getStackFuncNameMap
+
+getStackLen
+^^^^^^^^^^^
+	.. autofunction:: getStackLen
+
+getStackSposForFunc
+^^^^^^^^^^^^^^^^^^^
+	.. autofunction:: getStackSposForFunc
+
+getStackSposForFuncName
+^^^^^^^^^^^^^^^^^^^^^^^
+	.. autofunction:: getStackSposForFuncName
+
