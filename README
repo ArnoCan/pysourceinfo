@@ -92,7 +92,7 @@ VERSIONS and RELEASES
 * RELEASE: 00.05.00x - Production: Various performance enhancements.
 
 
-**Current Release: 00.01.006 - Alpha:**
+**Current Release: 00.01.007 - Alpha:**
 
 OS-Support - Tested by PyUnit/Eclipse with Success:
 
@@ -115,7 +115,7 @@ OS-Support - ToDo: Going to follow soon.
 
 Major Changes:
 
-* added stack search functions:getStack\*
+* Extended documentation, embedded Epydoc output into Sphinx output.
 
 Current test status:
 

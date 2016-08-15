@@ -1,6 +1,6 @@
 PROJECT='pysourceinfo'
-VERSION="0.1.7"
-RELEASE="0.1.7"
+VERSION="0.1.6"
+RELEASE="0.1.6"
 NICKNAME="Mimisbrunnr"
 AUTHOR='Arno-Can Uestuensoez'
 COPYRIGHT='Copyright (C) 2010,2011,2015-2016 Arno-Can Uestuensoez @Ingenieurbuero Arno-Can Uestuensoez'
@@ -77,15 +77,12 @@ done
 {
 cat <<EOF 
 
-import sys,os
 extensions.append('sphinx.ext.intersphinx.')
 sys.path.insert(0, os.path.abspath('$PWD/..'))
-sys.path.insert(0, os.path.abspath('$PWD'))
 
 html_logo = "_static/pysourceinfo-64x64.png"
 #html_favicon = None
 
-html_theme = "default"
 #html_theme = "classic"
 #html_theme = "pyramid"
 #html_theme = "agogo"
@@ -199,8 +196,8 @@ DOCDIR="${DOCDIR:-doc/en/html/man3/$PROJECT}"
 if [ ! -e "${DOCDIR}" ];then
 	mkdir -p "${DOCDIR}"
 fi
-# cp -a "${DOCHTMLDIR}"/html/* "${DOCDIR}"
-# echo
-# echo "display with: firefox -P preview.simple ${DOCHTML}"
-# echo "display with: firefox -P preview.simple ${DOCDIR}/index.html"
+cp -a "${DOCHTMLDIR}"/html/* "${DOCDIR}"
+echo
+echo "display with: firefox -P preview.simple ${DOCHTML}"
+echo "display with: firefox -P preview.simple ${DOCDIR}/index.html"
 echo

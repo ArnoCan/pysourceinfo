@@ -22,7 +22,8 @@ based on 'inspect' and additional sources `[shortcuts] <shortcuts.html#>`_.
     `Python Source Structures <sourceinfo.html>`_ 
 
   * Programming Interface: 
-    `API <shortcuts.html#pysourceinfo-pysourceinfo>`_
+    `[shortcuts] <shortcuts.html#pysourceinfo-pysourceinfo>`_
+    `[API] <epydoc/index.html>`_
 
     .
 
@@ -38,8 +39,13 @@ and 'pysourceinfo.tests'.
 `Shortcuts <shortcuts.html>`_
 =============================
 
-* `API-Shortcuts - Programming Interface <shortcuts.html>`_
+Common Interfaces:
 
+* `Programming Interface <shortcuts.html#>`_
+
+Complete technical API:
+
+* `API by Epydoc <epydoc/index.html>`_
 
 Table of Contents
 =================
