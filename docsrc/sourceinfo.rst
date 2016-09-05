@@ -1,11 +1,14 @@
 'PySourceInfo' - RTTI for Source Code
 *************************************
 
-The package 'pysourceinfo' supports beneath the hierarchical 
-navigation on filesystems, also utilities as helpers for 
-source code analysis at runtime. 
-This is based on the standard package 'inspect' and provides a 
-flat call interface with additional correlation where required.
+Blueprint
+^^^^^^^^^
+
+The features provided by the package 'pysourceinfo' are
+based on the standard package 'inspect' with
+dynamic evaluation of additional sources where rewuired.
+A flat call interface is provided for simplified application in
+OO as well as simple scripting.
 
 The provided runtime structure information on Python sources is 
 covered with basically one single type of interface
@@ -25,8 +28,8 @@ covered with basically one single type of interface
     def getPythonPath<Interface>(spos=1):
        pass
 
-Which gathers information on the defined '<Intefrace>' from
-the call stack, loaded modules, or search path 'PYTHONPATH'/'sys.path'.
+The interface gathers the information on the defined '<Interface>' from
+the call stack, loaded modules, or search path 'PATH'/'PYTHONPATH'/'sys.path'.
 
 The covered structural dynamic elements based on the call stackk are:
 
@@ -46,23 +49,19 @@ With additional functions covering mostly static information:
 
 * sys.path - actual OID and load path
 
-The target is to simplify the call interface of 'inspect' for the most
-common calls.
+For code and application examples refer to the souce code of 'pysourceinfo.UseCases' `[UseCases] <UseCases.html#>`_
+and 'pysourceinfo.tests' `[tests] <tests.html#>`_.
 
-A typical application is the drop-in design of regression and 
-unit tests.
-
-
-Information on Specific objects
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Information on Specific Object Categories
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
  
-Although the 'inspect' package provides a wide variety of information 
+Although the standard package 'inspect' provides a wide variety of information 
 some are still not available.
-Therefore the missing is extracted from combination of multiple sources
+Therefore the missing is extracted by the combination of multiple sources
 and rules.
 
 In general the main sources of information are given by the
-targte type.
+target type.
 
 * getCaller...
 

@@ -1,6 +1,6 @@
 PROJECT='pysourceinfo'
-VERSION="0.1.7"
-RELEASE="0.1.7"
+VERSION="0.1.10"
+RELEASE="0.1.10"
 NICKNAME="Mimisbrunnr"
 AUTHOR='Arno-Can Uestuensoez'
 COPYRIGHT='Copyright (C) 2010,2011,2015-2016 Arno-Can Uestuensoez @Ingenieurbuero Arno-Can Uestuensoez'
@@ -94,7 +94,7 @@ html_theme_options = {
 #    "rightsidebar": "true",
 #    "relbarbgcolor": "black",
     "externalrefs": "true",
-    "sidebarwidth": "290",
+    "sidebarwidth": "300",
     "stickysidebar": "true",
 #    "collapsiblesidebar": "true",
 

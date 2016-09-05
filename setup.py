@@ -52,7 +52,7 @@ __author__ = 'Arno-Can Uestuensoez'
 __author_email__ = 'acue_sf2@sourceforge.net'
 __license__ = "Artistic-License-2.0 + Forced-Fairplay-Constraints"
 __copyright__ = "Copyright (C) 2015-2016 Arno-Can Uestuensoez @Ingenieurbuero Arno-Can Uestuensoez"
-__version__ = '0.1.7'
+__version__ = '0.1.10'
 __uuid__='efed42d3-f801-4fbb-abfd-bd598d683a82'
 
 _NAME = 'pysourceinfo'
@@ -68,6 +68,14 @@ import os,sys
 from setuptools import setup #, find_packages
 import fnmatch
 import re, shutil, tempfile
+
+version = '{0}.{1}'.format(*sys.version_info[:2])
+if version < '2.7': # pragma: no cover
+    raise Exception("Requires Python-2.7.* or higher")
+
+#
+# required for a lot for now, thus just do it
+sys.path.insert(0,os.path.abspath(os.path.dirname(__file__)))
 
 #
 #*** ===>>> setup.py helper
@@ -201,14 +209,14 @@ if 'build_doc' in sys.argv:
     _sed(fn, pt, rp, re.MULTILINE)
 
     pt = '<h4>Next topic</h4>'
-    rp  = r'<h4>API</h4><p class="topless"><a href="epydoc/index.html" title="API">Programming Interface - Epydoc</a></p>'
+    rp  = r'<h4>API</h4><p class="topless"><a href="epydoc/index.html" title="API">Programming Interface</a></p>'
     rp += pt
 
     fn = dst0+'/index.html'
     _sed(fn, pt, rp, re.MULTILINE)
 
     pt = '<h4>Previous topic</h4>'
-    rp  = r'<h4>API</h4><p class="topless"><a href="epydoc/index.html" title="API">Programming Interface - Epydoc</a></p>'
+    rp  = r'<h4>API</h4><p class="topless"><a href="epydoc/index.html" title="API">Programming Interface</a></p>'
     rp += pt
 
 
@@ -523,3 +531,9 @@ setup(name=_name,
       packages=_packages,
       package_data=_package_data,
 )
+
+if '--help' in sys.argv:
+    print
+    print "Help on usage extensions by "+str(_NAME)
+    print "   --help-"+str(_NAME)
+    print

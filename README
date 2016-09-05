@@ -3,14 +3,14 @@ pysourceinfo
 
 The 'pysourceinfo' package provides basic runtime information on executed 
 sourcefiles based on 'inspect' and additional sources.
+The covered objects include packages, modules/files and functions/methods/scripts.
 
-The provided feature modules comprise the following list.
-For code examples refer to 'pysourceinfo.UseCases'.
+For code examples refer to the source package 'pysourceinfo.UseCases'.
 
 **Downloads**:
 
 * Sourceforge.net: https://sourceforge.net/projects/pysourceinfo/files/
-  
+
 * Github: https://github.com/ArnoCan/pysourceinfo/
 
 **Online documentation**:
@@ -23,11 +23,20 @@ setup.py
 
 The installer adds a few options to the standard setuptools options.
 
-* *build_sphinx*: Creates documentation for runtime system by Sphinx, html only. Calls 'callDocSphinx.sh'.
+* *build_doc*: Creates *Sphinx* based documentation with embeded javadoc-style API documentation by *Epydoc*, html only.
 
-* *build_epydoc*: Creates documentation for runtime system by Epydoc, html only. Calls 'callDocEpydoc.sh'.
+* *build_sphinx*: Creates Sphinx part of the documentation as standalone html. Calls 'callDocSphinx.sh'.
+
+* *build_epydoc*: Creates Epydoc part of the documentation as standalone html.
+
+* *project_doc*: Install a local copy into the doc directory of the project.
+
+* *instal_doc*: Install a local copy of the previously build documents in accordance to PEP-370.
 
 * *test*: Runs PyUnit tests by discovery.
+
+* *usecase*: Runs PyUnit tests on UseCases subdirectory by discovery.
+
 
 * *--help-pysourceinfo*: Displays this help.
 
@@ -36,6 +45,7 @@ The installer adds a few options to the standard setuptools options.
 * *--offline*: Sets online dependencies to offline, or ignores online dependencies.
 
 * *--exit*: Exit 'setup.py'.
+
 
 After successful installation the 'selftest' verifies basic checks by:
 
@@ -92,7 +102,7 @@ VERSIONS and RELEASES
 * RELEASE: 00.05.00x - Production: Various performance enhancements.
 
 
-**Current Release: 00.01.007 - Alpha:**
+**Current Release: 00.01.010 - Alpha:**
 
 OS-Support - Tested by PyUnit/Eclipse with Success:
 
@@ -116,6 +126,8 @@ OS-Support - ToDo: Going to follow soon.
 Major Changes:
 
 * Extended documentation, embedded Epydoc output into Sphinx output.
+
+* Bug-Fixes.
 
 Current test status:
 

@@ -29,60 +29,109 @@ Runtime Type Information for Python sources.
 
   *Priority on 'inspect'*:
 
-  +--------------------------------------------+---------------------------------------------------------+
-  | [docs]                                     | [source]                                                | 
-  +============================================+=========================================================+
-  | `getCallerFileName`_                       | `PySourceInfo.getCallerFileName`_                       |
-  +--------------------------------------------+---------------------------------------------------------+
-  | `getCallerFilePathName`_                   | `PySourceInfo.getCallerFilePathName`_                   |
-  +--------------------------------------------+---------------------------------------------------------+
-  | `getCallerFunc`_                           | `PySourceInfo.getCallerFunc`_                           |
-  +--------------------------------------------+---------------------------------------------------------+
-  | `getCallerFuncName`_                       | `PySourceInfo.getCallerFuncName`_                       |
-  +--------------------------------------------+---------------------------------------------------------+
-  | `getCallerLinenumber`_                     | `PySourceInfo.getCallerLinenumber`_                     |
-  +--------------------------------------------+---------------------------------------------------------+
-  | `getCallerModuleFilePathName`_             | `PySourceInfo.getCallerModuleFilePathName`_             |
-  +--------------------------------------------+---------------------------------------------------------+
-  | `getCallerModuleName`_                     | `PySourceInfo.getCallerModuleName`_                     |
-  +--------------------------------------------+---------------------------------------------------------+
-  | `getCallerModulePathName`_                 | `PySourceInfo.getCallerModulePathName`_                 |
-  +--------------------------------------------+---------------------------------------------------------+
-  | `getCallerModulePythonPath`_               | `PySourceInfo.getCallerModulePythonPath`_               |
-  +--------------------------------------------+---------------------------------------------------------+
-  | `getCallerName`_                           | `PySourceInfo.getCallerName`_                           |
-  +--------------------------------------------+---------------------------------------------------------+
-  | `getCallerNameOID`_                        | `PySourceInfo.getCallerNameOID`_                        |
-  +--------------------------------------------+---------------------------------------------------------+
-  | `getCallerNamespaceGlobal`_                | `PySourceInfo.getCallerNamespaceGlobal`_                |
-  +--------------------------------------------+---------------------------------------------------------+
-  | `getCallerNamespaceLocal`_                 | `PySourceInfo.getCallerNamespaceLocal`_                 |
-  +--------------------------------------------+---------------------------------------------------------+
-  | `getCallerPackageFilePathName`_            | `PySourceInfo.getCallerPackageFilePathName`_            |
-  +--------------------------------------------+---------------------------------------------------------+
-  | `getCallerPackageName`_                    | `PySourceInfo.getCallerPackageName`_                    |
-  +--------------------------------------------+---------------------------------------------------------+
-  | `getCallerPackagePathName`_                | `PySourceInfo.getCallerPackagePathName`_                |
-  +--------------------------------------------+---------------------------------------------------------+
-  | `getCallerPackagePythonPath`_              | `PySourceInfo.getCallerPackagePythonPath`_              |
-  +--------------------------------------------+---------------------------------------------------------+
-  | `getCallerPathName`_                       | `PySourceInfo.getCallerPathName`_                       |
-  +--------------------------------------------+---------------------------------------------------------+
+.. index::
+   single: options; functions
+   single: options; methods
 
+.. _CallerFunctionsandMethods:
+
+  * Caller - Functions and Methods:
+
+    +--------------------------------------------+---------------------------------------------------------+
+    | [docs]                                     | [source]                                                | 
+    +============================================+=========================================================+
+    | `getCallerFunc`_                           | `PySourceInfo.getCallerFunc`_                           |
+    +--------------------------------------------+---------------------------------------------------------+
+    | `getCallerFuncName`_                       | `PySourceInfo.getCallerFuncName`_                       |
+    +--------------------------------------------+---------------------------------------------------------+
+    | `getCallerLinenumber`_                     | `PySourceInfo.getCallerLinenumber`_                     |
+    +--------------------------------------------+---------------------------------------------------------+
+    | `getCallerName`_                           | `PySourceInfo.getCallerName`_                           |
+    +--------------------------------------------+---------------------------------------------------------+
+    | `getCallerNameOID`_                        | `PySourceInfo.getCallerNameOID`_                        |
+    +--------------------------------------------+---------------------------------------------------------+
+    | `getCallerNamespaceGlobal`_                | `PySourceInfo.getCallerNamespaceGlobal`_                |
+    +--------------------------------------------+---------------------------------------------------------+
+    | `getCallerNamespaceLocal`_                 | `PySourceInfo.getCallerNamespaceLocal`_                 |
+    +--------------------------------------------+---------------------------------------------------------+
+
+    .
+
+.. index::
+   single: options; modules
+   single: options; files
+
+.. _CallerModulesFiles:
+
+  * Modules - Files:
+
+    +--------------------------------------------+---------------------------------------------------------+
+    | [docs]                                     | [source]                                                | 
+    +============================================+=========================================================+
+    | `getCallerFileName`_                       | `PySourceInfo.getCallerFileName`_                       |
+    +--------------------------------------------+---------------------------------------------------------+
+    | `getCallerFilePathName`_                   | `PySourceInfo.getCallerFilePathName`_                   |
+    +--------------------------------------------+---------------------------------------------------------+
+    | `getCallerLinenumber`_                     | `PySourceInfo.getCallerLinenumber`_                     |
+    +--------------------------------------------+---------------------------------------------------------+
+    | `getCallerModuleFilePathName`_             | `PySourceInfo.getCallerModuleFilePathName`_             |
+    +--------------------------------------------+---------------------------------------------------------+
+    | `getCallerModuleName`_                     | `PySourceInfo.getCallerModuleName`_                     |
+    +--------------------------------------------+---------------------------------------------------------+
+    | `getCallerModulePathName`_                 | `PySourceInfo.getCallerModulePathName`_                 |
+    +--------------------------------------------+---------------------------------------------------------+
+    | `getCallerModulePythonPath`_               | `PySourceInfo.getCallerModulePythonPath`_               |
+    +--------------------------------------------+---------------------------------------------------------+
+    | `getCallerPathName`_                       | `PySourceInfo.getCallerPathName`_                       |
+    +--------------------------------------------+---------------------------------------------------------+
+
+    .
+
+.. index::
+   single: options; Packages
+   single: options; directories
+   single: options; files
+
+.. _CallerPackagesFilesandorDirectories:
+
+  * Packages - Files and/or Directories:
+
+    +--------------------------------------------+---------------------------------------------------------+
+    | [docs]                                     | [source]                                                | 
+    +============================================+=========================================================+
+    | `getCallerPackageFilePathName`_            | `PySourceInfo.getCallerPackageFilePathName`_            |
+    +--------------------------------------------+---------------------------------------------------------+
+    | `getCallerPackageName`_                    | `PySourceInfo.getCallerPackageName`_                    |
+    +--------------------------------------------+---------------------------------------------------------+
+    | `getCallerPackagePathName`_                | `PySourceInfo.getCallerPackagePathName`_                |
+    +--------------------------------------------+---------------------------------------------------------+
+    | `getCallerPackagePythonPath`_              | `PySourceInfo.getCallerPackagePythonPath`_              |
+    +--------------------------------------------+---------------------------------------------------------+
+
+    .
 
   *Priority on 'sys.path'*:
 
-  +--------------------------------------------+---------------------------------------------------------+
-  | [docs]                                     | [source]                                                | 
-  +============================================+=========================================================+
-  | `getCallerSysPathPackageName`_             | `PySourceInfo.getCallerSysPathPackageName`_             |
-  +--------------------------------------------+---------------------------------------------------------+
-  | `getCallerSysPathPackageSysPathName`_      | `PySourceInfo.getCallerSysPathPackageSysPathName`_      |
-  +--------------------------------------------+---------------------------------------------------------+
-  | `getCallerSysPathPackageSysPathNameRel`_   | `PySourceInfo.getCallerSysPathPackageSysPathNameRel`_   |
-  +--------------------------------------------+---------------------------------------------------------+
-  | `getCallerSysPathPackagePythonPath`_       | `PySourceInfo.getCallerSysPathPackagePythonPath`_       |
-  +--------------------------------------------+---------------------------------------------------------+
+.. index::
+   single: options; Packages
+   single: options; directories
+   single: options; files
+
+.. _CallerPackagesFilesandorDirectoriesSysPath:
+
+  * Packages - Files and/or Directories:
+
+    +--------------------------------------------+---------------------------------------------------------+
+    | [docs]                                     | [source]                                                | 
+    +============================================+=========================================================+
+    | `getCallerSysPathPackageName`_             | `PySourceInfo.getCallerSysPathPackageName`_             |
+    +--------------------------------------------+---------------------------------------------------------+
+    | `getCallerSysPathPackageSysPathName`_      | `PySourceInfo.getCallerSysPathPackageSysPathName`_      |
+    +--------------------------------------------+---------------------------------------------------------+
+    | `getCallerSysPathPackageSysPathNameRel`_   | `PySourceInfo.getCallerSysPathPackageSysPathNameRel`_   |
+    +--------------------------------------------+---------------------------------------------------------+
+    | `getCallerSysPathPackagePythonPath`_       | `PySourceInfo.getCallerSysPathPackagePythonPath`_       |
+    +--------------------------------------------+---------------------------------------------------------+
 
 .. _getCallerFileName: pysourceinfo.html#pysourceinfo.PySourceInfo.getCallerFileName
 .. _PySourceInfo.getCallerFileName: _modules/pysourceinfo/PySourceInfo.html#getCallerFileName

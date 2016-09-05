@@ -23,7 +23,7 @@ class CallUnits(unittest.TestCase):
         [ sys.path.pop() for x in range(len(sys.path)) ] #@UnusedVariable
         sys.path.extend(_s)
 
-        assert fx == 140
+        self.assertEqual(fx,143)
 
     def testCase001(self):
         import sys
@@ -36,7 +36,7 @@ class CallUnits(unittest.TestCase):
         [ sys.path.pop() for x in range(len(sys.path)) ] #@UnusedVariable
         sys.path.extend(_s)
 
-        assert fx == 4
+        self.assertEqual(fx,4)
 
     def testCase002(self):
         import sys
@@ -49,7 +49,7 @@ class CallUnits(unittest.TestCase):
         [ sys.path.pop() for x in range(len(sys.path)) ] #@UnusedVariable
         sys.path.extend(_s)
 
-        assert fx == 47
+        self.assertEqual(fx,47)
 
     def testCase003(self):
         import sys
