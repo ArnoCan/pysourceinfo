@@ -55,7 +55,14 @@ class CallUnits(unittest.TestCase):
         sys.path.insert(0,os.path.abspath(os.path.dirname(__file__)+os.sep+'..'))
         import PySourceInfo_check #@UnresolvedImport
         
-        fpn = "unittest/case.py"
+        version = '{0}.{1}'.format(*sys.version_info[:2])
+        if version == '2.6': # pragma: no cover
+            fpn = "unittest.py"
+        elif version == '2.7': # pragma: no cover
+            fpn = "unittest/case.py"
+        else:
+            assert False
+
         fx = PySourceInfo_check.check_callback(pysourceinfo.PySourceInfo.getCallerModuleFilePathName,3)
         fx = pysourceinfo.PySourceInfo.getPythonPathRel(fx)
         

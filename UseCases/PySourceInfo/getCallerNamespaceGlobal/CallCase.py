@@ -65,7 +65,13 @@ class CallUnits(unittest.TestCase):
         fx = PySourceInfo_check.check_callback(pysourceinfo.PySourceInfo.getCallerNamespaceGlobal,3)
         fx = fx['__name__']
         
-        assert fx == 'unittest.case'
+        version = '{0}.{1}'.format(*sys.version_info[:2])
+        if version == '2.6': # pragma: no cover
+            assert fx == 'unittest'
+        elif version == '2.7': # pragma: no cover
+            assert fx == 'unittest.case'
+        else:
+            assert False
         assert _sx != repr(sys.path)
         sys.path.pop(0)
         assert _sx == repr(sys.path)

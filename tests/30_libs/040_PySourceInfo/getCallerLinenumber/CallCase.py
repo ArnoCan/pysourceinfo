@@ -23,7 +23,7 @@ class CallUnits(unittest.TestCase):
         [ sys.path.pop() for x in range(len(sys.path)) ] #@UnusedVariable
         sys.path.extend(_s)
 
-        self.assertEqual(fx,143)
+        assert fx > 120 and fx < 200
 
     def testCase001(self):
         import sys
@@ -64,7 +64,14 @@ class CallUnits(unittest.TestCase):
         sys.path.extend(_s)
 
         assert fxn == 'run'
-        assert fx > 300 and fx < 400 # depends on platform, may require additional, anyhow keep it as a ref
+
+        version = '{0}.{1}'.format(*sys.version_info[:2])
+        if version == '2.6': # pragma: no cover
+            assert fx > 250 and fx < 300 # depends on platform, may require additional, anyhow keep it as a ref
+        elif version == '2.7': # pragma: no cover
+            assert fx > 300 and fx < 400 # depends on platform, may require additional, anyhow keep it as a ref
+        else:
+            assert False
 
 if __name__ == '__main__':
     unittest.main()

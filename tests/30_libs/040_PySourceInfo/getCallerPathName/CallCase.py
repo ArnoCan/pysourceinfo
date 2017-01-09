@@ -73,7 +73,13 @@ class CallUnits(unittest.TestCase):
         import PySourceInfo_check_tests #@UnresolvedImport
         
         fx = PySourceInfo_check_tests.check_callback(pysourceinfo.PySourceInfo.getCallerPathName,3)
-        assert os.path.basename(fx) == 'unittest'
+        version = '{0}.{1}'.format(*sys.version_info[:2])
+        if version == '2.6': # pragma: no cover
+            assert os.path.basename(fx) == 'python2.6'
+        elif version == '2.7': # pragma: no cover
+            assert os.path.basename(fx) == 'unittest'
+        else:
+            assert False
 
         [ sys.path.pop() for x in range(len(sys.path)) ] #@UnusedVariable
         sys.path.extend(_s)

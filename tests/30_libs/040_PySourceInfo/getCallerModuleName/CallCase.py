@@ -71,7 +71,13 @@ class CallUnits(unittest.TestCase):
         [ sys.path.pop() for x in range(len(sys.path)) ] #@UnusedVariable
         sys.path.extend(_s)
 
-        assert fx == 'unittest.case'
+        version = '{0}.{1}'.format(*sys.version_info[:2])
+        if version == '2.6': # pragma: no cover
+            assert os.path.basename(fx) == 'unittest'
+        elif version == '2.7': # pragma: no cover
+            assert fx == 'unittest.case'
+        else:
+            assert False
 
 
     def testCase004(self):
@@ -85,7 +91,13 @@ class CallUnits(unittest.TestCase):
         [ sys.path.pop() for x in range(len(sys.path)) ] #@UnusedVariable
         sys.path.extend(_s)
 
-        assert fx == 'unittest.case'
+        version = '{0}.{1}'.format(*sys.version_info[:2])
+        if version == '2.6': # pragma: no cover
+            assert os.path.basename(fx) == 'unittest'
+        elif version == '2.7': # pragma: no cover
+            assert fx == 'unittest.case'
+        else:
+            assert False
 
 
 if __name__ == '__main__':

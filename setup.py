@@ -23,6 +23,9 @@
       usecases: Runs PyUnit UseCases by discovery, a lightweight
           set of unit tests.
 
+      --sdk:
+          Requires sphinx, epydoc, and dot-graphics.
+
       --no-install-required: Suppresses installation dependency checks, 
           requires appropriate PYTHONPATH.
       --offline: Sets online dependencies to offline, or ignores online
@@ -52,7 +55,7 @@ __author__ = 'Arno-Can Uestuensoez'
 __author_email__ = 'acue_sf2@sourceforge.net'
 __license__ = "Artistic-License-2.0 + Forced-Fairplay-Constraints"
 __copyright__ = "Copyright (C) 2015-2016 Arno-Can Uestuensoez @Ingenieurbuero Arno-Can Uestuensoez"
-__version__ = '0.1.10'
+__version__ = '0.1.12'
 __uuid__='efed42d3-f801-4fbb-abfd-bd598d683a82'
 
 _NAME = 'pysourceinfo'
@@ -70,8 +73,9 @@ import fnmatch
 import re, shutil, tempfile
 
 version = '{0}.{1}'.format(*sys.version_info[:2])
-if version < '2.7': # pragma: no cover
-    raise Exception("Requires Python-2.7.* or higher")
+version = '{0}.{1}'.format(*sys.version_info[:2])
+if not version in ('2.6','2.7',):  # pragma: no cover
+    raise Exception("Requires Python-2.6(.6+) or 2.7")
 
 #
 # required for a lot for now, thus just do it
@@ -330,6 +334,8 @@ if 'install_doc' in sys.argv:
     print "exit setup.py now: exit="+str(exit_code)
     sys.argv.remove('install_doc')
 
+version = '{0}.{1}'.format(*sys.version_info[:2])
+
 # call of complete test suite by 'discover'
 if 'tests' in sys.argv or 'test' in sys.argv:
     if os.path.dirname(__file__)+os.pathsep not in os.environ['PATH']:
@@ -338,12 +344,23 @@ if 'tests' in sys.argv or 'test' in sys.argv:
         print "# putenv:PATH[0]="+str(p0)
     
     print "#"
-    print "# Check 'inspect' paths - call in: tests"
-    exit_code  = os.system('python -m unittest discover -s tests -p CallCase.py') # traverse tree
-    print "# Check 'inspect' paths - call in: tests.30_libs"
-    exit_code += os.system('python -m unittest discover -s tests.30_libs -p CallCase.py') # traverse tree
-    print "# Check 'inspect' paths - call in: tests.30_libs.040_PySourceInfo"
-    exit_code += os.system('python -m unittest discover -s tests.30_libs.040_PySourceInfo -p CallCase.py') # traverse tree
+    if version == '2.6': # pragma: no cover
+        print "# Check 'inspect' paths - call in: tests"
+        exit_code  = os.system('python -m discover -s tests -p CallCase.py') # traverse tree
+        print "# Check 'inspect' paths - call in: tests.30_libs"
+        exit_code += os.system('python -m discover -s tests.30_libs -p CallCase.py') # traverse tree
+        print "# Check 'inspect' paths - call in: tests.30_libs.040_PySourceInfo"
+        exit_code += os.system('python -m discover -s tests.30_libs.040_PySourceInfo -p CallCase.py') # traverse tree
+    elif version == '2.7': # pragma: no cover
+        print "# Check 'inspect' paths - call in: tests"
+        exit_code  = os.system('python -m unittest discover -s tests -p CallCase.py') # traverse tree
+        print "# Check 'inspect' paths - call in: tests.30_libs"
+        exit_code += os.system('python -m unittest discover -s tests.30_libs -p CallCase.py') # traverse tree
+        print "# Check 'inspect' paths - call in: tests.30_libs.040_PySourceInfo"
+        exit_code += os.system('python -m unittest discover -s tests.30_libs.040_PySourceInfo -p CallCase.py') # traverse tree
+    else:
+        print >>sys.stderr, "ERROR:Version not supported:"+str(version)
+        sys.exit(1)
     print "#"
     print "Called/Finished PyUnit tests => exit="+str(exit_code)
     print "exit setup.py now: exit="+str(exit_code)
@@ -365,10 +382,18 @@ if 'usecases' in sys.argv or 'usecase' in sys.argv:
         print "# putenv:PATH[0]="+str(p0)
     
     print "#"
-    print "# Check 'inspect' paths - call in: UseCases"
-    exit_code = os.system('python -m unittest discover -s UseCases -p CallCase.py') # traverse tree
-    print "# Check 'inspect' paths - call in: UseCases.PySourceInfo"
-    exit_code += os.system('python -m unittest discover -s UseCases.PySourceInfo -p CallCase.py') # traverse tree
+    if version == '2.6': # pragma: no cover
+        print "# Check 'inspect' paths - call in: UseCases"
+        exit_code = os.system('python -m discover -s UseCases -p CallCase.py') # traverse tree
+        print "# Check 'inspect' paths - call in: UseCases.PySourceInfo"
+        exit_code += os.system('python -m discover -s UseCases.PySourceInfo -p CallCase.py') # traverse tree
+    elif version == '2.7': # pragma: no cover
+        print "# Check 'inspect' paths - call in: UseCases"
+        exit_code = os.system('python -m unittest discover -s UseCases -p CallCase.py') # traverse tree
+        print "# Check 'inspect' paths - call in: UseCases.PySourceInfo"
+        exit_code += os.system('python -m unittest discover -s UseCases.PySourceInfo -p CallCase.py') # traverse tree
+    else:
+        sys.exit(1)
     print "#"
     print "Called/Finished PyUnit tests => exit="+str(exit_code)
     print "exit setup.py now: exit="+str(exit_code)
@@ -380,6 +405,11 @@ if 'usecases' in sys.argv or 'usecase' in sys.argv:
         sys.argv.remove('usecases')
     except:
         pass
+
+__sdk = False
+if '--sdk' in sys.argv:
+    __sdk = True
+    sys.argv.remove('--sdk')
 
 # Intentional HACK: ignore (online) dependencies, mainly foreseen for developement
 __no_install_requires = False
@@ -421,9 +451,9 @@ if len(sys.argv)==1:
 #
 _name= _NAME
 
-_description=("The 'pysourceinfo' package provides utilities simplified gain of runtime information of source code locations. "
-              "Therefore some featurs of 'inspect' are extended by additional in order to get information on packages, "
-              "modules, sources, functions/methods, and namespaces."
+_description=("The 'pysourceinfo' package provides utilities for simplified gain of runtime information "
+              "related to source code locations. The information is mainly based on 'inspect', but"
+              "extended where required."
               )
 
 # def read(fname):
@@ -448,10 +478,11 @@ _classifiers = [
     "Operating System :: POSIX",
     "Programming Language :: Python",
     "Programming Language :: Python :: 2",    
+    "Programming Language :: Python :: 2.6",    
     "Programming Language :: Python :: 2.7",    
     "Programming Language :: Unix Shell",
     "Topic :: Software Development :: Libraries :: Python Modules",
-    "Topic :: Utilities",
+    "Topic :: Utilities"
 ]
 
 _keywords  = ' Python Syntax Packages Modules Files Linenumbers Filenames Modulenames Packagenames'
@@ -472,11 +503,25 @@ _download_url="https://sourceforge.net/projects/pysourceinfo/files/"
 _url='https://sourceforge.net/projects/pysourceinfo/'
 
 _install_requires=[
-    'shutil',
-    'inspect',
-    're',
+#    'shutil',
+#    'inspect',
+#    're',
 #    'termcolor'
 ]
+if version == '2.6': # pragma: no cover
+    _install_requires.extend(
+        [
+            'discover',
+        ]
+    )
+
+if __sdk: # pragma: no cover
+    _install_requires.extend(
+        [
+            'sphinx >= 1.4',
+            'epydoc >= 3.0',
+        ]
+    )
 
 _test_suite="tests.CallCase"
 
@@ -487,7 +532,6 @@ if __debug__:
         print "#---------------------------------------------------------"
         print "package_data="+str(_package_data)
         print "#---------------------------------------------------------"
-
 
 
 #

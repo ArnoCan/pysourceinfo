@@ -81,19 +81,52 @@ and 'pysourceinfo.tests' `[tests] <tests.html#>`_.
 Install - HowTo - FAQ - Help
 ============================
 
+* **Requires**:
+
+  * Runtime:
+  
+    Python >2.6.6, or Python 2.7. Python 3.x not yet supported.
+  * SDK:
+
+    Python 2.7. Python 3.x not yet supported.
+    Sphinx the standard version >=1.4, which includes 'sphinx-apidoc'.
+    Epydoc version >=3.
+
+    When missing the creation of a virtual environment has to be considered.
+  
+* **Platforms**:
+
+  Linux, Mac-OS/OS-X, MS-Windows
+
 * **Install**:
 
-  Standard procedure online local install by sources::
+  * Runtime:
 
-    python setup.py install --user
+    Standard procedure online local install e.g. into virtual environment::
 
-  Custom procedure offline by::
+      pip install pysourceinfo
 
-    python setup.py install --user --offline
+    or::
 
-  Documents, requires Sphinx and Epydoc::
+      python setup.py install
 
-    python setup.py build_doc install_doc
+    Standard procedure online local install into user home::
+
+      python setup.py install --user
+
+    Custom procedure offline by::
+
+      python setup.py install --user --offline
+
+  * SDK:
+
+    Required for document creation, add '--sdk' option, checks build tools::
+
+      python setup.py install --sdk
+
+    Creation of documents, requires Sphinx including 'sphinx-apidoc', and Epydoc::
+
+      python setup.py build_doc project_doc install_doc
 
 * **Help**:
 

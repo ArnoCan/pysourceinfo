@@ -78,7 +78,14 @@ class CallUnits(unittest.TestCase):
         import PySourceInfo_check_tests #@UnresolvedImport
         
         fx = PySourceInfo_check_tests.check_callback(pysourceinfo.PySourceInfo.getCallerNameOID,3)
-        assert fx == 'unittest.case.CallUnits.run'
+
+        version = '{0}.{1}'.format(*sys.version_info[:2])
+        if version == '2.6': # pragma: no cover
+            assert fx == 'unittest.CallUnits.run'
+        elif version == '2.7': # pragma: no cover
+            assert fx == 'unittest.case.CallUnits.run'
+        else:
+            assert False
         assert _sx != repr(sys.path)
         sys.path.pop(0)
         assert _sx == repr(sys.path)

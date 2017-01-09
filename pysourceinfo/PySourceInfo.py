@@ -20,6 +20,16 @@ The categories of provided RTTI comprise:
 
 * **callers** - Python functions and class/object methods.
 
+The following definiton is applied:
+::
+
+   A package is represented by an imported top-entity which could either be a self-contained
+   module, or the '__init__.py' special module as the top-entity from a set of modules within
+   a sub directory structure.
+
+So physically a package is a distribution unit, which provides one or more 
+modules. Thus the displayed result in case of packages is the module when a self-contained,
+the path when a multi-module package.
 
 Where the following attributes are available:
 
@@ -53,15 +63,15 @@ from inspect import ismethod
 __author__ = 'Arno-Can Uestuensoez'
 __license__ = "Artistic-License-2.0 + Forced-Fairplay-Constraints"
 __copyright__ = "Copyright (C) 2010-2016 Arno-Can Uestuensoez @Ingenieurbuero Arno-Can Uestuensoez"
-__version__ = '0.1.10'
+__version__ = '0.1.12'
 __uuid__='9de52399-7752-4633-9fdc-66c87a9200b8'
 
 __docformat__ = "restructuredtext en"
 
 import os,sys
 version = '{0}.{1}'.format(*sys.version_info[:2])
-if version < '2.7': # pragma: no cover
-    raise Exception("Requires Python-2.7.* or higher")
+if version < '2.6': # pragma: no cover
+    raise Exception("Requires Python-2.6.* or higher")
 
 import inspect,re
 #
@@ -371,7 +381,15 @@ def getCallerPackagePathName(spos=1):
     module = inspect.getmodule(_sf[spos][0])
     if module and module.__package__:
         return os.path.dirname(module.__file__)
-    return re.sub(ur""+getCallerModuleName(spos+1)+'.py[co]*$','',getCallerModuleFilePathName(spos+1))
+
+    p0 = getCallerModuleName(spos+1)
+    if p0 == '__main__':
+        p = os.path.dirname(getCallerModuleFilePathName(spos+1))
+    else:
+        p = re.sub(ur"."+(re.sub(ur"^[^.]*\.",'',p0))+'.py[co]*$','',getCallerModuleFilePathName(spos+1))
+    if os.path.exists(p+os.path.sep+'__init__.py'):
+        return p
+    return getCallerModuleFilePathName(spos+1)
 
 def getCallerPackagePythonPath(spos=1):
     """Returns the python path for first matching package of the caller.

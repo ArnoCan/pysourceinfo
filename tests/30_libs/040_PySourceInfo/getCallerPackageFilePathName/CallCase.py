@@ -100,9 +100,18 @@ class CallUnits(unittest.TestCase):
         
         fx = PySourceInfo_check_tests.check_callback(pysourceinfo.PySourceInfo.getCallerPackageFilePathName,3)
         fx= os.path.normpath(fx)
-        fx = re.sub(ur".*([/\\]unittest[/\\]__init__.py)",r'\1',fx)
 
-        assert fx == os.sep+"unittest"+os.sep+"__init__.py"
+        version = '{0}.{1}'.format(*sys.version_info[:2])
+        if version == '2.6': # pragma: no cover
+            fx = re.sub(ur".*([/\\]unittest.py)",r'\1',fx)
+            assert fx == os.sep+"unittest.py"
+        elif version == '2.7': # pragma: no cover
+            fx = re.sub(ur".*([/\\]unittest[/\\]__init__.py)",r'\1',fx)
+            assert fx == os.sep+"unittest"+os.sep+"__init__.py"
+        else:
+            assert False
+        
+        
         assert _sx != repr(sys.path)
         sys.path.pop(0)
         assert _sx == repr(sys.path)

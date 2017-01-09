@@ -78,7 +78,13 @@ class CallUnits(unittest.TestCase):
         fx = pysourceinfo.PySourceInfo.getModuleSourceFilePathName(fm)
         fx = os.path.basename(fx)
         
-        assert os.path.basename(fx) == 'case.py'
+        version = '{0}.{1}'.format(*sys.version_info[:2])
+        if version == '2.6': # pragma: no cover
+            assert os.path.basename(fx) == 'unittest.py'
+        elif version == '2.7': # pragma: no cover
+            assert os.path.basename(fx) == 'case.py'
+        else:
+            assert False
         assert fx[-3:] == '.py'
 
         [ sys.path.pop() for x in range(len(sys.path)) ] #@UnusedVariable

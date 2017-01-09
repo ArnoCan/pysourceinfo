@@ -1,6 +1,6 @@
 PROJECT='pysourceinfo'
-VERSION="0.1.10"
-RELEASE="0.1.10"
+VERSION="0.1.12"
+RELEASE="0.1.12"
 NICKNAME="Mimisbrunnr"
 AUTHOR='Arno-Can Uestuensoez'
 COPYRIGHT='Copyright (C) 2010,2011,2015-2016 Arno-Can Uestuensoez @Ingenieurbuero Arno-Can Uestuensoez'

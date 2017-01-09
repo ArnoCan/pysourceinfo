@@ -21,7 +21,7 @@ class CallUnits(unittest.TestCase):
         fx = PySourceInfo_check_tests.check_callback(pysourceinfo.PySourceInfo.getCallerPackagePythonPath,0)
         fx = os.path.normpath(fx)
         assert fx == fpn
-        assert _sx != repr(sys.path)
+        self.assertNotEqual(_sx, repr(sys.path))
         sys.path.pop(0)
         assert _sx == repr(sys.path)
 
@@ -100,11 +100,18 @@ class CallUnits(unittest.TestCase):
         _sx = repr(sys.path)
         sys.path.insert(0,os.path.dirname(__file__)+os.sep+'..')
         import PySourceInfo_check_tests #@UnresolvedImport
+
+        version = '{0}.{1}'.format(*sys.version_info[:2])
+        if version == '2.6': # pragma: no cover
+            fpn = os.path.normpath(os.path.dirname(unittest.__file__))
+        elif version == '2.7': # pragma: no cover
+            fpn = os.path.normpath(os.path.dirname(unittest.__file__)+os.sep+"..")
+        else:
+            assert False
         
-        fpn = os.path.normpath(os.path.dirname(unittest.__file__)+os.sep+"..")
         fx = PySourceInfo_check_tests.check_callback(pysourceinfo.PySourceInfo.getCallerPackagePythonPath,3)
 
-        assert os.path.normpath(fx) == fpn
+        self.assertEqual(os.path.normpath(fx), fpn)
         assert _sx != repr(sys.path)
         sys.path.pop(0)
         assert _sx == repr(sys.path)

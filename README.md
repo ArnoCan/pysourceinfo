@@ -102,15 +102,15 @@ VERSIONS and RELEASES
 * RELEASE: 00.05.00x - Production: Various performance enhancements.
 
 
-**Current Release: 00.01.010 - Alpha:**
+**Current Release: 00.01.012 - Alpha:**
 
 OS-Support - Tested by PyUnit/Eclipse with Success:
 
-* Linux: Fedora - others should work, ToDo: CentOS, Debian, and SuSE 
+* Linux: Fedora, CentOS-6, CentOS-7 - others should work, ToDo: RHEL-6, RHEL-7, Debian, and SuSE 
 
 * Windows: Win10 - others see Cygwin
 
-* Mac-OS: Snow Leopard - others should work
+* Mac-OS: Snow Leopard - others should work too, last updates not yet tested.
 
 * Cygwin: 2.874/64 bit
 
@@ -121,11 +121,13 @@ OS-Support - ToDo: Going to follow soon.
 
 * UNIX: ToDo: Solaris-11 - should work
 
-
+Python support: 2.6, and 2.7
 
 Major Changes:
 
-* Extended documentation, embedded Epydoc output into Sphinx output.
+* Introduction of Python-2.6 support for legacy systems
+
+* Added 2.6 support.
 
 * Bug-Fixes.
 
@@ -133,7 +135,7 @@ Current test status:
 
 * UnitTests: >100
 
-* Use-Cases as UnitTests: >43
+* Use-Cases as UnitTests: >50
 
 **Total**: >140
 

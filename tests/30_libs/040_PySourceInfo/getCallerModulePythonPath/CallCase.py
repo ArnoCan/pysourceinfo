@@ -105,12 +105,19 @@ class CallUnits(unittest.TestCase):
         sys.path.insert(0,os.path.dirname(__file__)+os.sep+'..')
         import PySourceInfo_check_tests #@UnresolvedImport
         
+        version = '{0}.{1}'.format(*sys.version_info[:2])
+        if version == '2.6': # pragma: no cover
+            b = os.path.basename(unittest.__file__)[:-4]
+            a = PySourceInfo_check_tests.check_callback(pysourceinfo.PySourceInfo.getCallerModuleName,3)
+        elif version == '2.7': # pragma: no cover
+            fpn = os.path.dirname(unittest.__file__)
+            fpn = os.path.basename(fpn)
+            fx = PySourceInfo_check_tests.check_callback(pysourceinfo.PySourceInfo.getCallerModulePythonPath,3)
+            a = os.path.normpath(fx+os.sep+fpn)
+            b = os.path.normpath(os.path.dirname(unittest.__file__))
+        else:
+            assert False
 
-        fpn = os.path.dirname(unittest.__file__)
-        fpn = os.path.basename(fpn)
-        fx = PySourceInfo_check_tests.check_callback(pysourceinfo.PySourceInfo.getCallerModulePythonPath,3)
-        a = os.path.normpath(fx+os.sep+fpn)
-        b = os.path.normpath(os.path.dirname(unittest.__file__))
 
 
         [ sys.path.pop() for x in range(len(sys.path)) ] #@UnusedVariable

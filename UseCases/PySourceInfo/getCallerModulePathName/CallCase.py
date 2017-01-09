@@ -38,7 +38,13 @@ class CallUnits(unittest.TestCase):
         [ sys.path.pop() for x in range(len(sys.path)) ] #@UnusedVariable
         sys.path.extend(_s)
 
-        assert os.path.basename(fx) == 'unittest'
+        version = '{0}.{1}'.format(*sys.version_info[:2])
+        if version == '2.6': # pragma: no cover
+            assert os.path.basename(fx) == 'python2.6'
+        elif version == '2.7': # pragma: no cover
+            assert os.path.basename(fx) == 'unittest'
+        else:
+            assert False
 
 if __name__ == '__main__':
     unittest.main()
