@@ -1,0 +1,300 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>‘pysourceinfo.infolists’ - Module &mdash; pysourceinfo 0.1.32 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.32',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pysourceinfo 0.1.32 documentation" href="index.html" />
+    <link rel="next" title="‘pysourceinfo.objectinfo’ - Module" href="objectinfo.html" />
+    <link rel="prev" title="‘pysourceinfo.helper’ - Module" href="helper.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="objectinfo.html" title="‘pysourceinfo.objectinfo’ - Module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="helper.html" title="‘pysourceinfo.helper’ - Module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pysourceinfo 0.1.32 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="pysourceinfo-infolists-module">
+<h1>&#8216;pysourceinfo.infolists&#8217; - Module<a class="headerlink" href="#pysourceinfo-infolists-module" title="Permalink to this headline">¶</a></h1>
+<p>Lists and items of source information for runtime components.</p>
+<div class="section" id="module-pysourceinfo.infolists">
+<span id="modules"></span><h2>Modules<a class="headerlink" href="#module-pysourceinfo.infolists" title="Permalink to this headline">¶</a></h2>
+<p>pysourceinfo.infolists - lists.</p>
+<p>Details see &#64;local-manuals or &#64;[<a class="reference external" href="https://pythonhosted.org/pysourceinfo/">https://pythonhosted.org/pysourceinfo/</a>]</p>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="getsysmodules-filepathname-list">
+<h3>getsysmodules_filepathname_list<a class="headerlink" href="#getsysmodules-filepathname-list" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="function">
+<dt id="pysourceinfo.infolists.getsysmodules_filepathname_list">
+<code class="descclassname">pysourceinfo.infolists.</code><code class="descname">getsysmodules_filepathname_list</code><span class="sig-paren">(</span><em>r=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysourceinfo/infolists.html#getsysmodules_filepathname_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysourceinfo.infolists.getsysmodules_filepathname_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list of file pathnames of all loaded modules.</p>
+<p>Scans all modules for the packages contained in <em>sys.modules</em>.
+Args:</p>
+<blockquote>
+<div>r: regexpr to be applied on the file path names.</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>Returns the list of file path names for the loaded modules.</div></blockquote>
+<p>Raises:</p>
+<blockquote>
+<div>passed through exceptions</div></blockquote>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="getsysmodules-id-list">
+<h3>getsysmodules_id_list<a class="headerlink" href="#getsysmodules-id-list" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="function">
+<dt id="pysourceinfo.infolists.getsysmodules_id_list">
+<code class="descclassname">pysourceinfo.infolists.</code><code class="descname">getsysmodules_id_list</code><span class="sig-paren">(</span><em>r=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysourceinfo/infolists.html#getsysmodules_id_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysourceinfo.infolists.getsysmodules_id_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list of the IDs of the loaded modules.</p>
+<p>Args:</p>
+<blockquote>
+<div>r: regexpr to be applied on the IDs.</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>Returns the list of the loaded modules.</div></blockquote>
+<p>Raises:</p>
+<blockquote>
+<div>passed through exceptions</div></blockquote>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="getsysmodules-list">
+<h3>getsysmodules_list<a class="headerlink" href="#getsysmodules-list" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="function">
+<dt id="pysourceinfo.infolists.getsysmodules_list">
+<code class="descclassname">pysourceinfo.infolists.</code><code class="descname">getsysmodules_list</code><span class="sig-paren">(</span><em>r=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysourceinfo/infolists.html#getsysmodules_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysourceinfo.infolists.getsysmodules_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list of the loaded modules.</p>
+<p>Args:</p>
+<blockquote>
+<div>r: regexpr to be applied on the module names.</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>Returns the list of the loaded modules.</div></blockquote>
+<p>Raises:</p>
+<blockquote>
+<div>passed through exceptions</div></blockquote>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="getsysmodules-name-list">
+<h3>getsysmodules_name_list<a class="headerlink" href="#getsysmodules-name-list" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="function">
+<dt id="pysourceinfo.infolists.getsysmodules_name_list">
+<code class="descclassname">pysourceinfo.infolists.</code><code class="descname">getsysmodules_name_list</code><span class="sig-paren">(</span><em>r=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysourceinfo/infolists.html#getsysmodules_name_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysourceinfo.infolists.getsysmodules_name_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list of the loaded modules.</p>
+<p>Args:</p>
+<blockquote>
+<div>r: regexpr to be applied on the module names.</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>Returns the list of the names of the loaded modules.</div></blockquote>
+<p>Raises:</p>
+<blockquote>
+<div>passed through exceptions</div></blockquote>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="getsysmodules-pathname-list">
+<h3>getsysmodules_pathname_list<a class="headerlink" href="#getsysmodules-pathname-list" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="function">
+<dt id="pysourceinfo.infolists.getsysmodules_pathname_list">
+<code class="descclassname">pysourceinfo.infolists.</code><code class="descname">getsysmodules_pathname_list</code><span class="sig-paren">(</span><em>r=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysourceinfo/infolists.html#getsysmodules_pathname_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysourceinfo.infolists.getsysmodules_pathname_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list of path names of the loaded modules.</p>
+<p>Args:</p>
+<blockquote>
+<div>r: regexpr to be applied on the module path names.</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>Returns the list of pathnames of the loaded modules.</div></blockquote>
+<p>Raises:</p>
+<blockquote>
+<div>passed through exceptions</div></blockquote>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="getsysmodules-python-pathname-list">
+<h3>getsysmodules_python_pathname_list<a class="headerlink" href="#getsysmodules-python-pathname-list" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="function">
+<dt id="pysourceinfo.infolists.getsysmodules_python_pathname_list">
+<code class="descclassname">pysourceinfo.infolists.</code><code class="descname">getsysmodules_python_pathname_list</code><span class="sig-paren">(</span><em>r=None</em>, <em>plist=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysourceinfo/infolists.html#getsysmodules_python_pathname_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysourceinfo.infolists.getsysmodules_python_pathname_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list of path names for the loaded modules
+from PYTHONPATH.</p>
+<p>Args:</p>
+<blockquote>
+<div>r: regexpr to be applied on the module path names.</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>Returns the list of pathnames of the loaded modules.</div></blockquote>
+<p>Raises:</p>
+<blockquote>
+<div>passed through exceptions</div></blockquote>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="getsysmodules-pathname-rel-list">
+<h3>getsysmodules_pathname_rel_list<a class="headerlink" href="#getsysmodules-pathname-rel-list" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="function">
+<dt id="pysourceinfo.infolists.getsysmodules_pathname_rel_list">
+<code class="descclassname">pysourceinfo.infolists.</code><code class="descname">getsysmodules_pathname_rel_list</code><span class="sig-paren">(</span><em>r=None</em>, <em>plist=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysourceinfo/infolists.html#getsysmodules_pathname_rel_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysourceinfo.infolists.getsysmodules_pathname_rel_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns for the loaded modules the list of
+path names relative to PYTHONPATH.</p>
+<p>Args:</p>
+<blockquote>
+<div>r: regexpr to be applied on the module path names.</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>Returns the list of relative pathnames of the loaded modules.</div></blockquote>
+<p>Raises:</p>
+<blockquote>
+<div>passed through exceptions</div></blockquote>
+</dd></dl>
+
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>inspect Python2 - <a class="reference internal" href="references.html#inspect2" id="id1">[inspect2]</a></li>
+<li>inspect Python3 - <a class="reference internal" href="references.html#inspect3" id="id2">[inspect3]</a></li>
+<li>types Python2 - <a class="reference internal" href="references.html#types2" id="id3">[types2]</a></li>
+<li>types Python3 - <a class="reference internal" href="references.html#types3" id="id4">[types3]</a></li>
+<li>pystackinfo package; Arno-Can Uestuensoez <a class="reference internal" href="references.html#pystackinfo" id="id5">[pystackinfo]</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/pysourceinfo-64x64.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">&#8216;pysourceinfo.infolists&#8217; - Module</a><ul>
+<li><a class="reference internal" href="#module-pysourceinfo.infolists">Modules</a></li>
+<li><a class="reference internal" href="#functions">Functions</a><ul>
+<li><a class="reference internal" href="#getsysmodules-filepathname-list">getsysmodules_filepathname_list</a></li>
+<li><a class="reference internal" href="#getsysmodules-id-list">getsysmodules_id_list</a></li>
+<li><a class="reference internal" href="#getsysmodules-list">getsysmodules_list</a></li>
+<li><a class="reference internal" href="#getsysmodules-name-list">getsysmodules_name_list</a></li>
+<li><a class="reference internal" href="#getsysmodules-pathname-list">getsysmodules_pathname_list</a></li>
+<li><a class="reference internal" href="#getsysmodules-python-pathname-list">getsysmodules_python_pathname_list</a></li>
+<li><a class="reference internal" href="#getsysmodules-pathname-rel-list">getsysmodules_pathname_rel_list</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#resources">Resources</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>API</h4><p class="topless"><a href="epydoc/index.html" title="API">Programming Interface</a></p><h4>Previous topic</h4>
+  <p class="topless"><a href="helper.html"
+                        title="previous chapter">&#8216;pysourceinfo.helper&#8217; - Module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="objectinfo.html"
+                        title="next chapter">&#8216;pysourceinfo.objectinfo&#8217; - Module</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/infolists.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="objectinfo.html" title="‘pysourceinfo.objectinfo’ - Module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="helper.html" title="‘pysourceinfo.helper’ - Module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pysourceinfo 0.1.32 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2018, Arno-Can Uestuensoez.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.5.
+    </div>
+  </body>
+</html>

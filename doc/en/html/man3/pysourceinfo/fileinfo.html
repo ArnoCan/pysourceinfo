@@ -1,0 +1,592 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>‘pysourceinfo.fileinfo’ - Module &mdash; pysourceinfo 0.1.32 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.32',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pysourceinfo 0.1.32 documentation" href="index.html" />
+    <link rel="next" title="‘pysourceinfo.helper’ - Module" href="helper.html" />
+    <link rel="prev" title="‘pysourceinfo.bininfo’ - Module" href="bininfo.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="helper.html" title="‘pysourceinfo.helper’ - Module"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="bininfo.html" title="‘pysourceinfo.bininfo’ - Module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pysourceinfo 0.1.32 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="pysourceinfo-fileinfo-module">
+<h1>&#8216;pysourceinfo.fileinfo&#8217; - Module<a class="headerlink" href="#pysourceinfo-fileinfo-module" title="Permalink to this headline">¶</a></h1>
+<p>The <em>fileinfo</em> modules provides information about the source location
+of callables by utilizing the <em>__file__</em> variable and the call stack.</p>
+<p>The stack frame of inspect is in particular reduced to the common
+parameter <em>spos</em>, which is the &#8216;stack-position&#8217;
+representing the level of the addressed caller.
+The value <em>spos==0</em> is the function itself, whereas <em>spos==1</em> is the
+first level caller. Consequently <em>spos==2</em> is the caller of the caller,
+etc.</p>
+<p>The categories of the provided information comprise:</p>
+<ul class="simple">
+<li><strong>packages</strong> - Python packages.</li>
+<li><strong>modules</strong> - Python modules - a.k.a. source files.</li>
+<li><strong>callers</strong> - Python functions and class/object methods.</li>
+</ul>
+<p>The following definition is applied:</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">A package is represented by an imported top-entity which could either be a self-contained
+module, or the <em>__init__.py</em> special module as the top-entity from a set of modules within
+a sub directory structure.</p>
+</div>
+<p>So physically a package is a distribution unit, which provides one or more
+modules. Thus the displayed result in case of packages is the module when it is a self-contained module,
+the path when it is a multi-module package.</p>
+<p>The following attributes are provided by <em>fileinfo</em>:</p>
+<ul class="simple">
+<li>name(package, module, function)</li>
+<li>filename</li>
+<li>filepathname</li>
+<li>item of sys.path</li>
+<li>relative path to item of sys.path</li>
+<li>line number</li>
+</ul>
+<p>Dependent on the call context, some of the attribute values may
+not be available.</p>
+<div class="section" id="module-pysourceinfo.fileinfo">
+<span id="modules"></span><h2>Modules<a class="headerlink" href="#module-pysourceinfo.fileinfo" title="Permalink to this headline">¶</a></h2>
+<p>pysourceinfo.fileinfo - information on source files.</p>
+<p>Based on the stack-frames of <em>inspect</em>, <em>__file__</em>, and additional 
+attributes.</p>
+<p>Details see &#64;local-manuals or &#64;[<a class="reference external" href="https://pythonhosted.org/pysourceinfo/">https://pythonhosted.org/pysourceinfo/</a>]</p>
+</div>
+<div class="section" id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="getcaller-filename">
+<h3>getcaller_filename<a class="headerlink" href="#getcaller-filename" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="function">
+<dt id="pysourceinfo.fileinfo.getcaller_filename">
+<code class="descclassname">pysourceinfo.fileinfo.</code><code class="descname">getcaller_filename</code><span class="sig-paren">(</span><em>spos=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysourceinfo/fileinfo.html#getcaller_filename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysourceinfo.fileinfo.getcaller_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filename of caller&#8217;s module.</p>
+<p>Args:</p>
+<blockquote>
+<div>spos: Caller position on the stack.</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>Returns the filename.</div></blockquote>
+<p>Raises:</p>
+<blockquote>
+<div>passed through exceptions</div></blockquote>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="getcaller-filepathname">
+<h3>getcaller_filepathname<a class="headerlink" href="#getcaller-filepathname" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="function">
+<dt id="pysourceinfo.fileinfo.getcaller_filepathname">
+<code class="descclassname">pysourceinfo.fileinfo.</code><code class="descname">getcaller_filepathname</code><span class="sig-paren">(</span><em>spos=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysourceinfo/fileinfo.html#getcaller_filepathname"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysourceinfo.fileinfo.getcaller_filepathname" title="Permalink to this definition">¶</a></dt>
+<dd><p>File pathname of caller&#8217;s module.</p>
+<p>Args:</p>
+<blockquote>
+<div>spos: Caller position on the stack.</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>Returns the file pathname.</div></blockquote>
+<p>Raises:</p>
+<blockquote>
+<div>passed through exceptions</div></blockquote>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="getcaller-linenumber">
+<h3>getcaller_linenumber<a class="headerlink" href="#getcaller-linenumber" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="function">
+<dt id="pysourceinfo.fileinfo.getcaller_linenumber">
+<code class="descclassname">pysourceinfo.fileinfo.</code><code class="descname">getcaller_linenumber</code><span class="sig-paren">(</span><em>spos=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysourceinfo/fileinfo.html#getcaller_linenumber"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysourceinfo.fileinfo.getcaller_linenumber" title="Permalink to this definition">¶</a></dt>
+<dd><p>Source line number of call.</p>
+<p>Args:</p>
+<blockquote>
+<div>spos: Caller position on the stack.</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>Returns the line number of the parent call.</div></blockquote>
+<p>Raises:</p>
+<blockquote>
+<div>passed through exceptions</div></blockquote>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="getcaller-linenumber-def">
+<h3>getcaller_linenumber_def<a class="headerlink" href="#getcaller-linenumber-def" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="function">
+<dt id="pysourceinfo.fileinfo.getcaller_linenumber_def">
+<code class="descclassname">pysourceinfo.fileinfo.</code><code class="descname">getcaller_linenumber_def</code><span class="sig-paren">(</span><em>spos=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysourceinfo/fileinfo.html#getcaller_linenumber_def"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysourceinfo.fileinfo.getcaller_linenumber_def" title="Permalink to this definition">¶</a></dt>
+<dd><p>First line number of enclosing caller function/method definition.</p>
+<p>Args:</p>
+<blockquote>
+<div>spos: Caller position on the stack.</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>Returns the first linenumber of the calling functions/method definition.</div></blockquote>
+<p>Raises:</p>
+<blockquote>
+<div>passed through exceptions</div></blockquote>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="getcaller-package-filename">
+<h3>getcaller_package_filename<a class="headerlink" href="#getcaller-package-filename" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="function">
+<dt id="pysourceinfo.fileinfo.getcaller_package_filename">
+<code class="descclassname">pysourceinfo.fileinfo.</code><code class="descname">getcaller_package_filename</code><span class="sig-paren">(</span><em>spos=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysourceinfo/fileinfo.html#getcaller_package_filename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysourceinfo.fileinfo.getcaller_package_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Args:</p>
+<blockquote>
+<div>spos: Caller position on the stack.</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>Returns the file name of the package.</div></blockquote>
+<p>Raises:</p>
+<blockquote>
+<div>passed through exceptions</div></blockquote>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="getcaller-package-filepathname">
+<h3>getcaller_package_filepathname<a class="headerlink" href="#getcaller-package-filepathname" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="function">
+<dt id="pysourceinfo.fileinfo.getcaller_package_filepathname">
+<code class="descclassname">pysourceinfo.fileinfo.</code><code class="descname">getcaller_package_filepathname</code><span class="sig-paren">(</span><em>spos=1</em>, <em>pmatch=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysourceinfo/fileinfo.html#getcaller_package_filepathname"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysourceinfo.fileinfo.getcaller_package_filepathname" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filepathname of the package from <em>sys.path</em>.</p>
+<p>Args:</p>
+<blockquote>
+<div>spos: Caller position on the stack.</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>Returns the file path name of the package.</div></blockquote>
+<p>Raises:</p>
+<blockquote>
+<div>passed through exceptions</div></blockquote>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="getcaller-package-pathname">
+<h3>getcaller_package_pathname<a class="headerlink" href="#getcaller-package-pathname" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="function">
+<dt id="pysourceinfo.fileinfo.getcaller_package_pathname">
+<code class="descclassname">pysourceinfo.fileinfo.</code><code class="descname">getcaller_package_pathname</code><span class="sig-paren">(</span><em>spos=1</em>, <em>pmatch=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysourceinfo/fileinfo.html#getcaller_package_pathname"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysourceinfo.fileinfo.getcaller_package_pathname" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pathname of the package from <em>sys.path</em> as used for search of the package.</p>
+<p>Relies on &#8216;inspect&#8217;.</p>
+<p>Args:</p>
+<blockquote>
+<div>spos: Caller position on the stack.__</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>Returns the path name to the package.</div></blockquote>
+<p>Raises:</p>
+<blockquote>
+<div>passed through exceptions</div></blockquote>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="getcaller-pathname">
+<h3>getcaller_pathname<a class="headerlink" href="#getcaller-pathname" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="function">
+<dt id="pysourceinfo.fileinfo.getcaller_pathname">
+<code class="descclassname">pysourceinfo.fileinfo.</code><code class="descname">getcaller_pathname</code><span class="sig-paren">(</span><em>spos=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysourceinfo/fileinfo.html#getcaller_pathname"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysourceinfo.fileinfo.getcaller_pathname" title="Permalink to this definition">¶</a></dt>
+<dd><p>pathname of caller source file.</p>
+<p>Args:</p>
+<blockquote>
+<div>spos: Caller position on the stack.</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>Returns the filename.</div></blockquote>
+<p>Raises:</p>
+<blockquote>
+<div>passed through exceptions</div></blockquote>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="getcaller-pathname-rel">
+<h3>getcaller_pathname_rel<a class="headerlink" href="#getcaller-pathname-rel" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="function">
+<dt id="pysourceinfo.fileinfo.getcaller_pathname_rel">
+<code class="descclassname">pysourceinfo.fileinfo.</code><code class="descname">getcaller_pathname_rel</code><span class="sig-paren">(</span><em>spos=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysourceinfo/fileinfo.html#getcaller_pathname_rel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysourceinfo.fileinfo.getcaller_pathname_rel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Relative pathname to first matching package directory of caller.</p>
+<p>Evaluates &#8216;sys.path&#8217; first, else switches to &#8216;inspect&#8217;.</p>
+<p>Args:</p>
+<blockquote>
+<div>spos: Caller position on the stack.</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>Returns the path name to the package.</div></blockquote>
+<p>Raises:</p>
+<blockquote>
+<div>passed through exceptions</div></blockquote>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="getcaller-pathname-sub">
+<h3>getcaller_pathname_sub<a class="headerlink" href="#getcaller-pathname-sub" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="function">
+<dt id="pysourceinfo.fileinfo.getcaller_pathname_sub">
+<code class="descclassname">pysourceinfo.fileinfo.</code><code class="descname">getcaller_pathname_sub</code><span class="sig-paren">(</span><em>spos=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysourceinfo/fileinfo.html#getcaller_pathname_sub"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysourceinfo.fileinfo.getcaller_pathname_sub" title="Permalink to this definition">¶</a></dt>
+<dd><p>sub-pathname to first matching module directory of caller.</p>
+<p>Evaluates &#8216;sys.path&#8217; first, else switches to &#8216;inspect&#8217;.</p>
+<p>Args:</p>
+<blockquote>
+<div>spos: Caller position on the stack.</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>Returns the path name to the package.</div></blockquote>
+<p>Raises:</p>
+<blockquote>
+<div>passed through exceptions</div></blockquote>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="getcaller-python-pathname">
+<h3>getcaller_python_pathname<a class="headerlink" href="#getcaller-python-pathname" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="function">
+<dt id="pysourceinfo.fileinfo.getcaller_python_pathname">
+<code class="descclassname">pysourceinfo.fileinfo.</code><code class="descname">getcaller_python_pathname</code><span class="sig-paren">(</span><em>spos=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysourceinfo/fileinfo.html#getcaller_python_pathname"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysourceinfo.fileinfo.getcaller_python_pathname" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alias for getcaller_package_pathname.</p>
+<p>Args:</p>
+<blockquote>
+<div>spos: Caller position on the stack.</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>Returns the name of caller module.</div></blockquote>
+<p>Raises:</p>
+<blockquote>
+<div>passed through exceptions</div></blockquote>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="getcaller-source-filepathname">
+<h3>getcaller_source_filepathname<a class="headerlink" href="#getcaller-source-filepathname" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="function">
+<dt id="pysourceinfo.fileinfo.getcaller_source_filepathname">
+<code class="descclassname">pysourceinfo.fileinfo.</code><code class="descname">getcaller_source_filepathname</code><span class="sig-paren">(</span><em>spos=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysourceinfo/fileinfo.html#getcaller_source_filepathname"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysourceinfo.fileinfo.getcaller_source_filepathname" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pathname of caller source.</p>
+<p>Args:</p>
+<blockquote>
+<div>spos: Caller position on the stack.</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>Returns the file pathname of the source for the caller,
+else None.</div></blockquote>
+<p>Raises:</p>
+<blockquote>
+<div>passed through exceptions</div></blockquote>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="getmodule-filename">
+<h3>getmodule_filename<a class="headerlink" href="#getmodule-filename" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="function">
+<dt id="pysourceinfo.fileinfo.getmodule_filename">
+<code class="descclassname">pysourceinfo.fileinfo.</code><code class="descname">getmodule_filename</code><span class="sig-paren">(</span><em>mod</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysourceinfo/fileinfo.html#getmodule_filename"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysourceinfo.fileinfo.getmodule_filename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Basename of file for loaded module <em>mod</em>.</p>
+<p>Args:</p>
+<blockquote>
+<div>mod: Reference to a loaded module.</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>Returns the basename of the loaded module.</div></blockquote>
+<p>Raises:</p>
+<blockquote>
+<div>passed through exceptions</div></blockquote>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="getmodule-filepathname">
+<h3>getmodule_filepathname<a class="headerlink" href="#getmodule-filepathname" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="function">
+<dt id="pysourceinfo.fileinfo.getmodule_filepathname">
+<code class="descclassname">pysourceinfo.fileinfo.</code><code class="descname">getmodule_filepathname</code><span class="sig-paren">(</span><em>mod</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysourceinfo/fileinfo.html#getmodule_filepathname"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysourceinfo.fileinfo.getmodule_filepathname" title="Permalink to this definition">¶</a></dt>
+<dd><p>File pathname of loaded module <em>mod</em>.</p>
+<p>Args:</p>
+<blockquote>
+<div>mod: Reference to a loaded module.</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>Returns the file pathname of the loaded module.</div></blockquote>
+<p>Raises:</p>
+<blockquote>
+<div>passed through exceptions</div></blockquote>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="getmodule-package-pathname">
+<h3>getmodule_package_pathname<a class="headerlink" href="#getmodule-package-pathname" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="function">
+<dt id="pysourceinfo.fileinfo.getmodule_package_pathname">
+<code class="descclassname">pysourceinfo.fileinfo.</code><code class="descname">getmodule_package_pathname</code><span class="sig-paren">(</span><em>mod</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysourceinfo/fileinfo.html#getmodule_package_pathname"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysourceinfo.fileinfo.getmodule_package_pathname" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path name of package for loaded module.</p>
+<p>Args:</p>
+<blockquote>
+<div>mod: Reference to a loaded module.</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>Returns the pathname of the package.</div></blockquote>
+<p>Raises:</p>
+<blockquote>
+<div>passed through exceptions</div></blockquote>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="getmodule-pathname">
+<h3>getmodule_pathname<a class="headerlink" href="#getmodule-pathname" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="function">
+<dt id="pysourceinfo.fileinfo.getmodule_pathname">
+<code class="descclassname">pysourceinfo.fileinfo.</code><code class="descname">getmodule_pathname</code><span class="sig-paren">(</span><em>mod</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysourceinfo/fileinfo.html#getmodule_pathname"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysourceinfo.fileinfo.getmodule_pathname" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path name of loaded module.</p>
+<p>Args:</p>
+<blockquote>
+<div>mod: Reference to a loaded module.</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>Returns the pathname of the loaded module.</div></blockquote>
+<p>Raises:</p>
+<blockquote>
+<div>passed through exceptions</div></blockquote>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="getmodule-pathname-rel">
+<h3>getmodule_pathname_rel<a class="headerlink" href="#getmodule-pathname-rel" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="function">
+<dt id="pysourceinfo.fileinfo.getmodule_pathname_rel">
+<code class="descclassname">pysourceinfo.fileinfo.</code><code class="descname">getmodule_pathname_rel</code><span class="sig-paren">(</span><em>mod</em>, <em>plist=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysourceinfo/fileinfo.html#getmodule_pathname_rel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysourceinfo.fileinfo.getmodule_pathname_rel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Relative path name to PYTHONPATH for loaded module.</p>
+<p>Args:</p>
+<blockquote>
+<div>mod: Reference to a loaded module.</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>Returns the relative pathname of the loaded module.</div></blockquote>
+<p>Raises:</p>
+<blockquote>
+<div>passed through exceptions</div></blockquote>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="getmodule-pathname-sub">
+<h3>getmodule_pathname_sub<a class="headerlink" href="#getmodule-pathname-sub" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="function">
+<dt id="pysourceinfo.fileinfo.getmodule_pathname_sub">
+<code class="descclassname">pysourceinfo.fileinfo.</code><code class="descname">getmodule_pathname_sub</code><span class="sig-paren">(</span><em>mod</em>, <em>plist=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysourceinfo/fileinfo.html#getmodule_pathname_sub"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysourceinfo.fileinfo.getmodule_pathname_sub" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path name for loaded module, relative to package path .</p>
+<p>Args:</p>
+<blockquote>
+<div>mod: Reference to a loaded module.</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>Returns the sub pathname of the loaded module.</div></blockquote>
+<p>Raises:</p>
+<blockquote>
+<div>passed through exceptions</div></blockquote>
+</dd></dl>
+
+</div></blockquote>
+</div>
+<div class="section" id="getmodule-python-pathname">
+<h3>getmodule_python_pathname<a class="headerlink" href="#getmodule-python-pathname" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><dl class="function">
+<dt id="pysourceinfo.fileinfo.getmodule_python_pathname">
+<code class="descclassname">pysourceinfo.fileinfo.</code><code class="descname">getmodule_python_pathname</code><span class="sig-paren">(</span><em>mod</em>, <em>plist=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pysourceinfo/fileinfo.html#getmodule_python_pathname"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#pysourceinfo.fileinfo.getmodule_python_pathname" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path name from PYTHONPATH of loaded module.</p>
+<p>Args:</p>
+<blockquote>
+<div>mod: Reference to a loaded module.</div></blockquote>
+<p>Returns:</p>
+<blockquote>
+<div>Returns the pathname of the loaded module.</div></blockquote>
+<p>Raises:</p>
+<blockquote>
+<div>passed through exceptions</div></blockquote>
+</dd></dl>
+
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="exceptions">
+<h2>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>inspect Python2 - <a class="reference internal" href="references.html#inspect2" id="id1">[inspect2]</a></li>
+<li>inspect Python3 - <a class="reference internal" href="references.html#inspect3" id="id2">[inspect3]</a></li>
+<li>types Python2 - <a class="reference internal" href="references.html#types2" id="id3">[types2]</a></li>
+<li>types Python3 - <a class="reference internal" href="references.html#types3" id="id4">[types3]</a></li>
+<li>pystackinfo package; Arno-Can Uestuensoez <a class="reference internal" href="references.html#pystackinfo" id="id5">[pystackinfo]</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/pysourceinfo-64x64.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">&#8216;pysourceinfo.fileinfo&#8217; - Module</a><ul>
+<li><a class="reference internal" href="#module-pysourceinfo.fileinfo">Modules</a></li>
+<li><a class="reference internal" href="#functions">Functions</a><ul>
+<li><a class="reference internal" href="#getcaller-filename">getcaller_filename</a></li>
+<li><a class="reference internal" href="#getcaller-filepathname">getcaller_filepathname</a></li>
+<li><a class="reference internal" href="#getcaller-linenumber">getcaller_linenumber</a></li>
+<li><a class="reference internal" href="#getcaller-linenumber-def">getcaller_linenumber_def</a></li>
+<li><a class="reference internal" href="#getcaller-package-filename">getcaller_package_filename</a></li>
+<li><a class="reference internal" href="#getcaller-package-filepathname">getcaller_package_filepathname</a></li>
+<li><a class="reference internal" href="#getcaller-package-pathname">getcaller_package_pathname</a></li>
+<li><a class="reference internal" href="#getcaller-pathname">getcaller_pathname</a></li>
+<li><a class="reference internal" href="#getcaller-pathname-rel">getcaller_pathname_rel</a></li>
+<li><a class="reference internal" href="#getcaller-pathname-sub">getcaller_pathname_sub</a></li>
+<li><a class="reference internal" href="#getcaller-python-pathname">getcaller_python_pathname</a></li>
+<li><a class="reference internal" href="#getcaller-source-filepathname">getcaller_source_filepathname</a></li>
+<li><a class="reference internal" href="#getmodule-filename">getmodule_filename</a></li>
+<li><a class="reference internal" href="#getmodule-filepathname">getmodule_filepathname</a></li>
+<li><a class="reference internal" href="#getmodule-package-pathname">getmodule_package_pathname</a></li>
+<li><a class="reference internal" href="#getmodule-pathname">getmodule_pathname</a></li>
+<li><a class="reference internal" href="#getmodule-pathname-rel">getmodule_pathname_rel</a></li>
+<li><a class="reference internal" href="#getmodule-pathname-sub">getmodule_pathname_sub</a></li>
+<li><a class="reference internal" href="#getmodule-python-pathname">getmodule_python_pathname</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#exceptions">Exceptions</a></li>
+<li><a class="reference internal" href="#resources">Resources</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>API</h4><p class="topless"><a href="epydoc/index.html" title="API">Programming Interface</a></p><h4>Previous topic</h4>
+  <p class="topless"><a href="bininfo.html"
+                        title="previous chapter">&#8216;pysourceinfo.bininfo&#8217; - Module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="helper.html"
+                        title="next chapter">&#8216;pysourceinfo.helper&#8217; - Module</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/fileinfo.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="helper.html" title="‘pysourceinfo.helper’ - Module"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="bininfo.html" title="‘pysourceinfo.bininfo’ - Module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pysourceinfo 0.1.32 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2018, Arno-Can Uestuensoez.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.5.
+    </div>
+  </body>
+</html>

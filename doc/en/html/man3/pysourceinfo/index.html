@@ -1,0 +1,339 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Abstract &mdash; pysourceinfo 0.1.32 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.32',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pysourceinfo 0.1.32 documentation" href="#" />
+    <link rel="next" title="Shortcuts" href="shortcuts.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="shortcuts.html" title="Shortcuts"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">pysourceinfo 0.1.32 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="abstract">
+<h1>Abstract<a class="headerlink" href="#abstract" title="Permalink to this headline">¶</a></h1>
+<p>The <strong>pysourceinfo</strong> package provides source information on Python runtime objects
+based on <em>inspect</em>, <em>sys</em>, <em>os</em>, and <em>imp</em>.
+The covered objects include packages, modules, functions, methods, scripts,
+and classes by two views:</p>
+<ul class="simple">
+<li>File System View - packages, modules, and linenumbers - based on files and paths -
+<a class="reference internal" href="namebinding.html#filenamebinding"><span class="std std-ref">[File-Namebinding]</span></a>:</li>
+<li>Runtime Object View - callables, classes, and containers - based on in-memory RTTI / introspection -
+<a class="reference internal" href="namebinding.html#filenamebinding"><span class="std std-ref">[Object-Namebinding]</span></a>:</li>
+</ul>
+<p>The supported platforms are:</p>
+<ul class="simple">
+<li>Linux, BSD, Unix, OS-X, Cygwin, and Windows</li>
+<li>Python2, Python3 - CPython, PyPy</li>
+</ul>
+<p>Object addresses within modules - Object Identifier OID - and the display of the runtime call flow
+are supported by <em>PyStackInfo</em> <a class="reference internal" href="references.html#pystackinfo" id="id1">[pystackinfo]</a>.</p>
+</div>
+<div class="section" id="cockpit">
+<h1>Cockpit<a class="headerlink" href="#cockpit" title="Permalink to this headline">¶</a></h1>
+<div class="markyellow"><p><strong>Prerequisite Definitions</strong>: <a class="reference internal" href="namebinding.html#namebinding"><span class="std std-ref">Name-Binding - A Python API for Files and Objects</span></a></p>
+</div><div class="indextab"><table border="1" class="docutils">
+<colgroup>
+<col width="12%" />
+<col width="32%" />
+<col width="16%" />
+<col width="22%" />
+<col width="18%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Component</th>
+<th class="head">Standards/References</th>
+<th class="head">HowTo</th>
+<th class="head">Shortcuts</th>
+<th class="head">API</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><a class="reference external" href="pysourceinfo.html#">pysourceinfo</a></td>
+<td>&nbsp;</td>
+<td>&nbsp;</td>
+<td><a class="reference internal" href="shortcuts.html#pysourceinfo-init"><span class="std std-ref">pysourceinfo.__init__</span></a></td>
+<td><a class="reference external" href="_modules/pysourceinfo/__init__.html#">pysourceinfo.__init__</a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="sourceinfo.html#">fileinfo</a></td>
+<td><a class="reference internal" href="references.html#inspect2" id="id2">[inspect2]</a> <a class="reference internal" href="references.html#inspect3" id="id3">[inspect3]</a> <a class="reference internal" href="references.html#pep3155" id="id4">[PEP3155]</a> <a class="reference internal" href="references.html#pep3147" id="id5">[PEP3147]</a></td>
+<td><a class="reference external" href="howto.html">HowTo</a></td>
+<td><a class="reference internal" href="shortcuts.html#pysourceinfo-fileinfo"><span class="std std-ref">pysourceinfo.fileinfo</span></a></td>
+<td><a class="reference external" href="fileinfo.html#">rdbg.fileinfo</a></td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="sourceinfo.html#">objectinfo</a></td>
+<td><a class="reference internal" href="references.html#inspect2" id="id6">[inspect2]</a> <a class="reference internal" href="references.html#inspect3" id="id7">[inspect3]</a> <a class="reference internal" href="references.html#pep3155" id="id8">[PEP3155]</a> <a class="reference internal" href="references.html#pep3147" id="id9">[PEP3147]</a></td>
+<td><a class="reference external" href="howto.html">HowTo</a></td>
+<td><a class="reference internal" href="shortcuts.html#pysourceinfo-objectinfo"><span class="std std-ref">pysourceinfo.objectinfo</span></a></td>
+<td><a class="reference external" href="objectinfo.html#">rdbg.objectinfo</a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="sourceinfo.html#">infolists</a></td>
+<td>&nbsp;</td>
+<td><a class="reference external" href="howto.html">HowTo</a></td>
+<td><a class="reference internal" href="shortcuts.html#pysourceinfo-infolists"><span class="std std-ref">pysourceinfo.infolists</span></a></td>
+<td><a class="reference external" href="infolists.html#">rdbg.infolists</a></td>
+</tr>
+<tr class="row-even"><td><a class="reference external" href="sourceinfo.html#">bininfo</a></td>
+<td><a class="reference internal" href="references.html#inspect2" id="id12">[inspect2]</a> <a class="reference internal" href="references.html#inspect3" id="id13">[inspect3]</a> <a class="reference internal" href="references.html#pep3155" id="id14">[PEP3155]</a> <a class="reference internal" href="references.html#pep3147" id="id15">[PEP3147]</a></td>
+<td><a class="reference external" href="howto.html">HowTo</a></td>
+<td><a class="reference internal" href="shortcuts.html#pysourceinfo-bininfo"><span class="std std-ref">pysourceinfo.bininfo</span></a></td>
+<td><a class="reference external" href="bininfo.html#">rdbg.bininfo</a></td>
+</tr>
+<tr class="row-odd"><td><a class="reference external" href="sourceinfo.html#">helper</a></td>
+<td>&nbsp;</td>
+<td><a class="reference external" href="howto.html">HowTo</a></td>
+<td><a class="reference internal" href="shortcuts.html#pysourceinfo-helper"><span class="std std-ref">pysourceinfo.helper</span></a></td>
+<td><a class="reference external" href="helper.html#">rdbg.helper</a></td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="50%" />
+<col width="50%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Artifacts</th>
+<th class="head">Shortcuts</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>Concepts and Design</td>
+<td><a class="reference internal" href="shortcuts.html#developmentdocs"><span class="std std-ref">Development Documents</span></a></td>
+</tr>
+<tr class="row-odd"><td>Programming Interfaces</td>
+<td><a class="reference internal" href="shortcuts.html#developmentapi"><span class="std std-ref">API Shortcuts - pysourceinfo</span></a></td>
+</tr>
+</tbody>
+</table>
+</div></div>
+<div class="section" id="blueprint">
+<h1>Blueprint<a class="headerlink" href="#blueprint" title="Permalink to this headline">¶</a></h1>
+<p>The package <em>PySourceInfo</em> provides the display of code-location for callable Python syntax
+elements including the involved class and containment hierarchy.
+The name-binding as defined by the package <em>PySourceInfo</em> targets the accurate location
+of static code components.
+This is based on the dynamic runtime information as provided by the Python interpreter.
+The <em>PySourceInfo</em> and the related <em>PyStackInfo</em> avoid
+static data preparation <a class="reference internal" href="references.html#pep3155" id="id18">[PEP3155]</a> and AST based approaches e.g. by <a class="reference internal" href="references.html#qualname" id="id19">[qualname]</a>.
+In distinction pure dynamic data gathering is proceeded, which inherently provides
+also for generic code created during runtime execution.</p>
+<p><a class="reference internal" href="_images/layers-with-pystackinfo-blueprint.png"><img alt="layerswithpystackinfoblueprint" src="_images/layers-with-pystackinfo-blueprint.png" style="width: 600px;" /></a>
+<a class="reference external" href="_static/layers-with-pystackinfo-blueprint.png"><img alt="zoom" src="_images/zoom.png" style="width: 16px;" /></a></p>
+<p>The  <em>PySourceInfo</em> focuses on basic information on files, modules,
+and packages, including line numbers with moderate use of the <em>inspect</em> API.
+The <em>PyStackInfo</em> package focuses on advanced control flow and runtime object location,
+including <em>decorators</em>, <em>nested classes</em>, and <em>metaclasses</em>.</p>
+<p><a class="reference internal" href="_images/layers-blueprint.png"><img alt="pysourceinfoblueprint" src="_images/layers-blueprint.png" style="width: 450px;" /></a>
+<a class="reference external" href="_static/layers-blueprint.png"><img alt="zoom" src="_images/zoom.png" style="width: 16px;" /></a></p>
+<ul class="simple">
+<li><em>objectinfo</em> - information about the runtime location of Python syntax elements</li>
+<li><em>fileinfo</em> - information about the source location of callables</li>
+<li><em>bininfo</em> - information about the location of compiled runtime files</li>
+<li><em>infolists</em> - lists and enumerations of source information</li>
+<li><em>helper</em> - support functions for the PYTHONPATH and the stack access</li>
+</ul>
+<p>The package <em>PyStackInfo</em> makes extended use of the stack and type information.
+This provides advanced debugging and analysis in particular for typical routines
+handling large data sets where the pure debugger based analysis may encounter some limits.
+Both packages require the support of <em>inspect</em>, which is guaranteed in the standard CPython,
+and seems to be reliably present in <em>PyPy</em>.</p>
+<p>The provided runtime structure information on Python sources is
+covered with basically one single type of interface[<a class="reference external" href="namebinding.html">Name-Binding</a>]</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="k">def</span> <span class="nf">getCaller</span><span class="o">&lt;</span><span class="n">Interface</span><span class="o">&gt;</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Stack position:</span>
+<span class="sd">       spos==0 =&gt; caller(0==CallInterface)</span>
+<span class="sd">       spos==1 =&gt; caller(1)</span>
+<span class="sd">       spos==N =&gt; caller(N==level N)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+ <span class="k">def</span> <span class="nf">getModule</span><span class="o">&lt;</span><span class="n">Interface</span><span class="o">&gt;</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+ <span class="k">def</span> <span class="nf">getpythonpath</span><span class="o">&lt;</span><span class="n">Interface</span><span class="o">&gt;</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</td></tr></table></div>
+<p>The interface gathers the information on the defined &#8216;&lt;Interface&gt;&#8217; from
+the call stack, loaded modules, or search path <em>PATH</em>/<em>PYTHONPATH</em>/<em>sys.path</em>.</p>
+<p><a class="reference external" href="shortcuts.html">More...</a></p>
+</div>
+<div class="section" id="table-of-contents">
+<h1>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h1>
+<div class="marklihoveryellow"><div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="shortcuts.html">Shortcuts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="namebinding.html">Name-Binding - A Python API for Files and Objects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysourceinfo.html">&#8216;pysourceinfo.__init__&#8217; - Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bininfo.html">&#8216;pysourceinfo.bininfo&#8217; - Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fileinfo.html">&#8216;pysourceinfo.fileinfo&#8217; - Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="helper.html">&#8216;pysourceinfo.helper&#8217; - Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="infolists.html">&#8216;pysourceinfo.infolists&#8217; - Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="objectinfo.html">&#8216;pysourceinfo.objectinfo&#8217; - Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pysourceinfo.PySourceInfo.html">&#8216;pysourceinfo.PySourceInfo&#8217; - Module</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help.html">Help</a></li>
+<li class="toctree-l1"><a class="reference internal" href="howto.html">Howto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="todo.html">ToDo</a></li>
+</ul>
+</div>
+</div></div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<div class="marklihoveryellow"><ul class="simple">
+<li><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></li>
+<li><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></li>
+<li><a class="reference external" href="references.html">References</a></li>
+<li><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></li>
+</ul>
+</div></div>
+<div class="section" id="resources">
+<h1>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h1>
+<p><strong>Project Data</strong></p>
+<ul class="simple">
+<li>PROJECT=pysourceinfo</li>
+<li>MISSION=Support easy access to RTTI on Python source files.</li>
+<li>AUTHOR=Arno-Can Uestuensoez</li>
+<li>COPYRIGHT=Copyright (C) 2010,2011,2015-2017 Arno-Can Uestuensoez &#64;Ingenieurbuero Arno-Can Uestuensoez</li>
+<li>LICENSE=Artistic-License-2.0 + Forced-Fairplay-Constraints</li>
+<li>VERSION=0.1.32</li>
+<li>RELEASE=0.1.32</li>
+<li>STATUS=alpha</li>
+</ul>
+<p><strong>Online Documents</strong></p>
+<div class="marklihoveryellow"><ul class="simple">
+<li>Pythonhosted: <a class="reference external" href="https://pythonhosted.org/pysourceinfo/">https://pythonhosted.org/pysourceinfo/</a></li>
+</ul>
+</div><p><strong>Licenses</strong></p>
+<div class="marklihoveryellow"><ul>
+<li><p class="first">Artistic-License-2.0(base license): <a class="reference external" href="_static/ArtisticLicense20.html">ArtisticLicense20.html</a></p>
+</li>
+<li><p class="first">Forced-Fairplay-Constraints(amendments): <a class="reference external" href="_static/licenses-amendments.txt">licenses-amendments.txt</a></p>
+<p><a class="reference external" href="_static/profile_info.html"><img alt="profileinfo" src="_images/profile_info.png" style="width: 48px;" /></a>  <a class="reference internal" href="references.html#xkcd" id="id20">[xkcd]</a> Support the OpenSource Authors :-)</p>
+</li>
+</ul>
+</div><p><strong>Downloads</strong></p>
+<div class="marklihoveryellow"><ul class="simple">
+<li>Python Package Index: <a class="reference external" href="https://pypi.python.org/pypi/pysourceinfo">https://pypi.python.org/pypi/pysourceinfo</a></li>
+<li>Sourceforge.net: <a class="reference external" href="https://sourceforge.net/projects/pysourceinfo/">https://sourceforge.net/projects/pysourceinfo/</a></li>
+<li>github.com: <a class="reference external" href="https://github.com/ArnoCan/pysourceinfo/">https://github.com/ArnoCan/pysourceinfo/</a></li>
+</ul>
+</div></div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="#">
+              <img class="logo" src="_static/pysourceinfo-64x64.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Abstract</a></li>
+<li><a class="reference internal" href="#cockpit">Cockpit</a></li>
+<li><a class="reference internal" href="#blueprint">Blueprint</a></li>
+<li><a class="reference internal" href="shortcuts.html">Shortcuts</a></li><li><a class="reference internal" href="howto.html">Howto</a></li><li><a class="reference internal" href="install.html">Install</a></li><li><a class="reference internal" href="#table-of-contents">Table of Contents</a></li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+<li><a class="reference internal" href="#resources">Resources</a></li>
+</ul>
+
+  <h4>API</h4><p class="topless"><a href="epydoc/index.html" title="API">Programming Interface</a></p><h4>Next topic</h4>
+  <p class="topless"><a href="shortcuts.html"
+                        title="next chapter">Shortcuts</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="shortcuts.html" title="Shortcuts"
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">pysourceinfo 0.1.32 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2018, Arno-Can Uestuensoez.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.5.
+    </div>
+  </body>
+</html>

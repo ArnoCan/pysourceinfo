@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pysourceinfo.__init__ &mdash; pysourceinfo 0.1.32 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1.32',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="pysourceinfo 0.1.32 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">pysourceinfo 0.1.32 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for pysourceinfo.__init__</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;&#39;pysourceinfo&#39; - Python RTTI based on &#39;inspect&#39;&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">sys</span> <span class="k">import</span> <span class="n">version_info</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Arno-Can Uestuensoez&#39;</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s2">&quot;Artistic-License-2.0 + Forced-Fairplay-Constraints&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright (C) 2010-2017 Arno-Can Uestuensoez&quot;</span> \
+                <span class="s2">&quot; @Ingenieurbuero Arno-Can Uestuensoez&quot;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.1.21&#39;</span>
+<span class="n">__uuid__</span> <span class="o">=</span> <span class="s1">&#39;efed42d3-f801-4fbb-abfd-bd598d683a82&#39;</span>
+<span class="n">__docformat__</span> <span class="o">=</span> <span class="s2">&quot;restructuredtext en&quot;</span>
+
+
+<div class="viewcode-block" id="PySourceInfoError"><a class="viewcode-back" href="../../pysourceinfo.html#pysourceinfo.__init__.PySourceInfoError">[docs]</a><span class="k">class</span> <span class="nc">PySourceInfoError</span><span class="p">(</span><span class="ne">Exception</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Common parent exception for the *pysourceinfo* package.&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PySourceInfoError</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span></div>
+
+<span class="n">V3K</span> <span class="o">=</span> <span class="kc">False</span>  <span class="c1"># : Python3.5+</span>
+<span class="k">if</span> <span class="n">version_info</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,):</span>
+    <span class="n">V3K</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">_STR</span> <span class="o">=</span> <span class="p">(</span><span class="nb">str</span><span class="p">,)</span>  <span class="c1"># : string and unicode</span>
+    <span class="kn">from</span> <span class="nn">importlib</span> <span class="k">import</span> <span class="n">find_loader</span>  <span class="c1"># @UnresolvedImport</span>
+    <span class="n">vers</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">version_info</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># pylint: disable-msg=W0142</span>
+<span class="k">elif</span> <span class="n">version_info</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span> <span class="o">&gt;</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,)</span> <span class="ow">and</span> <span class="n">version_info</span><span class="p">[:</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+    <span class="n">_STR</span> <span class="o">=</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">unicode</span><span class="p">,)</span>  <span class="c1"># : string and unicode @UndefinedVariable</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="n">PySourceInfoError</span><span class="p">(</span>
+        <span class="s2">&quot;Requires Python 2.7+, or 3.5+:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">version_info</span><span class="p">[:</span><span class="mi">2</span><span class="p">]))</span>
+
+
+<span class="c1"># deprecated with 3.3/__pycache__, but still require these, going to use own values than</span>
+<span class="c1"># re-map for smart import/export</span>
+<span class="n">MT_UNKNOWN</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">MT_SOURCE</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1">#: same value as PY_SOURCE = 1</span>
+<span class="n">MT_COMPILED</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1">#: same value as PY_COMPILED = 2</span>
+<span class="n">MT_EXTENSION</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># : same value as C_EXTENSION = 3</span>
+<span class="n">MT_DIRECTORY</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># : same value as PKG_DIRECTORY = 5</span>
+<span class="n">MT_BUILTIN</span> <span class="o">=</span> <span class="mi">6</span>  <span class="c1"># : same value as C_BUILTIN = 6</span>
+<span class="n">MT_FROZEN</span> <span class="o">=</span> <span class="mi">7</span>  <span class="c1"># : same value as PY_FROZEN = 7</span>
+
+<span class="n">MT_COMPILED_OPT</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># : PY_COMPILED | &lt;opt1 or opt2&gt; # 2 | 8</span>
+<span class="n">MT_COMPILED_OPT1</span> <span class="o">=</span> <span class="mi">18</span>  <span class="c1"># : PY_COMPILED | &lt;opt1&gt; # 2 | 16</span>
+<span class="n">MT_COMPILED_OPT2</span> <span class="o">=</span> <span class="mi">34</span>  <span class="c1"># : PY_COMPILED | &lt;opt2&gt; # 2 | 32</span>
+<span class="n">MT_COMPILED_DEBUG</span> <span class="o">=</span> <span class="mi">66</span>  <span class="c1"># : PY_COMPILED | 0 # 2 | 64</span>
+
+
+<span class="c1">#</span>
+<span class="c1"># bits defining the evaluated package path </span>
+<span class="c1"># from PYTHONPATH in case of multiple matches</span>
+<span class="c1">#</span>
+<span class="n">P_FIRST</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1">#: first matched path-prefix</span>
+<span class="n">P_LAST</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1">#: last matched path-prefix</span>
+<span class="n">P_SHORTEST</span><span class="o">=</span> <span class="mi">4</span>  <span class="c1">#: longest matched path-prefix</span>
+<span class="n">P_LONGEST</span> <span class="o">=</span> <span class="mi">8</span>  <span class="c1">#: longest matched path-prefix</span>
+<span class="n">P_IGNORE0</span> <span class="o">=</span> <span class="mi">16</span>  <span class="c1">#: ignores sys.path[0] - the execution path</span>
+
+<span class="n">presolve</span> <span class="o">=</span> <span class="n">P_FIRST</span>  <span class="c1">#: default value for sys.path resolution</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;bininfo&#39;</span><span class="p">,</span>
+    <span class="s2">&quot;fileinfo.py&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;helper.py&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;infolists.py&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;objectinfo.py&quot;</span><span class="p">,</span>
+<span class="p">]</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/pysourceinfo-64x64.png" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">pysourceinfo 0.1.32 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2018, Arno-Can Uestuensoez.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.5.
+    </div>
+  </body>
+</html>

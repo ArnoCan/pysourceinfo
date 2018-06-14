@@ -1,0 +1,352 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pysourceinfo.objectinfo &mdash; pysourceinfo 0.1.32 documentation</title>
+    
+    <link rel="stylesheet" href="../../_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '0.1.32',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <link rel="top" title="pysourceinfo 0.1.32 documentation" href="../../index.html" />
+    <link rel="up" title="Module code" href="../index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">pysourceinfo 0.1.32 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for pysourceinfo.objectinfo</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;PySourceInfo - runtime type and source information on Python.</span>
+
+<span class="sd">Based on the stack-frames of **inspect**, main parameter is **spos** </span>
+<span class="sd">- stack position. </span>
+
+<span class="sd">* *spos=1* is caller, *spos=2* is caller-of-caller, etc.. </span>
+
+<span class="sd">* &#39;r&#39; is a regular expression for &#39;search()&#39;.</span>
+
+<span class="sd">Details see @local-manuals or @[https://pythonhosted.org/pysourceinfo/]</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">inspect</span> <span class="k">import</span> <span class="n">stack</span><span class="p">,</span> <span class="n">getmodule</span><span class="p">,</span> <span class="n">ismodule</span>
+
+<span class="kn">from</span> <span class="nn">imp</span> <span class="k">import</span> <span class="n">is_builtin</span><span class="p">,</span> <span class="n">is_frozen</span><span class="p">,</span> <span class="n">find_module</span>
+<span class="kn">from</span> <span class="nn">types</span> <span class="k">import</span> <span class="n">ModuleType</span><span class="p">,</span> <span class="n">BuiltinFunctionType</span><span class="p">,</span> <span class="n">BuiltinMethodType</span>
+
+<span class="kn">from</span> <span class="nn">pysourceinfo</span> <span class="k">import</span> <span class="n">PySourceInfoError</span><span class="p">,</span> <span class="n">V3K</span><span class="p">,</span> \
+    <span class="n">MT_UNKNOWN</span><span class="p">,</span> <span class="n">MT_SOURCE</span><span class="p">,</span> <span class="n">MT_COMPILED</span><span class="p">,</span> <span class="n">MT_EXTENSION</span><span class="p">,</span> <span class="n">MT_DIRECTORY</span><span class="p">,</span> <span class="n">MT_BUILTIN</span><span class="p">,</span> <span class="n">MT_FROZEN</span><span class="p">,</span> \
+    <span class="n">MT_COMPILED_OPT</span><span class="p">,</span> <span class="n">MT_COMPILED_OPT1</span><span class="p">,</span> <span class="n">MT_COMPILED_OPT2</span><span class="p">,</span> <span class="n">MT_COMPILED_DEBUG</span>
+
+<span class="k">if</span> <span class="n">V3K</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">importlib</span> <span class="k">import</span> <span class="n">find_loader</span>  <span class="c1"># @UnresolvedImport</span>
+
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Arno-Can Uestuensoez&#39;</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s2">&quot;Artistic-License-2.0 + Forced-Fairplay-Constraints&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright (C) 2010-2017 Arno-Can Uestuensoez&quot;</span> \
+    <span class="s2">&quot; @Ingenieurbuero Arno-Can Uestuensoez&quot;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.1.21&#39;</span>
+<span class="n">__uuid__</span> <span class="o">=</span> <span class="s1">&#39;9de52399-7752-4633-9fdc-66c87a9200b8&#39;</span>
+
+<span class="n">__docformat__</span> <span class="o">=</span> <span class="s2">&quot;restructuredtext en&quot;</span>
+
+
+<div class="viewcode-block" id="getcaller_module"><a class="viewcode-back" href="../../objectinfo.html#pysourceinfo.objectinfo.getcaller_module">[docs]</a><span class="k">def</span> <span class="nf">getcaller_module</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Caller module.&quot;&quot;&quot;</span>
+    <span class="n">_sf</span> <span class="o">=</span> <span class="n">stack</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">spos</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">_sf</span><span class="p">):</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">getmodule</span><span class="p">(</span><span class="n">_sf</span><span class="p">[</span><span class="n">spos</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span></div>
+
+
+<div class="viewcode-block" id="getcaller_module_name"><a class="viewcode-back" href="../../objectinfo.html#pysourceinfo.objectinfo.getcaller_module_name">[docs]</a><span class="k">def</span> <span class="nf">getcaller_module_name</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Name of caller module, else *None*.&quot;&quot;&quot;</span>
+    <span class="n">_sf</span> <span class="o">=</span> <span class="n">stack</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_sf</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">spos</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="n">getmodule</span><span class="p">(</span><span class="n">_sf</span><span class="p">[</span><span class="n">spos</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">module</span><span class="p">:</span>  <span class="c1"># seems to be more accurate than getmodule_name</span>
+        <span class="k">if</span> <span class="n">module</span><span class="o">.</span><span class="n">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">_sf</span><span class="p">[</span><span class="n">spos</span><span class="p">][</span><span class="mi">1</span><span class="p">])[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">module</span><span class="o">.</span><span class="n">__name__</span></div>
+
+
+<div class="viewcode-block" id="getcaller_module_name_sub"><a class="viewcode-back" href="../../objectinfo.html#pysourceinfo.objectinfo.getcaller_module_name_sub">[docs]</a><span class="k">def</span> <span class="nf">getcaller_module_name_sub</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Name from package to module.&quot;&quot;&quot;</span>
+
+    <span class="c1"># TODO:</span>
+    <span class="n">_sf</span> <span class="o">=</span> <span class="n">stack</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_sf</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">spos</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="n">getmodule</span><span class="p">(</span><span class="n">_sf</span><span class="p">[</span><span class="n">spos</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">module</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">module</span><span class="o">.</span><span class="n">__name__</span>  <span class="c1"># seems to be more accurate than getmodule_name</span></div>
+
+
+<div class="viewcode-block" id="getcaller_module_oid"><a class="viewcode-back" href="../../objectinfo.html#pysourceinfo.objectinfo.getcaller_module_oid">[docs]</a><span class="k">def</span> <span class="nf">getcaller_module_oid</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;OID of caller module.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">getmodule_oid</span><span class="p">(</span><span class="n">getcaller_module</span><span class="p">(</span><span class="n">spos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="getcaller_module_oid_sub"><a class="viewcode-back" href="../../objectinfo.html#pysourceinfo.objectinfo.getcaller_module_oid_sub">[docs]</a><span class="k">def</span> <span class="nf">getcaller_module_oid_sub</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;OID of caller module.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">getmodule_oid_sub</span><span class="p">(</span><span class="n">getcaller_module_oid</span><span class="p">(</span><span class="n">spos</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="getcaller_name"><a class="viewcode-back" href="../../objectinfo.html#pysourceinfo.objectinfo.getcaller_name">[docs]</a><span class="k">def</span> <span class="nf">getcaller_name</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Name of caller.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">stack</span><span class="p">()[</span><span class="n">spos</span><span class="p">][</span><span class="mi">3</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="getcaller_package_name"><a class="viewcode-back" href="../../objectinfo.html#pysourceinfo.objectinfo.getcaller_package_name">[docs]</a><span class="k">def</span> <span class="nf">getcaller_package_name</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Name of first matching package containing the caller.</span>
+<span class="sd">    The package is defined as the the first part</span>
+<span class="sd">    of the module name.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_sf</span> <span class="o">=</span> <span class="n">stack</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">_sf</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">spos</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">module</span> <span class="o">=</span> <span class="n">getmodule</span><span class="p">(</span><span class="n">_sf</span><span class="p">[</span><span class="n">spos</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">if</span> <span class="n">module</span> <span class="ow">and</span> <span class="n">module</span><span class="o">.</span><span class="n">__package__</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;^([^.]+).*&quot;</span><span class="p">,</span> <span class="s1">r&#39;\1&#39;</span><span class="p">,</span> <span class="n">module</span><span class="o">.</span><span class="n">__package__</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">&quot;^([^.]+).*&quot;</span><span class="p">,</span> <span class="s1">r&#39;\1&#39;</span><span class="p">,</span> <span class="n">getcaller_module_name</span><span class="p">(</span><span class="n">spos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="getmodule_by_id"><a class="viewcode-back" href="../../objectinfo.html#pysourceinfo.objectinfo.getmodule_by_id">[docs]</a><span class="k">def</span> <span class="nf">getmodule_by_id</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Loaded module by ID.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">i</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="nb">id</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">==</span> <span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="getmodule_by_name"><a class="viewcode-back" href="../../objectinfo.html#pysourceinfo.objectinfo.getmodule_by_name">[docs]</a><span class="k">def</span> <span class="nf">getmodule_by_name</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Loaded module by given name.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="ow">and</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">n</span><span class="p">]</span></div>
+
+
+<span class="n">_gmn</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">r&#39;^.*[.]&#39;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="getmodule_name"><a class="viewcode-back" href="../../objectinfo.html#pysourceinfo.objectinfo.getmodule_name">[docs]</a><span class="k">def</span> <span class="nf">getmodule_name</span><span class="p">(</span><span class="n">mod</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Name similar to basename of loaded module, same as getmodule_oid.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">mod</span> <span class="ow">and</span> <span class="n">ismodule</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="s1">&#39;__name__&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">_gmn</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">mod</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="getmodule_name_sub"><a class="viewcode-back" href="../../objectinfo.html#pysourceinfo.objectinfo.getmodule_name_sub">[docs]</a><span class="k">def</span> <span class="nf">getmodule_name_sub</span><span class="p">(</span><span class="n">mod</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Name relative to PYTHONPATH/sys.path of loaded module, same as getmodule_oid_sub.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">mod</span> <span class="ow">and</span> <span class="n">ismodule</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="s1">&#39;__name__&#39;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">r&#39;^[^.]*[.]&#39;</span><span class="p">,</span> <span class="s1">r&#39;&#39;</span><span class="p">,</span> <span class="n">mod</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="getmodule_oid"><a class="viewcode-back" href="../../objectinfo.html#pysourceinfo.objectinfo.getmodule_oid">[docs]</a><span class="k">def</span> <span class="nf">getmodule_oid</span><span class="p">(</span><span class="n">mod</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Name relative to PYTHONPATH/sys.path of loaded module.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">mod</span> <span class="ow">and</span> <span class="n">ismodule</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="s1">&#39;__name__&#39;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">mod</span><span class="o">.</span><span class="n">__name__</span></div>
+
+
+<div class="viewcode-block" id="getmodule_oid_sub"><a class="viewcode-back" href="../../objectinfo.html#pysourceinfo.objectinfo.getmodule_oid_sub">[docs]</a><span class="k">def</span> <span class="nf">getmodule_oid_sub</span><span class="p">(</span><span class="n">mod</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Name relative to PYTHONPATH/sys.path of loaded module.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">mod</span> <span class="ow">and</span> <span class="n">ismodule</span><span class="p">(</span><span class="n">mod</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="s1">&#39;__name__&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">r&#39;^[^.]*[.]&#39;</span><span class="p">,</span> <span class="s1">r&#39;&#39;</span><span class="p">,</span> <span class="n">mod</span><span class="o">.</span><span class="n">__name__</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="getmodule_package_name"><a class="viewcode-back" href="../../objectinfo.html#pysourceinfo.objectinfo.getmodule_package_name">[docs]</a><span class="k">def</span> <span class="nf">getmodule_package_name</span><span class="p">(</span><span class="n">mod</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Name of package for loaded module.&quot;&quot;&quot;</span>
+    <span class="n">mn</span> <span class="o">=</span> <span class="n">getmodule_name</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">mn</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="s1">&#39;__name__&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">mod</span><span class="o">.</span><span class="n">__name__</span></div>
+
+
+<div class="viewcode-block" id="getmodule_type"><a class="viewcode-back" href="../../objectinfo.html#pysourceinfo.objectinfo.getmodule_type">[docs]</a><span class="k">def</span> <span class="nf">getmodule_type</span><span class="p">(</span><span class="n">mod</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Type for loaded module as defined by module &#39;imp.*&#39;&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">V3K</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="n">find_module</span><span class="p">(</span><span class="n">getmodule_oid</span><span class="p">(</span><span class="n">mod</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">ret</span> <span class="ow">and</span> <span class="n">ret</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">ret</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="ow">is</span> <span class="nb">int</span><span class="p">:</span>  <span class="c1"># MT_SOURCE,MT_COMPILED,MT_EXTENSION</span>
+                    <span class="k">return</span> <span class="n">ret</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+                <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">ret</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="ow">is</span> <span class="nb">tuple</span><span class="p">:</span>  <span class="c1"># MT_DIRECTORY,MT_BUILTIN</span>
+                    <span class="k">return</span> <span class="n">ret</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+                <span class="c1"># TODO: PY_FROZEN</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">ismodule</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span> <span class="ow">is</span> <span class="n">ModuleType</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">_n</span> <span class="o">=</span> <span class="n">getmodule_oid</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">_n</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">builtin_module_names</span> <span class="ow">or</span> <span class="n">is_builtin</span><span class="p">(</span><span class="n">_n</span><span class="p">):</span>
+                        <span class="k">return</span> <span class="n">MT_BUILTIN</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">bn</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">_n</span><span class="p">]</span><span class="o">.</span><span class="n">__file__</span>
+                        <span class="k">if</span> <span class="n">bn</span><span class="p">:</span>
+                            <span class="n">bn</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">bn</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="n">bn</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;__init__&#39;</span><span class="p">):</span>
+                                <span class="k">return</span> <span class="n">MT_DIRECTORY</span>
+                            <span class="k">elif</span> <span class="n">bn</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span> <span class="o">==</span> <span class="s1">&#39;py&#39;</span><span class="p">:</span>
+                                <span class="k">return</span> <span class="n">MT_SOURCE</span>
+                            <span class="k">elif</span> <span class="n">bn</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;pyc&#39;</span><span class="p">,):</span>
+                                <span class="k">return</span> <span class="n">MT_COMPILED_DEBUG</span>
+                            <span class="k">elif</span> <span class="n">bn</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;pyo&#39;</span><span class="p">):</span>
+                                <span class="k">return</span> <span class="n">MT_COMPILED_OPT</span>  <span class="c1"># either O1 or O2</span>
+
+                            <span class="k">elif</span> <span class="n">bn</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;so&#39;</span><span class="p">,):</span>
+                                <span class="k">return</span> <span class="n">MT_EXTENSION</span>
+                            <span class="k">elif</span> <span class="n">is_frozen</span><span class="p">(</span><span class="n">_n</span><span class="p">):</span>
+                                <span class="k">return</span> <span class="n">MT_FROZEN</span>
+                <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+                    <span class="k">pass</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="k">raise</span>
+            <span class="k">return</span> <span class="n">MT_UNKNOWN</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># PEP 3147 -- PYC Repository Directories</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">find_loader</span><span class="p">(</span><span class="n">getmodule_oid</span><span class="p">(</span><span class="n">mod</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="n">ret</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span> <span class="s1">&#39;path&#39;</span><span class="p">):</span>
+            <span class="c1"># check python native</span>
+            <span class="n">cdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">ret</span><span class="o">.</span><span class="n">path</span><span class="p">)</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="s1">&#39;__pycache__&#39;</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">cdir</span><span class="p">):</span>
+                <span class="n">v</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{0}{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="o">*</span><span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+                <span class="n">mname</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">r&quot;^.*[.]&quot;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">ret</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.&#39;</span> <span class="o">+</span> <span class="n">sys</span><span class="o">.</span><span class="n">implementation</span><span class="o">.</span><span class="n">cache_tag</span>  <span class="c1"># @UndefinedVariable</span>
+                <span class="k">for</span> <span class="n">xf</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">walk</span><span class="p">(</span><span class="n">cdir</span><span class="p">):</span>
+                    <span class="k">for</span> <span class="n">xi</span> <span class="ow">in</span> <span class="n">xf</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+                        <span class="k">if</span> <span class="n">xi</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">mname</span><span class="p">):</span>
+                            <span class="c1">#</span>
+                            <span class="c1"># for now supports: Python3, Pypy3</span>
+                            <span class="c1">#</span>
+                            <span class="k">if</span> <span class="n">xi</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span><span class="o">==</span> <span class="s2">&quot;pyc&quot;</span><span class="p">:</span>
+                                <span class="k">return</span> <span class="n">MT_COMPILED_DEBUG</span>
+                            <span class="k">elif</span> <span class="n">xi</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span><span class="o">==</span> <span class="s2">&quot;pyo&quot;</span><span class="p">:</span>
+                                <span class="k">if</span> <span class="n">xi</span><span class="p">[</span><span class="o">-</span><span class="mi">9</span><span class="p">:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span><span class="o">==</span> <span class="s2">&quot;opt-1&quot;</span><span class="p">:</span>
+                                    <span class="k">return</span> <span class="n">MT_COMPILED_OPT1</span>
+                                <span class="k">if</span> <span class="n">xi</span><span class="p">[</span><span class="o">-</span><span class="mi">9</span><span class="p">:</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span><span class="o">==</span> <span class="s2">&quot;opt-2&quot;</span><span class="p">:</span>
+                                    <span class="k">return</span> <span class="n">MT_COMPILED_OPT2</span>
+                            <span class="k">else</span><span class="p">:</span>
+                                <span class="k">raise</span> <span class="n">PySourceInfoError</span><span class="p">(</span><span class="s2">&quot;Extension unknown:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">xi</span><span class="p">))</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">MT_SOURCE</span>
+
+        <span class="k">elif</span> <span class="nb">type</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="n">BuiltinFunctionType</span><span class="p">,</span> <span class="n">BuiltinMethodType</span><span class="p">,):</span>
+            <span class="k">return</span> <span class="n">MT_BUILTIN</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_n</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="n">ret</span><span class="p">:</span>
+
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">ret</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">ret</span><span class="p">)</span> <span class="o">==</span> <span class="nb">type</span><span class="p">:</span>
+                        <span class="c1"># return MT_FROZEN</span>
+                        <span class="k">return</span> <span class="n">MT_BUILTIN</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="n">MT_UNKNOWN</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">_n</span> <span class="o">=</span> <span class="n">ret</span><span class="o">.</span><span class="n">name</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">_n</span> <span class="o">=</span> <span class="n">getmodule_oid</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+                    <span class="k">pass</span>
+                <span class="k">except</span><span class="p">:</span>
+                    <span class="k">raise</span>
+
+            <span class="k">if</span> <span class="n">_n</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">builtin_module_names</span> <span class="ow">or</span> <span class="n">is_builtin</span><span class="p">(</span><span class="n">_n</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">MT_BUILTIN</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">bn</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">_n</span><span class="p">]</span><span class="o">.</span><span class="n">__file__</span>
+                <span class="k">if</span> <span class="n">bn</span><span class="p">:</span>
+                    <span class="n">bn</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">bn</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">bn</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;__init__&#39;</span><span class="p">):</span>
+                        <span class="k">return</span> <span class="n">MT_DIRECTORY</span>
+                    <span class="k">elif</span> <span class="n">bn</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span> <span class="o">==</span> <span class="s1">&#39;py&#39;</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="n">MT_SOURCE</span>
+                    <span class="k">elif</span> <span class="n">bn</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;pyc&#39;</span><span class="p">,</span> <span class="s1">&#39;pyo&#39;</span><span class="p">):</span>
+                        <span class="k">return</span> <span class="n">MT_COMPILED</span>
+                    <span class="k">elif</span> <span class="n">bn</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span> <span class="ow">in</span> <span class="p">(</span><span class="s1">&#39;so&#39;</span><span class="p">,):</span>
+                        <span class="k">return</span> <span class="n">MT_EXTENSION</span>
+                    <span class="k">elif</span> <span class="n">is_frozen</span><span class="p">(</span><span class="n">_n</span><span class="p">):</span>
+                        <span class="k">return</span> <span class="n">MT_FROZEN</span>
+
+            <span class="k">return</span> <span class="n">MT_UNKNOWN</span></div>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../../index.html">
+              <img class="logo" src="../../_static/pysourceinfo-64x64.png" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h4>API</h4><p class="topless"><a href="../../epydoc/index.html" title="API">Programming Interface</a></p><h3>Quick search</h3>
+    <form class="search" action="../../search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">pysourceinfo 0.1.32 documentation</a> &raquo;</li>
+          <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2018, Arno-Can Uestuensoez.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.5.
+    </div>
+  </body>
+</html>

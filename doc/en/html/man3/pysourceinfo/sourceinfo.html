@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Introspection - The Python RTTI and Source information &mdash; pysourceinfo 0.1.32 documentation</title>
+    
+    <link rel="stylesheet" href="_static/classic.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0.1.32',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="pysourceinfo 0.1.32 documentation" href="index.html" /> 
+  </head>
+  <body role="document">
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pysourceinfo 0.1.32 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="introspection-the-python-rtti-and-source-information">
+<h1>Introspection - The Python RTTI and Source information<a class="headerlink" href="#introspection-the-python-rtti-and-source-information" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="blueprint">
+<h2>Blueprint<a class="headerlink" href="#blueprint" title="Permalink to this headline">¶</a></h2>
+<p>The features provided by the package <em>pysourceinfo</em> are
+based on the standard package <em>inspect</em> with
+dynamic evaluation of additional sources where required.
+A flat call interface is provided for simplified application in
+OO as well as simple scripting.</p>
+<p>The provided runtime structure information on Python sources is
+covered with basically one single type of interface</p>
+<div class="highlight-python"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span> <span class="k">def</span> <span class="nf">getCaller</span><span class="o">&lt;</span><span class="n">Interface</span><span class="o">&gt;</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot; Stack position:</span>
+<span class="sd">       spos==0 =&gt; caller(0==CallInterface)</span>
+<span class="sd">       spos==1 =&gt; caller(1)</span>
+<span class="sd">       spos==N =&gt; caller(N==level N)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+ <span class="k">def</span> <span class="nf">getModule</span><span class="o">&lt;</span><span class="n">Interface</span><span class="o">&gt;</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">pass</span>
+
+ <span class="k">def</span> <span class="nf">getpythonpath</span><span class="o">&lt;</span><span class="n">Interface</span><span class="o">&gt;</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</td></tr></table></div>
+<p>The interface gathers the information on the defined &#8216;&lt;Interface&gt;&#8217; from
+the call stack, loaded modules, or search path <em>PATH</em>/<em>PYTHONPATH</em>/<em>sys.path</em>.</p>
+<p>The covered structural dynamic elements based on the call stack are:</p>
+<ul class="simple">
+<li>package</li>
+<li>module</li>
+<li>function</li>
+<li>class/method</li>
+<li>name spaces - global/local</li>
+</ul>
+<p>With additional functions covering mostly static information:</p>
+<ul class="simple">
+<li>loaded module</li>
+<li>sys.path - actual OID and load path</li>
+</ul>
+</div>
+<div class="section" id="pysourceinfo-information-on-specific-object-categories">
+<h2>PySourceInfo - Information on Specific Object Categories<a class="headerlink" href="#pysourceinfo-information-on-specific-object-categories" title="Permalink to this headline">¶</a></h2>
+<p>Although the standard package <em>inspect</em> provides a wide variety of information
+some are still not available.
+Therefore the missing is extracted by the combination of multiple sources
+and rules.</p>
+<p>In general the main sources of information are given by the
+target type.</p>
+<ul>
+<li><p class="first">getCaller...</p>
+<blockquote>
+<div><p>This type works on the frame stack of <em>inspect</em>
+Some data, which is not directly provided, like
+the actual used <em>PYTHONPATH</em> item, are calculated
+by combination of multiple sources.</p>
+</div></blockquote>
+</li>
+<li><p class="first">getModule...</p>
+<blockquote>
+<div><p>This type works on the module information mainly
+based on <em>__file__</em>, and <em>__name__</em>.</p>
+</div></blockquote>
+</li>
+<li><p class="first">getpythonpath...</p>
+<blockquote>
+<div><p>This type correlates <em>PYTHONPATH</em>/<em>sys.path</em> with
+provided path and file names.</p>
+</div></blockquote>
+</li>
+</ul>
+<p>The objects for which the information could be requested are
+mainly categorized as follows.</p>
+<ul>
+<li><p class="first">function names and file pathnames</p>
+<blockquote>
+<div><p>Provided by inspect and the module object.</p>
+</div></blockquote>
+</li>
+<li><p class="first">module names and file pathnames</p>
+<blockquote>
+<div><p>Provided by inspect and the module object.</p>
+</div></blockquote>
+</li>
+<li><p class="first">package names and file pathnames</p>
+<blockquote>
+<div><p>Derived from the module information including
+the global name space, and the the current content
+of <em>sys.path</em>. Thus this could be unreliable under
+some circumstances.</p>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>decorator package <a class="reference internal" href="references.html#msimio" id="id1">[msimio]</a></li>
+<li>functools Python2 <a class="reference internal" href="references.html#functools2" id="id2">[functools2]</a></li>
+<li>functools Python3 <a class="reference internal" href="references.html#functools3" id="id3">[functools3]</a></li>
+<li>inspect Python2 <a class="reference internal" href="references.html#inspect2" id="id4">[inspect2]</a></li>
+<li>inspect Python3 <a class="reference internal" href="references.html#inspect3" id="id5">[inspect3]</a></li>
+<li>pystackinfo package <a class="reference internal" href="references.html#pystackinfo" id="id6">[pystackinfo]</a></li>
+<li>types Python2 <a class="reference internal" href="references.html#types2" id="id7">[types2]</a></li>
+<li>types Python3 <a class="reference internal" href="references.html#types3" id="id8">[types3]</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/pysourceinfo-64x64.png" alt="Logo"/>
+            </a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Introspection - The Python RTTI and Source information</a><ul>
+<li><a class="reference internal" href="#blueprint">Blueprint</a></li>
+<li><a class="reference internal" href="#pysourceinfo-information-on-specific-object-categories">PySourceInfo - Information on Specific Object Categories</a></li>
+<li><a class="reference internal" href="#resources">Resources</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/sourceinfo.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="Go" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">pysourceinfo 0.1.32 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &copy; Copyright 2018, Arno-Can Uestuensoez.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.4.5.
+    </div>
+  </body>
+</html>
