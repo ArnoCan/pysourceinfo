@@ -1,18 +1,20 @@
-'PySourceInfo' - RTTI for Source Code
-*************************************
+Introspection - The Python RTTI and Source information
+******************************************************
 
 Blueprint
 ^^^^^^^^^
 
-The features provided by the package 'pysourceinfo' are
-based on the standard package 'inspect' with
-dynamic evaluation of additional sources where rewuired.
+The features provided by the package *pysourceinfo* are
+based on the standard package *inspect* with
+dynamic evaluation of additional sources where required.
 A flat call interface is provided for simplified application in
 OO as well as simple scripting.
 
 The provided runtime structure information on Python sources is 
 covered with basically one single type of interface
-  ::
+
+.. code-block:: python
+   :linenos:
 
     def getCaller<Interface>(spos=1):
        """ Stack position: 
@@ -25,13 +27,13 @@ covered with basically one single type of interface
     def getModule<Interface>(spos=1):
        pass
 
-    def getPythonPath<Interface>(spos=1):
+    def getpythonpath<Interface>(spos=1):
        pass
 
 The interface gathers the information on the defined '<Interface>' from
-the call stack, loaded modules, or search path 'PATH'/'PYTHONPATH'/'sys.path'.
+the call stack, loaded modules, or search path *PATH*/*PYTHONPATH*/*sys.path*.
 
-The covered structural dynamic elements based on the call stackk are:
+The covered structural dynamic elements based on the call stack are:
 
 * package
 
@@ -41,7 +43,7 @@ The covered structural dynamic elements based on the call stackk are:
 
 * class/method
 
-* namespaces - global/local
+* name spaces - global/local
 
 With additional functions covering mostly static information: 
 
@@ -49,13 +51,10 @@ With additional functions covering mostly static information:
 
 * sys.path - actual OID and load path
 
-For code and application examples refer to the souce code of 'pysourceinfo.UseCases' `[UseCases] <UseCases.html#>`_
-and 'pysourceinfo.tests' `[tests] <tests.html#>`_.
-
-Information on Specific Object Categories
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PySourceInfo - Information on Specific Object Categories
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
  
-Although the standard package 'inspect' provides a wide variety of information 
+Although the standard package *inspect* provides a wide variety of information 
 some are still not available.
 Therefore the missing is extracted by the combination of multiple sources
 and rules.
@@ -65,36 +64,48 @@ target type.
 
 * getCaller...
 
-    This type works on the frame stack of 'inspect'
+    This type works on the frame stack of *inspect*
     Some data, which is not directly provided, like
-    the actual used PYTHONPATH item, are calculated
+    the actual used *PYTHONPATH* item, are calculated
     by combination of multiple sources.
 
 * getModule...
 
     This type works on the module information mainly
-    based on '__file__', and '__name__'.
+    based on *__file__*, and *__name__*.
 
-* getPythonPath...
+* getpythonpath...
 
-    This type correlates PYTHONPATH/sys.path with
+    This type correlates *PYTHONPATH*/*sys.path* with
     provided path and file names.
 
 The objects for which the information could be requested are
-mainly categorised as follows.
+mainly categorized as follows.
 
-* function names and filepathnames
+* function names and file pathnames
 
     Provided by inspect and the module object.
 
-* module names and filepathnames
+* module names and file pathnames
 
     Provided by inspect and the module object.
  
-* package names and filepathnames
+* package names and file pathnames
 
     Derived from the module information including
-    the global namespace, and the the current content
-    of 'sys.path'. Thus this could be unreliable under
+    the global name space, and the the current content
+    of *sys.path*. Thus this could be unreliable under
     some circumstances. 
+
+Resources
+^^^^^^^^^
+
+* decorator package [msimio]_
+* functools Python2 [functools2]_
+* functools Python3 [functools3]_
+* inspect Python2 [inspect2]_
+* inspect Python3 [inspect3]_
+* pystackinfo package [pystackinfo]_
+* types Python2 [types2]_
+* types Python3 [types3]_
 

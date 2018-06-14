@@ -1,61 +1,37 @@
 pysourceinfo
-==============
+============
 
 The 'pysourceinfo' package provides basic runtime information on executed 
-sourcefiles based on 'inspect' and additional sources.
-The covered objects include packages, modules/files and functions/methods/scripts.
+sourcefiles based on 'inspect', 'sys', 'os', and additional sources.
+The covered objects include packages, modules/files and functions/methods/scripts. 
 
-For code examples refer to the source package 'pysourceinfo.UseCases'.
+The supported platforms are:
 
-**Downloads**:
+* Linux, BSD, Unix, OS-X, Cygwin, and Windows
 
-* Sourceforge.net: https://sourceforge.net/projects/pysourceinfo/files/
+* Python2.7+, Python3.5+
 
-* Github: https://github.com/ArnoCan/pysourceinfo/
 
 **Online documentation**:
 
-* https://pypi.python.org/pypi/pysourceinfo/
-* https://pythonhosted.org/pysourceinfo/
+* https://pysourceinfo.sourceforge.io/
 
-setup.py
---------
+**Runtime-Repository**:
 
-The installer adds a few options to the standard setuptools options.
+* PyPI: https://pypi.org/project/pysourceinfo/
 
-* *build_doc*: Creates *Sphinx* based documentation with embeded javadoc-style API documentation by *Epydoc*, html only.
-
-* *build_sphinx*: Creates Sphinx part of the documentation as standalone html. Calls 'callDocSphinx.sh'.
-
-* *build_epydoc*: Creates Epydoc part of the documentation as standalone html.
-
-* *project_doc*: Install a local copy into the doc directory of the project.
-
-* *instal_doc*: Install a local copy of the previously build documents in accordance to PEP-370.
-
-* *test*: Runs PyUnit tests by discovery.
-
-* *usecase*: Runs PyUnit tests on UseCases subdirectory by discovery.
+  Install: *pip install pysourceinfo*, see also 'Install'.
 
 
-* *--help-pysourceinfo*: Displays this help.
+**Downloads**:
 
-* *--no-install-required*: Suppresses installation dependency checks, requires appropriate PYTHONPATH.
+* sourceforge.net: https://sourceforge.net/projects/pysourceinfo/files/
 
-* *--offline*: Sets online dependencies to offline, or ignores online dependencies.
+* bitbucket.org: https://bitbucket.org/acue/pysourceinfo
 
-* *--exit*: Exit 'setup.py'.
+* github.com: https://github.com/ArnoCan/pysourceinfo/
 
-
-After successful installation the 'selftest' verifies basic checks by:
-
-  *pysourceinfo --selftest*
-
-with the exit value '0' when OK.
-
-The option '-v' raises the degree of verbosity for inspection
-
-  *pysourceinfo --selftest -v -v -v -v*
+* pypi.org: https://pypi.org/project/pysourceinfo/
  
 
 Project Data
@@ -63,79 +39,61 @@ Project Data
 
 * PROJECT: 'pysourceinfo'
 
-* MISSION: Extend the standard PyUnit package for arbitrary ExecUnits.
+* MISSION: Support easy access to RTTI on Python source and binary files.
 
 * VERSION: 00.01
 
-* RELEASE: 00.01
-
-* NICKNAME: 'Mimisbrunnr'
+* RELEASE: 00.01.032
 
 * STATUS: alpha
 
 * AUTHOR: Arno-Can Uestuensoez
 
-* COPYRIGHT: Copyright (C) 2010,2011,2015-2016 Arno-Can Uestuensoez @Ingenieurbuero Arno-Can Uestuensoez
+* COPYRIGHT: Copyright (C) 2010,2011,2015-2017 Arno-Can Uestuensoez @Ingenieurbuero Arno-Can Uestuensoez
 
 * LICENSE: Artistic-License-2.0 + Forced-Fairplay-Constraints
-  Refer to enclose documents:
-  
-  *  ArtisticLicense20.html - for base license: Artistic-License-2.0 
-
-  *  licenses-amendments.txt - for amendments: Forced-Fairplay-Constraints
-
-VERSIONS and RELEASES
----------------------
-
-**Planned Releases:**
-
-* RELEASE: 00.00.00x - Pre-Alpha: Extraction of the features from hard-coded application into a reusable package.
-
-* RELEASE: 00.01.00x - Alpha: Completion of basic features. 
-
-* RELEASE: 00.02.00x - Alpha: Completion of features, stable interface. 
-
-* RELEASE: 00.03.00x - Beta: Accomplish test cases for medium to high complexity.
-
-* RELEASE: 00.04.00x - Production: First production release. Estimated number of UnitTests := 250.
-
-* RELEASE: 00.05.00x - Production: Various performance enhancements.
 
 
-**Current Release: 00.01.012 - Alpha:**
+Python support: 
 
-OS-Support - Tested by PyUnit/Eclipse with Success:
+* Standard Python(CPython) - Python2.7, and Python3.5+ 
 
-* Linux: Fedora, CentOS-6, CentOS-7 - others should work, ToDo: RHEL-6, RHEL-7, Debian, and SuSE 
+* PyPy - 5.10+ - Python2.7+, and Python3.5+
 
-* Windows: Win10 - others see Cygwin
+OS-Support:
 
-* Mac-OS: Snow Leopard - others should work too, last updates not yet tested.
+* Linux: Fedora, CentOS, Debian, and Raspbian 
 
-* Cygwin: 2.874/64 bit
+* BSD: OpenBSD, FreeBSD
+
+* OS-X: Snow Leopard
+
+* Windows: Win7, Win10
+
+* Cygwin
+
+* UNIX: Solaris
 
 
-OS-Support - ToDo: Going to follow soon.
-
-* BSD: ToDo: OpenBSD, FreeBSD - others should work
-
-* UNIX: ToDo: Solaris-11 - should work
-
-Python support: 2.6, and 2.7
+**Current Release**
 
 Major Changes:
 
-* Introduction of Python-2.6 support for legacy systems
+* Python2.6 support dropped.
 
-* Added 2.6 support.
+* Python3.5+ support introduced.
 
-* Bug-Fixes.
+* PyPy tests added.
 
-Current test status:
+* Changed module structure and fitting names into overall category based naming schema.
 
-* UnitTests: >100
+* Split more stack related parts into package *PyStackInfo*
 
-* Use-Cases as UnitTests: >50
+* Added special support for decorators.
 
-**Total**: >140
+* Added support for some special cases of Python syntax elements, e.g. support of nested-classes.
+
+* Added several new functions.
+
+* Enhanced documentation
 

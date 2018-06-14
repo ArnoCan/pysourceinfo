@@ -1,146 +1,201 @@
-'pysourceinfo.PySourceInfo' - Module
-**************************************
+'pysourceinfo.__init__' - Module
+================================
 
-.. automodule:: pysourceinfo.PySourceInfo
+Common definitions for the package *pysourceinfo*.
 
-Functions
+Module
+------
+.. automodule:: pysourceinfo.__init__
+
+Constants
 ---------
 
-getCallerFileName
-^^^^^^^^^^^^^^^^^
-	.. autofunction:: getCallerFileName
+Python Version
+^^^^^^^^^^^^^^
+* **V3K**: Python3.5+
+* **ISSTR**: string and unicode
+* **unicode**: for Python3, remaps to str
 
-getCallerFilePathName
-^^^^^^^^^^^^^^^^^^^^^
-	.. autofunction:: getCallerFilePathName
+Platform
+^^^^^^^^
+Current platform as bit-array.
+Could be uses ads target and/or source platform.
 
-getCallerFuncName
-^^^^^^^^^^^^^^^^^
-	.. autofunction:: getCallerFuncName
+* Enum Values:
 
-getCallerLinenumber
-^^^^^^^^^^^^^^^^^^^
-	.. autofunction:: getCallerLinenumber
+  * **RTE_BSD(8)**: BSD, as Posix system.
+  * **RTE_CYGWIN(32)**: Cygwin
+  * **RTE_DARWIN(16)**: Darwin/OS-X, as Posix system, no macpath-legacy.
+  * **RTE_GENERIC(1024)**: Undefined platform for special cases.
+  * **RTE_LINUX(4)**: Linux, as Posix system.
+  * **RTE_OSX(16)**: Darwin/OS-X, as Posix system, no macpath-legacy.
+  * **RTE_POSIX(1)**: Posix systems using *fcntl*.
+  * **RTE_SOLARIS(64)**: UNIX/Solaris, as Posix system.
+  * **RTE_URI(128)**: URI - [RFC3869]_
+  * **RTE_WIN32(2)**: Windows
 
-getCallerModule
-^^^^^^^^^^^^^^^
-	.. autofunction:: getCallerModule
+* Control Variables:
 
-getCallerModuleFilePathName
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-	.. autofunction:: getCallerModuleFilePathName
+  * **RTE**: Current runtime-environment variable.
 
-getCallerModuleName
-^^^^^^^^^^^^^^^^^^^
-	.. autofunction:: getCallerModuleName 
+Search Path Resolution
+^^^^^^^^^^^^^^^^^^^^^^
+The resolution of the path variables for loaded modules is not
+provided by the Python interpreter - at least not as a simple
+usable variable.
+The resolution from the *PYTHONPATH* / *sys.path* 
+depends on the load mechanism, and potentially on the current
+entries in the *sys.path* variable.
+When loaded by a filepath this could be an arbitrary filesystem
+path, or a memory block.
+Due to the variety of possible load mechanisms of Python and the
+lack of an interpreter variable, the implementation relies on the
+*sys.path* variable by checking these as a matching path-prefix.
 
-getCallerModulePathName
-^^^^^^^^^^^^^^^^^^^^^^^
-	.. autofunction:: getCallerModulePathName
+The *sys.path* variable could be populated with arbitrary paths
+and redundancies, the python interpreter adds the startup directory
+by default into the position *sys.path[0]*.
+So this algorithm is by definition only as acurate,
+as the current *sys.path* variable reflects the actual load-prefixes.
+Therefore the *pysourceinfo* package defines constants that control
+the evaluation strategy of the package path
+from the search tpath list *PYTHONPATH*/*sys.path*.
+In case of one matching path-prefix, this values have no effect.
+The constants help for the expected resolution
+in case of multiple matches, with remaining possible in-accuracies.
+The controlling constants are:
 
-getCallerModulePythonPath
-^^^^^^^^^^^^^^^^^^^^^^^^^
-	.. autofunction:: getCallerModulePythonPath
+* **P_FIRST**: first matched path-prefix
+* **P_IGNORE0**: starts with element 1, ignores element 0
+* **P_LAST**: last matched path-prefix
+* **P_LONGEST**: longest matched path-prefix
+* **P_SHORTEST**: longest matched path-prefix
 
-getCallerName
-^^^^^^^^^^^^^
-	.. autofunction:: getCallerName
+The interfaces supporting path resolution provide the parameter
+*presolve* for individual setting for each call.
 
-getCallerNameOID
-^^^^^^^^^^^^^^^^
-	.. autofunction:: getCallerNameOID
+The default value is stored in the package variable
+with the default value *P_FIRST*.
 
-getCallerNamespaceGlobal
-^^^^^^^^^^^^^^^^^^^^^^^^
-	.. autofunction:: getCallerNamespaceGlobal
+.. code-block:: python
+   :linenos:
 
-getCallerNamespaceLocal
-^^^^^^^^^^^^^^^^^^^^^^^
-	.. autofunction:: getCallerNamespaceLocal
-
-getCallerPackageFilePathName
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-	.. autofunction:: getCallerPackageFilePathName
-
-getCallerPackageName
-^^^^^^^^^^^^^^^^^^^^
-	.. autofunction:: getCallerPackageName
-
-getCallerPackagePathName
-^^^^^^^^^^^^^^^^^^^^^^^^
-	.. autofunction:: getCallerPackagePathName
-
-getCallerPackagePythonPath
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-	.. autofunction:: getCallerPackagePythonPath
-
-
-getCallerSysPathPackageName
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-	.. autofunction:: getCallerSysPathPackageName
-
-getCallerSysPathPackageSysPathName
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-	.. autofunction:: getCallerSysPathPackageSysPathName
-
-getCallerSysPathPackageSysPathNameRel
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-	.. autofunction:: getCallerSysPathPackageSysPathNameRel
-
-getCallerSysPathPackagePythonPath
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-	.. autofunction:: getCallerSysPathPackagePythonPath
-
-getCallerPathName
-^^^^^^^^^^^^^^^^^
-	.. autofunction:: getCallerPathName
+   pysourceinfo.presolve = P_FIRST
 
 
-getModuleFilePathName
-^^^^^^^^^^^^^^^^^^^^^
-	.. autofunction:: getModuleFilePathName
+The effect of the search strategy is two-folded,
 
-getModulePathName
-^^^^^^^^^^^^^^^^^
-	.. autofunction:: getModulePathName
+#. resolution of the path-prefix
+#. resolution of relative sub-paths
 
-getModuleSourceFilePathName
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-	.. autofunction:: getModuleSourceFilePathName
+The constants are consistently defining the strategy for the path-prefix only,
+the resulting strategy for the sub-path resolution is therefore reziprocal.
+The constants have the following effect.
 
-getPythonPathFromSysPath
-^^^^^^^^^^^^^^^^^^^^^^^^
-	.. autofunction:: getPythonPathFromSysPath
+* **P_FIRST**: results in arbitrary matching sub-path of the first path
+* **P_LAST**: results in arbitrary matching sub-path of the last path
+* **P_LONGEST**: results in shortest possible matching sub-path
+* **P_SHORTEST**: results in longest possible matching sub-path
 
-getPythonPathRel
-^^^^^^^^^^^^^^^^
-	.. autofunction:: getPythonPathRel
+The resolution of absolute filenames of modules is not effected by the
+constants.
 
-getStackFuncList
-^^^^^^^^^^^^^^^^
-	.. autofunction:: getStackFuncList
+For the shared implementation refer to `matchpath() <fileinfo.html#matchpath>`_.
 
-getStackFuncMap
-^^^^^^^^^^^^^^^
-	.. autofunction:: getStackFuncMap
 
-getStackFuncNameList
-^^^^^^^^^^^^^^^^^^^^
-	.. autofunction:: getStackFuncNameList
+File Types
+^^^^^^^^^^
+The following constants are defined as common and independent constants identifying
+file types.
+These are supported on all platforms for Python2 and Python3, where the
+introduced *__pycache__* is handeled.
 
-getStackFuncNameMap
-^^^^^^^^^^^^^^^^^^^
-	.. autofunction:: getStackFuncNameMap
+The values are adapted to the standard enumeration and continued consistently
+over spanning the releases.
 
-getStackLen
-^^^^^^^^^^^
-	.. autofunction:: getStackLen
+The values *MT_COMPILED_OPT1* and *MT_COMPILED_OPT2* are in the current version
+partially ambiguous due to the lack of file-content analysis.
 
-getStackSposForFunc
-^^^^^^^^^^^^^^^^^^^
-	.. autofunction:: getStackSposForFunc
+* **MT_UNKNOWN**
 
-getStackSposForFuncName
-^^^^^^^^^^^^^^^^^^^^^^^
-	.. autofunction:: getStackSposForFuncName
+  .. code-block:: python
+     :linenos:
 
+     MT_UNKNOWN = 0
+
+* **MT_SOURCE**
+
+  .. code-block:: python
+     :linenos:
+
+     MT_SOURCE = 1  #: same value as PY_SOURCE = 1
+
+* **MT_COMPILED**
+
+  .. code-block:: python
+     :linenos:
+
+     MT_COMPILED = 2  #: same value as PY_COMPILED = 2
+
+* **MT_EXTENSION**
+
+  .. code-block:: python
+     :linenos:
+
+     MT_EXTENSION = 3  # : same value as C_EXTENSION = 3
+
+* **MT_DIRECTORY**
+
+  .. code-block:: python
+     :linenos:
+
+     MT_DIRECTORY = 5  # : same value as PKG_DIRECTORY = 5
+
+* **MT_BUILTIN**
+
+  .. code-block:: python
+     :linenos:
+
+     MT_BUILTIN = 6  # : same value as C_BUILTIN = 6
+
+* **MT_FROZEN**
+
+  .. code-block:: python
+     :linenos:
+
+     MT_FROZEN = 7  # : same value as PY_FROZEN = 7
+
+* **MT_COMPILED_OPT1**
+
+  .. code-block:: python
+     :linenos:
+
+     MT_COMPILED_OPT1 = 10  # : PY_COMPILED | <opt1> # 2 | 8
+
+* **MT_COMPILED_OPT2**
+
+  .. code-block:: python
+     :linenos:
+
+     MT_COMPILED_OPT2 = 18  # : PY_COMPILED | <opt2> # 2 | 16
+
+* **MT_COMPILED_DEBUG**
+
+  .. code-block:: python
+     :linenos:
+
+     MT_COMPILED_DEBUG = 34  # : PY_COMPILED | 0 # 2 | 32
+
+
+Miscelaneous
+^^^^^^^^^^^^
+Shared control variables for *pysourceinfo*:
+
+* **debug**
+* **verbose**
+
+
+Exceptions
+----------
+
+.. autoclass:: PySourceInfoError

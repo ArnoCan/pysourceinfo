@@ -1,9 +1,8 @@
 PROJECT='pysourceinfo'
-VERSION="0.1.12"
-RELEASE="0.1.12"
-NICKNAME="Mimisbrunnr"
+VERSION="0.1.32"
+RELEASE="0.1.32"
 AUTHOR='Arno-Can Uestuensoez'
-COPYRIGHT='Copyright (C) 2010,2011,2015-2016 Arno-Can Uestuensoez @Ingenieurbuero Arno-Can Uestuensoez'
+COPYRIGHT='Copyright (C) 2010,2011,2015-2017 Arno-Can Uestuensoez @Ingenieurbuero Arno-Can Uestuensoez'
 LICENSE='Artistic-License-2.0 + Forced-Fairplay-Constraints'
 STATUS='alpha'
 MISSION='Support easy access to RTTI on Python source files.'
@@ -37,9 +36,9 @@ STATIC="${OUTDIR}/apidoc/sphinx/_static"
 FILEDIRS=""
 FILEDIRS="${INDIR}dosrc"
 FILEDIRS="$FILEDIRS ${INDIR}pysourceinfo"
-FILEDIRS="$FILEDIRS ${INDIR}UseCases"
-FILEDIRS="$FILEDIRS ${INDIR}tests"
-FILEDIRS="$FILEDIRS ${INDIR}testdata"
+#FILEDIRS="$FILEDIRS ${INDIR}UseCases"
+#FILEDIRS="$FILEDIRS ${INDIR}tests"
+#FILEDIRS="$FILEDIRS ${INDIR}testdata"
 
 #FILEDIRS="$FILEDIRS ${INDIR}setup.py"
 #FILEDIRS="$FILEDIRS ${INDIR}bin"
@@ -94,7 +93,7 @@ html_theme_options = {
 #    "rightsidebar": "true",
 #    "relbarbgcolor": "black",
     "externalrefs": "true",
-    "sidebarwidth": "300",
+    "sidebarwidth": "365",
     "stickysidebar": "true",
 #    "collapsiblesidebar": "true",
 
@@ -123,20 +122,33 @@ html_theme_options = {
 
 # def setup(app):
 #     app.add_stylesheet('css/custom.css')
+def setup(app):
+	app.add_stylesheet('custom.css')
 
 EOF
 } >> ${OUTDIR}/apidoc/sphinx/conf.py
 mkdir "${STATIC}/css/"
-cp docsrc/custom.css "${STATIC}/css/custom.css"
-cp docsrc/pysourceinfo-64x64.png "${STATIC}/"
 
+# for d in docsrc/images/*.{png,jpg} docsrc/*.{png,jpg};do cp $d "${STATIC}"; done
+#
+## html
+#for d in docsrc/*.html;do cp $d "${STATIC}"; done
+#
+## txt
+#for d in docsrc/*.txt;do cp $d "${STATIC}"; done
+#
+## css
+#for d in docsrc/*.css;do cp $d "${STATIC}"; done
+#
+## py
+#for d in docsrc/*.py;do cp $d "${STATIC}"; done
 
 # put the docs together
 #
 cat docsrc/index.rst                     > ${OUTDIR}/apidoc/sphinx/index.rst
 {
 cat <<EOF
-Project data summary:
+**Project Data**
 
 * PROJECT=${PROJECT}
 
@@ -154,25 +166,55 @@ Project data summary:
 
 * STATUS=${STATUS}
 
-* NICKNAME=${NICKNAME}
-
-  Internal information on the Python call stack by ${NICKNAME}, see \`${NICKNAME}
-  - located beneath the world tree Yggdrasil, the water of the well
-  contains much wisdom, and Odin's eye sacrifice to the well was in exchange
-  for a drink from it...
-  <https://en.wikipedia.org/wiki/Mimisbrunnr>\`_  
-
 EOF
-} >> ${OUTDIR}/apidoc/sphinx/index.rst 
+} > ${OUTDIR}/apidoc/sphinx/project.rst 
 
-#
-cat docsrc/sourceinfo.rst > ${OUTDIR}/apidoc/sphinx/sourceinfo.rst
-cat docsrc/pysourceinfo.rst > ${OUTDIR}/apidoc/sphinx/pysourceinfo.rst
-cat docsrc/shortcuts.rst > ${OUTDIR}/apidoc/sphinx/shortcuts.rst
+# rst files
+for d in docsrc/*.rst;do cat $d > ${OUTDIR}/apidoc/sphinx/${d##*/}; done
+
 #
 # static - literal data
-cat ArtisticLicense20.html > "${STATIC}/ArtisticLicense20.html"
-cat licenses-amendments.txt > "${STATIC}/licenses-amendments.txt"
+#
+# images
+for d in docsrc/*.{png,jpg,gif} docsrc/images/*.{png,jpg,gif};do cp $d "${STATIC}"; done
+
+# html
+for d in docsrc/*.html;do cp $d "${STATIC}"; done
+
+# txt
+for d in docsrc/*.txt;do cp $d "${STATIC}"; done
+
+# css
+for d in docsrc/*.css;do cp $d "${STATIC}"; done
+
+# py
+for d in docsrc/*.py;do cp $d "${STATIC}"; done
+
+cp ArtisticLicense20.html "${STATIC}"
+cp licenses-amendments.txt "${STATIC}"
+
+#
+#cat docsrc/allareobjects.rst > ${OUTDIR}/apidoc/sphinx/allareobjects.rst
+#cat docsrc/bininfo.rst > ${OUTDIR}/apidoc/sphinx/bininfo.rst
+#cat docsrc/fileinfo.rst > ${OUTDIR}/apidoc/sphinx/fileinfo.rst
+#cat docsrc/help.rst > ${OUTDIR}/apidoc/sphinx/help.rst
+#cat docsrc/helper.rst > ${OUTDIR}/apidoc/sphinx/helper.rst
+#cat docsrc/howto.rst > ${OUTDIR}/apidoc/sphinx/howto.rst
+#cat docsrc/infolists.rst > ${OUTDIR}/apidoc/sphinx/infolists.rst
+#cat docsrc/install.rst > ${OUTDIR}/apidoc/sphinx/install.rst
+#cat docsrc/namebinding.rst > ${OUTDIR}/apidoc/sphinx/namebinding.rst
+#cat docsrc/objectinfo.rst > ${OUTDIR}/apidoc/sphinx/objectinfo.rst
+#cat docsrc/pysourceinfo.rst > ${OUTDIR}/apidoc/sphinx/pysourceinfo.rst
+#cat docsrc/runtimepackages.rst > ${OUTDIR}/apidoc/sphinx/runtimepackages.rst
+#cat docsrc/shortcuts.rst > ${OUTDIR}/apidoc/sphinx/shortcuts.rst
+#cat docsrc/sourceinfo.rst > ${OUTDIR}/apidoc/sphinx/sourceinfo.rst
+#cat docsrc/todo.rst > ${OUTDIR}/apidoc/sphinx/todo.rst
+#
+#cat docsrc/references.rst > ${OUTDIR}/apidoc/sphinx/references.rst
+
+# static - literal data
+#cat ArtisticLicense20.html > "${STATIC}/ArtisticLicense20.html"
+#cat licenses-amendments.txt > "${STATIC}/licenses-amendments.txt"
 #
 #cp docsrc/lionwhisperer.png "${STATIC}"
 

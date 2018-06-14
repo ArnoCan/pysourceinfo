@@ -1,44 +1,150 @@
 Abstract
 ========
 
-The 'pysourceinfo' package provides basic runtime information on executed sourcefiles
-based on 'inspect' and additional sources `[shortcuts] <shortcuts.html#>`_.
+The **pysourceinfo** package provides source information on Python runtime objects
+based on *inspect*, *sys*, *os*, and *imp*.
+The covered objects include packages, modules, functions, methods, scripts, 
+and classes by two views:
+
+* File System View - packages, modules, and linenumbers - based on files and paths -
+  :ref:`[File-Namebinding] <FILENAMEBINDING>`:
+* Runtime Object View - callables, classes, and containers - based on in-memory RTTI / introspection -
+  :ref:`[Object-Namebinding] <FILENAMEBINDING>`:
+
+The supported platforms are:
+
+* Linux, BSD, Unix, OS-X, Cygwin, and Windows
+* Python2, Python3 - CPython, PyPy
+
+Object addresses within modules - Object Identifier OID - and the display of the runtime call flow
+are supported by *PyStackInfo* [pystackinfo]_.
+
+Cockpit
+=======
+
+.. raw:: html
+
+   <div class="markyellow">
+
+**Prerequisite Definitions**: :ref:`NAMEBINDING`
+
+.. raw:: html
+
+   </div>
+
+.. raw:: html
+
+   <div class="indextab">
+
++-----------------+-----------------------------------------------+-----------------------+--------------------------------+--------------------------+
+| Component       | Standards/References                          | HowTo                 | Shortcuts                      | API                      |
++=================+===============================================+=======================+================================+==========================+
+| `pysourceinfo`_ |                                               |                       | :ref:`PYSOURCEINFO_INIT`       | `pysourceinfo.__init__`_ |
++-----------------+-----------------------------------------------+-----------------------+--------------------------------+--------------------------+
+| `fileinfo`_     | [inspect2]_ [inspect3]_ [PEP3155]_ [PEP3147]_ | `HowTo <howto.html>`_ | :ref:`PYSOURCEINFO_FILEINFO`   | `rdbg.fileinfo`_         |
++-----------------+-----------------------------------------------+-----------------------+--------------------------------+--------------------------+
+| `objectinfo`_   | [inspect2]_ [inspect3]_ [PEP3155]_ [PEP3147]_ | `HowTo <howto.html>`_ | :ref:`PYSOURCEINFO_OBJECTINFO` | `rdbg.objectinfo`_       |
++-----------------+-----------------------------------------------+-----------------------+--------------------------------+--------------------------+
+| `infolists`_    |                                               | `HowTo <howto.html>`_ | :ref:`PYSOURCEINFO_INFOLISTS`  | `rdbg.infolists`_        |
++-----------------+-----------------------------------------------+-----------------------+--------------------------------+--------------------------+
+| `bininfo`_      | [inspect2]_ [inspect3]_ [PEP3155]_ [PEP3147]_ | `HowTo <howto.html>`_ | :ref:`PYSOURCEINFO_BININFO`    | `rdbg.bininfo`_          |
++-----------------+-----------------------------------------------+-----------------------+--------------------------------+--------------------------+
+| `helper`_       |                                               | `HowTo <howto.html>`_ | :ref:`PYSOURCEINFO_HELPER`     | `rdbg.helper`_           |
++-----------------+-----------------------------------------------+-----------------------+--------------------------------+--------------------------+
+
++------------------------+------------------------+
+| Artifacts              | Shortcuts              |
++========================+========================+
+| Concepts and Design    | :ref:`DEVELOPMENTDOCS` |
++------------------------+------------------------+
+| Programming Interfaces | :ref:`DEVELOPMENTAPI`  |
++------------------------+------------------------+
+
+.. raw:: html
+
+   </div>
+
+.. _pysourceinfo.__init__: _modules/pysourceinfo/__init__.html#
+.. _pysourceinfo: pysourceinfo.html#
+
+.. _Remote Debug: howto.html
+.. _pyrdbg.checkrdbg.checkandremove_rdbgoptions: pyrdbg.html#checkandremove-rdbgoptions
+
+.. _Debug Basics: howto_debug_basics.html
+.. _Advance Configuration: howto_advanced_configuration.html 
+
+.. _fileinfo: sourceinfo.html#
+.. _objectinfo: sourceinfo.html#
+.. _infolists: sourceinfo.html#
+.. _bininfo: sourceinfo.html#
+.. _helper: sourceinfo.html#
+
+.. _rdbg.fileinfo: fileinfo.html#
+.. _rdbg.objectinfo: objectinfo.html#
+.. _rdbg.infolists: infolists.html#
+.. _rdbg.bininfo: bininfo.html#
+.. _rdbg.helper: helper.html#
 
 
-* **Runtime Type Information on Python source components: Packages, Modules, and Calls**
-
-  A basic coverage of the 'inspect' package is provided for the 
-  simplified gathering of information on packages, modules, and files based 
-  on the call stack 
-  `[details] <sourceinfo.html>`_ 
-
-  * **callers** - Python functions and class/object methods
-    :ref:`[API-selection] <CallerFunctionsandMethods>`.
-
-  * **modules** - Python modules - a.k.a. source files
-    :ref:`[API-selection] <CallerModulesFiles>`.
-
-  * **packages** - Python packages based on 'inspect'
-    :ref:`[API-selection] <CallerPackagesFilesandorDirectories>`
-    or based on 'sys.path'
-    :ref:`[API-selection] <CallerPackagesFilesandorDirectoriesSysPath>`.
-
-  .
-The main target of the project is the completion and simplification of the call interface 
-for the most common calls related to RTTI provided by 'inspect'.
 
 Blueprint
 =========
 
-The features provided by the package 'pysourceinfo' are
-based on the standard package 'inspect' with
-dynamic evaluation of additional sources where rewuired.
-A flat call interface is provided for simplified application in
-OO as well as simple scripting.
+The package *PySourceInfo* provides the display of code-location for callable Python syntax 
+elements including the involved class and containment hierarchy.
+The name-binding as defined by the package *PySourceInfo* targets the accurate location
+of static code components.
+This is based on the dynamic runtime information as provided by the Python interpreter.
+The *PySourceInfo* and the related *PyStackInfo* avoid 
+static data preparation [PEP3155]_ and AST based approaches e.g. by [qualname]_.
+In distinction pure dynamic data gathering is proceeded, which inherently provides 
+also for generic code created during runtime execution.
+
+|layerswithpystackinfoblueprint|
+|layerswithpystackinfoblueprint_zoom|
+
+.. |layerswithpystackinfoblueprint_zoom| image:: _static/zoom.png
+   :alt: zoom 
+   :target: _static/layers-with-pystackinfo-blueprint.png
+   :width: 16
+
+.. |layerswithpystackinfoblueprint| image:: _static/layers-with-pystackinfo-blueprint.png 
+   :width: 600
+
+
+The  *PySourceInfo* focuses on basic information on files, modules,
+and packages, including line numbers with moderate use of the *inspect* API.
+The *PyStackInfo* package focuses on advanced control flow and runtime object location,
+including *decorators*, *nested classes*, and *metaclasses*.
+
+|pysourceinfoblueprint|
+|pysourceinfoblueprint_zoom|
+
+.. |pysourceinfoblueprint_zoom| image:: _static/zoom.png
+   :alt: zoom 
+   :target: _static/layers-blueprint.png
+   :width: 16
+
+.. |pysourceinfoblueprint| image:: _static/layers-blueprint.png 
+   :width: 450
+
+* *objectinfo* - information about the runtime location of Python syntax elements 
+* *fileinfo* - information about the source location of callables
+* *bininfo* - information about the location of compiled runtime files
+* *infolists* - lists and enumerations of source information
+* *helper* - support functions for the PYTHONPATH and the stack access
+
+The package *PyStackInfo* makes extended use of the stack and type information.
+This provides advanced debugging and analysis in particular for typical routines
+handling large data sets where the pure debugger based analysis may encounter some limits.
+Both packages require the support of *inspect*, which is guaranteed in the standard CPython,
+and seems to be reliably present in *PyPy*.
 
 The provided runtime structure information on Python sources is 
-covered with basically one single type of interface
-  ::
+covered with basically one single type of interface[`Name-Binding <namebinding.html>`_]
+
+.. code-block:: python
+   :linenos:
 
     def getCaller<Interface>(spos=1):
        """ Stack position: 
@@ -51,140 +157,105 @@ covered with basically one single type of interface
     def getModule<Interface>(spos=1):
        pass
 
-    def getPythonPath<Interface>(spos=1):
+    def getpythonpath<Interface>(spos=1):
        pass
 
 The interface gathers the information on the defined '<Interface>' from
-the call stack, loaded modules, or search path 'PATH'/'PYTHONPATH'/'sys.path'.
+the call stack, loaded modules, or search path *PATH*/*PYTHONPATH*/*sys.path*.
 
-The covered structural dynamic elements based on the call stackk are:
+`More... <shortcuts.html>`_ 
 
-* package
-
-* module
-
-* function
-
-* class/method
-
-* namespaces - global/local
-
-With additional functions covering mostly static information: 
-
-* loaded module
-
-* sys.path - actual OID and load path
-
-For code and application examples refer to the souce code of 'pysourceinfo.UseCases' `[UseCases] <UseCases.html#>`_
-and 'pysourceinfo.tests' `[tests] <tests.html#>`_.
-
-Install - HowTo - FAQ - Help
-============================
-
-* **Requires**:
-
-  * Runtime:
-  
-    Python >2.6.6, or Python 2.7. Python 3.x not yet supported.
-  * SDK:
-
-    Python 2.7. Python 3.x not yet supported.
-    Sphinx the standard version >=1.4, which includes 'sphinx-apidoc'.
-    Epydoc version >=3.
-
-    When missing the creation of a virtual environment has to be considered.
-  
-* **Platforms**:
-
-  Linux, Mac-OS/OS-X, MS-Windows
-
-* **Install**:
-
-  * Runtime:
-
-    Standard procedure online local install e.g. into virtual environment::
-
-      pip install pysourceinfo
-
-    or::
-
-      python setup.py install
-
-    Standard procedure online local install into user home::
-
-      python setup.py install --user
-
-    Custom procedure offline by::
-
-      python setup.py install --user --offline
-
-  * SDK:
-
-    Required for document creation, add '--sdk' option, checks build tools::
-
-      python setup.py install --sdk
-
-    Creation of documents, requires Sphinx including 'sphinx-apidoc', and Epydoc::
-
-      python setup.py build_doc project_doc install_doc
-
-* **Help**:
-
-  **Remark**: On Windows platforms it seems to be required the inspect module has to be
-  initialized, so for now please include befor the import of 'pysourceinfo'::
-
-    # For now a dummy call for initialization, will be cleared soon...
-    import inspect
-    _dummyInit = inspect.stack()
-
-    # For example...
-    from pysourceinfo.PySourceInfo import getCallerModule,getCallerName
-
-  that's it. Going to investigate this soon.
-
-`Shortcuts <shortcuts.html>`_
-=============================
-
-Common Interfaces:
-
-* `Programming Interface <shortcuts.html#>`_
-
-Complete technical API:
-
-* Interface in javadoc-style `[API] <epydoc/index.html>`_
 
 Table of Contents
 =================
+.. raw:: html
+
+   <div class="marklihoveryellow">
+
+
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 1
 
    shortcuts
+   namebinding
+
    pysourceinfo
-   UseCases
-   tests
-   testdata
+   bininfo
+   fileinfo
+   helper
+   infolists
+   objectinfo
 
-* setup.py
+   pysourceinfo.PySourceInfo
 
-  For help on extensions to standard options call onlinehelp:: 
+   help
+   howto
+   install
+   todo
 
-    python setup.py --help-pysourceinfo
+.. raw:: html
 
+   </div>
 
 
 Indices and tables
 ==================
+.. raw:: html
 
+   <div class="marklihoveryellow">
 
 * :ref:`genindex`
 * :ref:`modindex`
+* `References <references.html>`_
 * :ref:`search`
 
+.. raw:: html
+
+   </div>
 
 Resources
 =========
 
-For available downloads refer to:
+.. include:: project.rst
+
+**Online Documents**
+
+.. raw:: html
+
+   <div class="marklihoveryellow">
+
+* Pythonhosted: https://pythonhosted.org/pysourceinfo/
+
+.. raw:: html
+
+   </div>
+
+**Licenses**
+
+.. raw:: html
+
+   <div class="marklihoveryellow">
+
+* Artistic-License-2.0(base license): `ArtisticLicense20.html <_static/ArtisticLicense20.html>`_
+
+* Forced-Fairplay-Constraints(amendments): `licenses-amendments.txt <_static/licenses-amendments.txt>`_ 
+
+  |profileinfo|  [xkcd]_ Support the OpenSource Authors :-)
+
+  .. |profileinfo| image:: _static/profile_info.png 
+     :target: _static/profile_info.html
+     :width: 48
+
+.. raw:: html
+
+   </div>
+
+
+**Downloads**
+
+.. raw:: html
+
+   <div class="marklihoveryellow">
 
 * Python Package Index: https://pypi.python.org/pypi/pysourceinfo
 
@@ -192,9 +263,6 @@ For available downloads refer to:
 
 * github.com: https://github.com/ArnoCan/pysourceinfo/
 
-For Licenses refer to enclosed documents:
+.. raw:: html
 
-* Artistic-License-2.0(base license): `ArtisticLicense20.html <_static/ArtisticLicense20.html>`_
-
-* Forced-Fairplay-Constraints(amendments): `licenses-amendments.txt <_static/licenses-amendments.txt>`_ / `Protect OpenSource Authors <http://xkcd.com/1303/>`_
-
+   </div>

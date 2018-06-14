@@ -10,9 +10,3 @@ or within Eclipse by the plugin PyDev / PyUnit.
 
 
 **REMARK**: For additional unit tests refer to subdirectory 'UseCases' 
-
-
-30_libs
--------
-Provided library modules of 'epyunit'.
-

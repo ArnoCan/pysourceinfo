@@ -1,2 +1,16 @@
 #recursive include doc 
 
+#documentation
+recursive-include doc/en/html/man3/pysourceinfo *
+
+#Misc
+include .gitignore
+include ArtisticLicense20.html
+include LICENSE
+include setenv.sh
+include README.md
+include callDocSphinx.sh
+include licenses-amendments.txt
+include setup.cfg
+include setup.py
+include dosrc/pysourceinfo-64x64.png

@@ -16,7 +16,7 @@
 #Python + stuptools + sphinx
 /**/build/
 /**/dist/
-/**/jsondata.egg-info/
+/**/*.egg-info/
 
 
 # by default these are copies only, the source are in components 
@@ -24,6 +24,8 @@
 /**/repos/
 /**/raw/
 
+# epydoc
+profile.out
 
 #
 # *** Dynamic data of specific tools/apps: ***
@@ -141,6 +143,10 @@ nosetests.xml
 
 # -> ignore dynamic eclipse data
 /**/RemoteSystemsTempFiles/
+/**/.settings/
+/**/.includepath
+/**/.pydevproject
+
 
 #allow context specific eclipse framework settings
 ide
