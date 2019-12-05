@@ -1,7 +1,7 @@
 #recursive include doc 
 
 #documentation
-recursive-include doc/en/html/man3/pysourceinfo *
+recursive-include doc/en/html/man3/sourceinfo *
 
 #Misc
 include .gitignore
@@ -13,4 +13,4 @@ include callDocSphinx.sh
 include licenses-amendments.txt
 include setup.cfg
 include setup.py
-include dosrc/pysourceinfo-64x64.png
+include dosrc/sourceinfo-64x64.png

@@ -3,6 +3,7 @@
 
 Name-Binding - A Python API for Files and Objects
 =================================================
+
 The main task of the subsystem *PySourceInfo* is to provide code location for specific
 in memory objects, and partially vice-versa.
 Therefore a set of functions is defined with a similar pattern of signatures for
@@ -62,7 +63,7 @@ The following main cases are possible:
 #. The package is delivered as a compressed *zip* file ([PEP273]_, [PEP441]_).
 #. The package is an implicit namespace package, [PEP420]_.
 
-For detailed information refer to `Runtime Packages <runtimepackages.html#>`_.
+For detailed information refer to :ref:`Runtime Packages <RUNTIMEPACKAGES>`.
  
 The scope of the interfaces changes slightly, when binary modules were loaded explicitly.
 The binaries for **Python2** are addressed by the following interfaces.
@@ -108,8 +109,6 @@ Additional partial helper sources are available:
 * *Sys* - Generic helper based on *sys* 
 
 
-Address Components
-^^^^^^^^^^^^^^^^^^
 This section discusses the components required for the assembly of the runtime and module addresses.
 These are in general straight-forward, but in some cases require special handling for a general interface:
 
@@ -121,18 +120,18 @@ Additional information related to advanced features based on the call stack is p
 *PyStackInfo* [pystackinfo]_ . 
 
 Address Hierarchies
-"""""""""""""""""""
+-------------------
 The address as defined for a component is specifically different for various views depending on the domain it is based on.
 This comprises in case of programming e.g. the inheritance view and the containment view, which could 
 not be transformed simply to runtime one view in any case.
 In case of code representation by Python the containment view and the inheritance view use partially the 
 same notation(dotted-notation),
-which basically inherently reflects Pythons core paradigm `Anything is an Object <allareobjects.html>`_
+which basically inherently reflects Pythons core paradigm :ref:`Anything is an Object <ANYTHINGISANOBJECT>`
 - types are meta-objects at runtime.
 
 
 Containment and Inheritance
-'''''''''''''''''''''''''''
+---------------------------
 The containment reflects the hierarchy of runtime elements - objects - as they are allocated initially by
 the executed Python code.
 These could span an arbitrary deep tree structure of data, class, and callable entries - reflected by the logical AST.
@@ -157,7 +156,7 @@ dynamic evaluation fails.
 
 
 Nested Functions
-''''''''''''''''
+----------------
 Nesting in case of function definitions reflects the physical code location
 properly.
 
@@ -173,7 +172,7 @@ The following example demonstrates the application on nested functions:
 
    from __future__ import absolute_import
    
-   from pysourceinfo.CallerCodeFlow import getCallerOID,getCallerComponentOID,getSourceLocation
+   from sourceinfo.CallerCodeFlow import getCallerOID,getCallerComponentOID,getSourceLocation
 
    module = getCallerOID()
    
@@ -197,7 +196,7 @@ Resulting in the output:
    fctC.fctB.fctA
 
 Nested Classes
-''''''''''''''
+--------------
 The nesting of class definitions reflects containment hierarchies in the sense of addressing the 
 class definition within the Python code at the concrete location of the containment 
 hierarchy appropriately.
@@ -214,7 +213,7 @@ The following script demonstrates the behavior:
 
    from __future__ import absolute_import
    
-   from pysourceinfo.CallerCodeFlow import getCallerOID,getCallerComponentOID,getSourceLocation
+   from sourceinfo.CallerCodeFlow import getCallerOID,getCallerComponentOID,getSourceLocation
 
    module = getCallerOID()
    
@@ -246,10 +245,7 @@ The following script demonstrates the behavior:
    print "a.getOID:        " + a.getOID()
 
 
-Resulting in the output for the class definitions/meta-data:
-
-.. code-block:: python
-   :linenos:
+Resulting in the output for the class definitions/meta-data::
 
    c:               <class '__main__.C'>
    b:               <class '__main__.B'>
@@ -308,7 +304,7 @@ The same behavior occurs for the old-syle classes:
        class B:
            class A:
                def getOID(self):
-                   ret = pysourceinfo.PySourceInfo.getCallerOID()
+                   ret = sourceinfo.PySourceInfo.getCallerOID()
                    return ret
            def getOID(self):
                c = C.B.A()
@@ -320,7 +316,7 @@ The same behavior occurs for the old-syle classes:
            return ret
 
 Mixed-Refrences
-'''''''''''''''
+---------------
 Mixed references are containment paths with nested callables and callables from within inheritance hierarchies.
 This results in a path for the source location, which is in dotted notation and includes the actual code elements,
 instead of the dynamically assigned runtime types.
@@ -333,7 +329,7 @@ methods of nested classese:
 
    from __future__ import absolute_import
    
-   from pysourceinfo.CallerCodeFlow import getCallerOID,getCallerComponentOID,getSourceLocation
+   from sourceinfo.CallerCodeFlow import getCallerOID,getCallerComponentOID,getSourceLocation
 
    module = getCallerOID()
       
@@ -346,7 +342,7 @@ methods of nested classese:
                def getOID(self):
                    def localFct01():
                        def localFct00():
-                           ret = pysourceinfo.PySourceInfo.getCallerOID()
+                           ret = sourceinfo.PySourceInfo.getCallerOID()
                            return ret
                        ret = localFct00()
                        return ret
@@ -395,13 +391,13 @@ The following code example shows the call of global function from within a deepe
 
    from __future__ import absolute_import
    
-   #4TEST: import pysourceinfo.PySourceInfo
+   #4TEST: import sourceinfo.PySourceInfo
    
-   module = pysourceinfo.PySourceInfo.getCallerOID()
+   module = sourceinfo.PySourceInfo.getCallerOID()
    
    def globalFct01():
        def globalFct00():
-           ret = pysourceinfo.PySourceInfo.getCallerOID()
+           ret = sourceinfo.PySourceInfo.getCallerOID()
            return ret
        ret = globalFct00()
        return ret
@@ -446,7 +442,7 @@ Resulting in the OID output of:
    c.getOID:        globalFct10.globalFct01.globalFct00
 
 Scopes
-''''''
+------
 The scopes of the runtime elements generally reflect the actual code elements scope accurately.
 For an exception refer to the section nested classes. 
 
@@ -464,7 +460,7 @@ Additional information on the stack structure and the included namespace referen
 by the package *PyStackInfo* [pystackinfo]_ . 
 
 Superposition
-'''''''''''''
+-------------
 The automatic superposition by coverage of a redefined call interface involves either derived classes,
 or redefinitions in local namespaces in distinction to global namespace or the callers namespace.
 This could be distinguished at runtime by analysing the address of the actual executed code object.
@@ -472,7 +468,7 @@ The *PySourceInfo* package resolves this accurately as demostrated by the previo
 
 
 Callables
-"""""""""
+=========
 The references to callables at runtime by the interpreter API are represented as unique stack frames, but could be 
 of various types, e.g. built-ins, method, or functions.
 These could also be located within various scopes.
@@ -488,7 +484,7 @@ For advanced features and detailed description refer to the description of the p
 *PyStackInfo* [pystackinfo]_ . 
 
 Functions
-'''''''''
+---------
 Functions are in general quite easy to handle, as they represent a context bound and basically 
 constant-code element.
 Thus normally no holomorphy by inheritance is involved and nested containment could easily be mapped 
@@ -517,7 +513,7 @@ An example of the construction of a *types.FunctionType* callable is:
        return ret
 
 Methods
-'''''''
+-------
 Class and object methods are basically the same type of callables as functions, with slightly 
 variation due to their integration into a classes call infrastructure.
 The representation of the stack frame represents this by missing a runtime type distinction.
@@ -527,13 +523,13 @@ This is handled by the *PySourceInfo* and *PyStackInfo* packages accurately - wi
 exceptions for nested classes.
 
 Class Types
-"""""""""""
+^^^^^^^^^^^
 The packages *PySourceInfo* and *PyStackInfo* support *Old-Style* and *New-Style* classes.
 This also include *Mix-Ins* or *Multiple-Inheritance*, *Meta-Classes* and 
 wrapped classes, methods, and functions by *Decorators*.
 
 Old-Style
-'''''''''
+^^^^^^^^^
 Transparent support for old style classes, see previous examples:
 
 .. code-block:: python
@@ -543,7 +539,7 @@ Transparent support for old style classes, see previous examples:
        class B:
            class A:
                def getOID(self):
-                   ret = pysourceinfo.PySourceInfo.getCallerOID()
+                   ret = sourceinfo.PySourceInfo.getCallerOID()
                    return ret
            def getOID(self):
                c = C.B.A()
@@ -554,10 +550,10 @@ Transparent support for old style classes, see previous examples:
            ret = c.getOID()
            return ret
 
-For support Python versions see `Releases <#python-releases>`_.
+For support Python versions see :ref:`Releases <PYTHONRELEASES>`.
 
 New-Style
-'''''''''
+^^^^^^^^^
 Transparent support for new style classes, see previous examples:
 
 .. code-block:: python
@@ -567,7 +563,7 @@ Transparent support for new style classes, see previous examples:
        class B(object):
            class A(object):
                def getOID(self):
-                   ret = pysourceinfo.PySourceInfo.getCallerOID()
+                   ret = sourceinfo.PySourceInfo.getCallerOID()
                    return ret
            def getOID(self):
                c = C.B.A()
@@ -578,10 +574,10 @@ Transparent support for new style classes, see previous examples:
            ret = c.getOID()
            return ret
 
-For support Python versions see `Releases <#python-releases>`_.
+For support Python versions see :ref:`Releases <PYTHONRELEASES>`.
 
 Meta-Classes
-''''''''''''
+^^^^^^^^^^^^
 The following script depicts the application within the *__new__* and *__init__*
 methods of a meta-class.
 
@@ -590,33 +586,33 @@ methods of a meta-class.
 
    from __future__ import absolute_import
    
-   #4TEST: import pysourceinfo.PySourceInfo
+   #4TEST: import sourceinfo.PySourceInfo
    
-   module = pysourceinfo.PySourceInfo.getCallerOID()
+   module = sourceinfo.PySourceInfo.getCallerOID()
    
    class myMeta(type):
        def __new__(cls, name, bases, attr):
    
            def metaMethod(self,*args,**kw):
-               ret = pysourceinfo.PySourceInfo.getCallerComponentOID()
+               ret = sourceinfo.PySourceInfo.getCallerComponentOID()
                return ret
    
-           print pysourceinfo.PySourceInfo.getCallerComponentOID()
+           print sourceinfo.PySourceInfo.getCallerComponentOID()
    
            attr['metaMethod'] = metaMethod
            return type.__new__(cls, name, bases, attr)
     
        def __init__(cls, name, bases, attr):
-           print pysourceinfo.PySourceInfo.getCallerComponentOID()
+           print sourceinfo.PySourceInfo.getCallerComponentOID()
    
    class MyClass(object):
        __metaclass__ = myMeta
    
        def __init__(self,*args,**kw):
-	       print pysourceinfo.PySourceInfo.getCallerComponentOID()
+	       print sourceinfo.PySourceInfo.getCallerComponentOID()
            super(MyClass,self).__init__(*args,**kw)
        def myMethod(self):
-           ret = pysourceinfo.PySourceInfo.getCallerComponentOID()
+           ret = sourceinfo.PySourceInfo.getCallerComponentOID()
            return ret
    
    mc = MyClass()
@@ -639,7 +635,7 @@ This prints out:
 
 
 Decorators
-''''''''''
+----------
 The syntax element of *@decorator* requires in the Python implementation due to the 
 dynamic evaluation of the source-location some special handling.
 This is due to the virtual relocation of the call, which is the position of the wrapped call,
@@ -703,7 +699,7 @@ ffs.
 
 
 Module Types
-""""""""""""
+------------
 
 The persistent Python code is divided into packages and modules.
 These represent storage entities of code within single files as modules,
@@ -730,7 +726,7 @@ This comprises in particular the path names correlated tightly to the file syste
 the *PYTHONPATH* environment variable.
 
 Modules API by imp
-''''''''''''''''''
+^^^^^^^^^^^^^^^^^^
 The *imp* module is utilized by the *PySourceInfo* package in order to get the type information
 of modules by the interface *getmodule_type*, which provides re-mapped values from *imp*.
 
@@ -754,11 +750,11 @@ which could also be imported with identical values from *PySourceInfo*:
 .. code-block:: python
    :linenos:
 
-   from pysourceinfo.PySourceInfo import getmodule_type,PY_SOURCE,PY_COMPILED,C_EXTENSION,PKG_DIRECTORY,C_BUILTIN,PY_FROZEN
+   from sourceinfo.PySourceInfo import getmodule_type,PY_SOURCE,PY_COMPILED,C_EXTENSION,PKG_DIRECTORY,C_BUILTIN,PY_FROZEN
 
 
 Modules API by sys
-''''''''''''''''''
+^^^^^^^^^^^^^^^^^^
 The *sys* package provides for basic runtime platform related interfaces.
 This covers for *PyStackInfo* and  *PySourceInfo* the requirement for the two data structures:
 
@@ -782,10 +778,10 @@ Which are applied as:
 
 
 API - Interfaces
-^^^^^^^^^^^^^^^^
+================
 
 Common conventions
-""""""""""""""""""
+------------------
 The following common conventions are applied:
 
 * **normpath**
@@ -845,7 +841,7 @@ The following common conventions are applied:
 
 
 Filesystem Binding Functions
-""""""""""""""""""""""""""""
+----------------------------
 
 The bindings provide simplified access to files for stack and memory objects.
 
@@ -879,36 +875,36 @@ The bindings provide simplified access to files for stack and memory objects.
 | get<obj>_source_filepathname  | Caller[`C12`_], Module[`M12`_], | absolute path to source module                  |
 +-------------------------------+---------------------------------+-------------------------------------------------+
 
-.. _C0: fileinfo.html#pysourceinfo.fileinfo.getcaller_filename
-.. _C10: fileinfo.html#pysourceinfo.fileinfo.getcaller_python_pathname
-.. _C11: fileinfo.html#pysourceinfo.fileinfo.getcaller_source_filepathname
-.. _C12: fileinfo.html#pysourceinfo.fileinfo.getcaller_source_filepathname
-.. _C1: fileinfo.html#pysourceinfo.fileinfo.getcaller_filepathname
-.. _C2: fileinfo.html#pysourceinfo.fileinfo.getcaller_linenumber
-.. _C3: fileinfo.html#pysourceinfo.fileinfo.getcaller_linenumber_def
-.. _C4: fileinfo.html#pysourceinfo.fileinfo.getcaller_package_name
-.. _C5: fileinfo.html#pysourceinfo.fileinfo.getcaller_package_filename
-.. _C6: fileinfo.html#pysourceinfo.fileinfo.getcaller_package_filepathname
-.. _C7: fileinfo.html#pysourceinfo.fileinfo.getcaller_pathname
-.. _C8: fileinfo.html#pysourceinfo.fileinfo.getcaller_pathname_rel
-.. _C9: fileinfo.html#pysourceinfo.fileinfo.getcaller_pathname_sub
+.. _C0: fileinfo.html#sourceinfo.fileinfo.getcaller_filename
+.. _C10: fileinfo.html#sourceinfo.fileinfo.getcaller_python_pathname
+.. _C11: fileinfo.html#sourceinfo.fileinfo.getcaller_source_filepathname
+.. _C12: fileinfo.html#sourceinfo.fileinfo.getcaller_source_filepathname
+.. _C1: fileinfo.html#sourceinfo.fileinfo.getcaller_filepathname
+.. _C2: fileinfo.html#sourceinfo.fileinfo.getcaller_linenumber
+.. _C3: fileinfo.html#sourceinfo.fileinfo.getcaller_linenumber_def
+.. _C4: fileinfo.html#sourceinfo.fileinfo.getcaller_package_name
+.. _C5: fileinfo.html#sourceinfo.fileinfo.getcaller_package_filename
+.. _C6: fileinfo.html#sourceinfo.fileinfo.getcaller_package_filepathname
+.. _C7: fileinfo.html#sourceinfo.fileinfo.getcaller_pathname
+.. _C8: fileinfo.html#sourceinfo.fileinfo.getcaller_pathname_rel
+.. _C9: fileinfo.html#sourceinfo.fileinfo.getcaller_pathname_sub
 
-.. _M0: fileinfo.html#pysourceinfo.fileinfo.getmodule_filename
-.. _M10: fileinfo.html#pysourceinfo.fileinfo.getmodule_pathname_sub
-.. _M11: fileinfo.html#pysourceinfo.fileinfo.getmodule_python_pathname
-.. _M12: fileinfo.html#pysourceinfo.fileinfo.getmodule_filepathname
-.. _M1: fileinfo.html#pysourceinfo.fileinfo.getmodule_filepathname
-.. _M4: fileinfo.html#pysourceinfo.fileinfo.getmodule_package_name
-.. _M5: fileinfo.html#pysourceinfo.fileinfo.getmodule_package_filename
-.. _M6: fileinfo.html#pysourceinfo.fileinfo.getmodule_package_filepathname
-.. _M7: fileinfo.html#pysourceinfo.fileinfo.getmodule_package_pathname
-.. _M8: fileinfo.html#pysourceinfo.fileinfo.getmodule_pathname
-.. _M9: fileinfo.html#pysourceinfo.fileinfo.getmodule_pathname_rel
+.. _M0: fileinfo.html#sourceinfo.fileinfo.getmodule_filename
+.. _M10: fileinfo.html#sourceinfo.fileinfo.getmodule_pathname_sub
+.. _M11: fileinfo.html#sourceinfo.fileinfo.getmodule_python_pathname
+.. _M12: fileinfo.html#sourceinfo.fileinfo.getmodule_filepathname
+.. _M1: fileinfo.html#sourceinfo.fileinfo.getmodule_filepathname
+.. _M4: fileinfo.html#sourceinfo.fileinfo.getmodule_package_name
+.. _M5: fileinfo.html#sourceinfo.fileinfo.getmodule_package_filename
+.. _M6: fileinfo.html#sourceinfo.fileinfo.getmodule_package_filepathname
+.. _M7: fileinfo.html#sourceinfo.fileinfo.getmodule_package_pathname
+.. _M8: fileinfo.html#sourceinfo.fileinfo.getmodule_pathname
+.. _M9: fileinfo.html#sourceinfo.fileinfo.getmodule_pathname_rel
 
-See pysourceinfo.fileinfo [`shortcuts <shortcuts.html#pysourceinfo-fileinfoinfo>`_]
+See :ref:`sourceinfo.fileinfo <PYSOURCEINFO_FILEINFO>`.
 
 Object Binding Functions
-""""""""""""""""""""""""
+------------------------
 
 The bindings provide simplified address evaluation and resolution for stack and memory objects.
 
@@ -942,32 +938,31 @@ The bindings provide simplified address evaluation and resolution for stack and 
 | get<obj>_type            | Module[`M32`_]                 | bit array for <obj>                   |
 +--------------------------+--------------------------------+---------------------------------------+
 
-.. _M20: objectinfo.html#pysourceinfo.objectinfo.getmodule_by_id
-.. _M21: objectinfo.html#pysourceinfo.objectinfo.getmodule_by_name
-.. _M27: objectinfo.html#pysourceinfo.objectinfo.getmodule_name
-.. _M28: objectinfo.html#pysourceinfo.objectinfo.getmodule_name_sub
-.. _M29: objectinfo.html#pysourceinfo.objectinfo.getmodule_oid
-.. _M30: objectinfo.html#pysourceinfo.objectinfo.getmodule_oid_sub
-.. _M31: objectinfo.html#pysourceinfo.objectinfo.getmodule_package_name
-.. _M32: objectinfo.html#pysourceinfo.objectinfo.getmodule_type
+.. _M20: objectinfo.html#sourceinfo.objectinfo.getmodule_by_id
+.. _M21: objectinfo.html#sourceinfo.objectinfo.getmodule_by_name
+.. _M27: objectinfo.html#sourceinfo.objectinfo.getmodule_name
+.. _M28: objectinfo.html#sourceinfo.objectinfo.getmodule_name_sub
+.. _M29: objectinfo.html#sourceinfo.objectinfo.getmodule_oid
+.. _M30: objectinfo.html#sourceinfo.objectinfo.getmodule_oid_sub
+.. _M31: objectinfo.html#sourceinfo.objectinfo.getmodule_package_name
+.. _M32: objectinfo.html#sourceinfo.objectinfo.getmodule_type
 
-.. _C22: objectinfo.html#pysourceinfo.objectinfo.getcaller_module
-.. _C23: objectinfo.html#pysourceinfo.objectinfo.getcaller_module_name
-.. _C24: objectinfo.html#pysourceinfo.objectinfo.getcaller_module_name_sub
-.. _C25: objectinfo.html#pysourceinfo.objectinfo.getcaller_module_oid
-.. _C26: objectinfo.html#pysourceinfo.objectinfo.getcaller_module_oid_sub
-.. _C27: objectinfo.html#pysourceinfo.objectinfo.getcaller_name
-.. _C31: objectinfo.html#pysourceinfo.objectinfo.getcaller_package_name
-
-
+.. _C22: objectinfo.html#sourceinfo.objectinfo.getcaller_module
+.. _C23: objectinfo.html#sourceinfo.objectinfo.getcaller_module_name
+.. _C24: objectinfo.html#sourceinfo.objectinfo.getcaller_module_name_sub
+.. _C25: objectinfo.html#sourceinfo.objectinfo.getcaller_module_oid
+.. _C26: objectinfo.html#sourceinfo.objectinfo.getcaller_module_oid_sub
+.. _C27: objectinfo.html#sourceinfo.objectinfo.getcaller_name
+.. _C31: objectinfo.html#sourceinfo.objectinfo.getcaller_package_name
 
 
-See pysourceinfo.objectinfo [`shortcuts <shortcuts.html#pysourceinfo-objectinfo>`_]
+
+See :ref:`sourceinfo.objectinfo <PYSOURCEINFO_OBJECTINFO>`.
 
 .. _SETSANDENTITIES:
 
 Sets and Entities
-"""""""""""""""""
+-----------------
 +--------------------------------------+-------------+---------------------------------------------------------+
 | [template]                           | [obj]       | [description]                                           |
 +======================================+=============+=========================================================+
@@ -995,19 +990,20 @@ name part *_module* is dropped in order to avoid redundancy, e.g.:
 
 Similar for the remaining.
 
-See pysourceinfo.infolists [`shortcuts <shortcuts.html#pysourceinfo-infolists>`_]
+See :ref:`sourceinfo.infolists <PYSOURCEINFO_INFOLISTS>`.
 
-.. _S70: infolists.html#pysourceinfo.infolists.getsysmodules_filepathname_list
-.. _S71: infolists.html#pysourceinfo.infolists.getsysmodules_id_list
-.. _S72: infolists.html#pysourceinfo.infolists.getsysmodules_list
-.. _S73: infolists.html#pysourceinfo.infolists.getsysmodules_name_list
-.. _S74: infolists.html#pysourceinfo.infolists.getsysmodules_pathname_list
-.. _S75: infolists.html#pysourceinfo.infolists.getsysmodules_pathname_rel_list
-.. _S76: infolists.html#pysourceinfo.infolists.getsysmodules_python_pathname_list
+.. _S70: infolists.html#sourceinfo.infolists.getsysmodules_filepathname_list
+.. _S71: infolists.html#sourceinfo.infolists.getsysmodules_id_list
+.. _S72: infolists.html#sourceinfo.infolists.getsysmodules_list
+.. _S73: infolists.html#sourceinfo.infolists.getsysmodules_name_list
+.. _S74: infolists.html#sourceinfo.infolists.getsysmodules_pathname_list
+.. _S75: infolists.html#sourceinfo.infolists.getsysmodules_pathname_rel_list
+.. _S76: infolists.html#sourceinfo.infolists.getsysmodules_python_pathname_list
 
+.. _PYTHONRELEASES:
 
 Python Releases
-^^^^^^^^^^^^^^^
+---------------
 The *pysourceinfo* in combination with *pystackinfo* provides fully
 dynamic replacement for the evaluation of *__qualname__* for
 *Python2* and *Python3*.
@@ -1021,14 +1017,14 @@ dynamic functions for global and private scope, etc.
   The current version of this package is tested for *Python2.7+*
   with:
 
-    2.7.5, 2.7.12
+    2.7.14
 
 * **Python3.x**
 
   The current version of this package is tested for *Python3.5+*
   with:
 
-    3.5.3, 3.6.2
+    3.5.3, 3.6.5, 3.7.0
 
 * **PyPy2**
 
@@ -1049,7 +1045,7 @@ with extended support for dynamic created entries is available
 by [pystackinfo]_.
 
 Resources
-^^^^^^^^^
+=========
 
 * classtools package [classtools]_
 * decorator package [msimio]_

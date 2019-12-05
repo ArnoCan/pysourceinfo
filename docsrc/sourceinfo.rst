@@ -1,111 +1,176 @@
-Introspection - The Python RTTI and Source information
-******************************************************
 
-Blueprint
-^^^^^^^^^
+.. _PYSOURCEINFO_INIT:
 
-The features provided by the package *pysourceinfo* are
-based on the standard package *inspect* with
-dynamic evaluation of additional sources where required.
-A flat call interface is provided for simplified application in
-OO as well as simple scripting.
+sourceinfo.__init__
+===================
 
-The provided runtime structure information on Python sources is 
-covered with basically one single type of interface
+Common definitions for the package *pysourceinfo*.
+
+Module
+------
+.. automodule:: sourceinfo.__init__
+
+Constants
+---------
+
+Search Path Resolution
+^^^^^^^^^^^^^^^^^^^^^^
+The resolution of the path variables for loaded modules is not
+provided by the Python interpreter - at least not as a simple
+usable variable.
+The resolution from the *PYTHONPATH* / *sys.path* 
+depends on the load mechanism, and potentially on the current
+entries in the *sys.path* variable.
+When loaded by a filepath this could be an arbitrary filesystem
+path, or a memory block.
+Due to the variety of possible load mechanisms of Python and the
+lack of an interpreter variable, the implementation relies on the
+*sys.path* variable by checking these as a matching path-prefix.
+
+The *sys.path* variable could be populated with arbitrary paths
+and redundancies, the python interpreter adds the startup directory
+by default into the position *sys.path[0]*.
+So this algorithm is by definition only as acurate,
+as the current *sys.path* variable reflects the actual load-prefixes.
+Therefore the *pysourceinfo* package defines constants that control
+the evaluation strategy of the package path
+from the search tpath list *PYTHONPATH*/*sys.path*.
+In case of one matching path-prefix, this values have no effect.
+The constants help for the expected resolution
+in case of multiple matches, with remaining possible in-accuracies.
+The controlling constants are:
+
+* **P_FIRST**: first matched path-prefix
+* **P_IGNORE0**: starts with element 1, ignores element 0
+* **P_LAST**: last matched path-prefix
+* **P_LONGEST**: longest matched path-prefix
+* **P_SHORTEST**: longest matched path-prefix
+
+The interfaces supporting path resolution provide the parameter
+*presolve* for individual setting for each call.
+
+The default value is stored in the package variable
+with the default value *P_FIRST*.
 
 .. code-block:: python
    :linenos:
 
-    def getCaller<Interface>(spos=1):
-       """ Stack position: 
-          spos==0 => caller(0==CallInterface) 
-          spos==1 => caller(1) 
-          spos==N => caller(N==level N) 
-       """
-       pass
+   sourceinfo.presolve = P_FIRST
 
-    def getModule<Interface>(spos=1):
-       pass
 
-    def getpythonpath<Interface>(spos=1):
-       pass
+The effect of the search strategy is two-folded,
 
-The interface gathers the information on the defined '<Interface>' from
-the call stack, loaded modules, or search path *PATH*/*PYTHONPATH*/*sys.path*.
+#. resolution of the path-prefix
+#. resolution of relative sub-paths
 
-The covered structural dynamic elements based on the call stack are:
+The constants are consistently defining the strategy for the path-prefix only,
+the resulting strategy for the sub-path resolution is therefore reziprocal.
+The constants have the following effect.
 
-* package
+* **P_FIRST**: results in arbitrary matching sub-path of the first path
+* **P_LAST**: results in arbitrary matching sub-path of the last path
+* **P_LONGEST**: results in shortest possible matching sub-path
+* **P_SHORTEST**: results in longest possible matching sub-path
 
-* module
+The resolution of absolute filenames of modules is not effected by the
+constants.
 
-* function
+For the shared implementation refer to `matchpath() <fileinfo.html#matchpath>`_.
 
-* class/method
 
-* name spaces - global/local
+File Types
+^^^^^^^^^^
+The following constants are defined as common and independent constants identifying
+file types.
+These are supported on all platforms for Python2 and Python3, where the
+introduced *__pycache__* is handeled.
 
-With additional functions covering mostly static information: 
+The values are adapted to the standard enumeration and continued consistently
+over spanning the releases.
 
-* loaded module
+The values *MT_COMPILED_OPT1* and *MT_COMPILED_OPT2* are in the current version
+partially ambiguous due to the lack of file-content analysis.
 
-* sys.path - actual OID and load path
+* **MT_UNKNOWN**
 
-PySourceInfo - Information on Specific Object Categories
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
- 
-Although the standard package *inspect* provides a wide variety of information 
-some are still not available.
-Therefore the missing is extracted by the combination of multiple sources
-and rules.
+  .. code-block:: python
+     :linenos:
 
-In general the main sources of information are given by the
-target type.
+     MT_UNKNOWN = 0
 
-* getCaller...
+* **MT_SOURCE**
 
-    This type works on the frame stack of *inspect*
-    Some data, which is not directly provided, like
-    the actual used *PYTHONPATH* item, are calculated
-    by combination of multiple sources.
+  .. code-block:: python
+     :linenos:
 
-* getModule...
+     MT_SOURCE = 1  #: same value as PY_SOURCE = 1
 
-    This type works on the module information mainly
-    based on *__file__*, and *__name__*.
+* **MT_COMPILED**
 
-* getpythonpath...
+  .. code-block:: python
+     :linenos:
 
-    This type correlates *PYTHONPATH*/*sys.path* with
-    provided path and file names.
+     MT_COMPILED = 2  #: same value as PY_COMPILED = 2
 
-The objects for which the information could be requested are
-mainly categorized as follows.
+* **MT_EXTENSION**
 
-* function names and file pathnames
+  .. code-block:: python
+     :linenos:
 
-    Provided by inspect and the module object.
+     MT_EXTENSION = 3  # : same value as C_EXTENSION = 3
 
-* module names and file pathnames
+* **MT_DIRECTORY**
 
-    Provided by inspect and the module object.
- 
-* package names and file pathnames
+  .. code-block:: python
+     :linenos:
 
-    Derived from the module information including
-    the global name space, and the the current content
-    of *sys.path*. Thus this could be unreliable under
-    some circumstances. 
+     MT_DIRECTORY = 5  # : same value as PKG_DIRECTORY = 5
 
-Resources
-^^^^^^^^^
+* **MT_BUILTIN**
 
-* decorator package [msimio]_
-* functools Python2 [functools2]_
-* functools Python3 [functools3]_
-* inspect Python2 [inspect2]_
-* inspect Python3 [inspect3]_
-* pystackinfo package [pystackinfo]_
-* types Python2 [types2]_
-* types Python3 [types3]_
+  .. code-block:: python
+     :linenos:
 
+     MT_BUILTIN = 6  # : same value as C_BUILTIN = 6
+
+* **MT_FROZEN**
+
+  .. code-block:: python
+     :linenos:
+
+     MT_FROZEN = 7  # : same value as PY_FROZEN = 7
+
+* **MT_COMPILED_OPT1**
+
+  .. code-block:: python
+     :linenos:
+
+     MT_COMPILED_OPT1 = 10  # : PY_COMPILED | <opt1> # 2 | 8
+
+* **MT_COMPILED_OPT2**
+
+  .. code-block:: python
+     :linenos:
+
+     MT_COMPILED_OPT2 = 18  # : PY_COMPILED | <opt2> # 2 | 16
+
+* **MT_COMPILED_DEBUG**
+
+  .. code-block:: python
+     :linenos:
+
+     MT_COMPILED_DEBUG = 34  # : PY_COMPILED | 0 # 2 | 32
+
+
+Miscelaneous
+^^^^^^^^^^^^
+Shared control variables for *pysourceinfo*:
+
+* **debug**
+* **verbose**
+
+
+Exceptions
+----------
+
+.. autoclass:: SourceInfoError

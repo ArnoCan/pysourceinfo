@@ -1,3 +1,6 @@
+
+.. _ANYTHINGISANOBJECT:
+
 Anything is an Object
 =====================
 
@@ -19,7 +22,7 @@ the Python interpreter, in particular via iPython.
 
  
 E.g. the function:
-::
+::::::::::::::::::
 
    getObjectType()
 

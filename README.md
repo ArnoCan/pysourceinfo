@@ -2,15 +2,8 @@ pysourceinfo
 ============
 
 The 'pysourceinfo' package provides basic runtime information on executed 
-sourcefiles based on 'inspect', 'sys', 'os', and additional sources.
+sourcefiles and modules based on 'inspect', 'sys', 'os', and additional sources.
 The covered objects include packages, modules/files and functions/methods/scripts. 
-
-The supported platforms are:
-
-* Linux, BSD, Unix, OS-X, Cygwin, and Windows
-
-* Python2.7+, Python3.5+
-
 
 **Online documentation**:
 
@@ -22,78 +15,111 @@ The supported platforms are:
 
   Install: *pip install pysourceinfo*, see also 'Install'.
 
-
 **Downloads**:
-
-* sourceforge.net: https://sourceforge.net/projects/pysourceinfo/files/
 
 * bitbucket.org: https://bitbucket.org/acue/pysourceinfo
 
 * github.com: https://github.com/ArnoCan/pysourceinfo/
 
 * pypi.org: https://pypi.org/project/pysourceinfo/
- 
+
+* sourceforge.net: https://sourceforge.net/projects/pysourceinfo/files/
 
 Project Data
 ------------
 
 * PROJECT: 'pysourceinfo'
 
-* MISSION: Support easy access to RTTI on Python source and binary files.
+* MISSION: Support easy access to RTTI for Python source and binary files.
 
 * VERSION: 00.01
 
-* RELEASE: 00.01.032
+* RELEASE: 00.01.038
 
 * STATUS: alpha
 
 * AUTHOR: Arno-Can Uestuensoez
 
-* COPYRIGHT: Copyright (C) 2010,2011,2015-2017 Arno-Can Uestuensoez @Ingenieurbuero Arno-Can Uestuensoez
+* COPYRIGHT: Copyright (C) 2010,2011,2015-2019 Arno-Can Uestuensoez @Ingenieurbuero Arno-Can Uestuensoez
 
 * LICENSE: Artistic-License-2.0 + Forced-Fairplay-Constraints
 
+Concepts and enumeration values are migrated from the 
 
-Python support: 
+* *UnifiedSessionsManager* (C) 2008 Arno-Can Uestuensoez @Ingenieurbuero Arno-Can Uestuensoez.  
 
-* Standard Python(CPython) - Python2.7, and Python3.5+ 
+Runtime Environment
+-------------------
+For a comprehensive list refer to the documentation.
 
-* PyPy - 5.10+ - Python2.7+, and Python3.5+
+**Python Syntax Support**
 
-OS-Support:
+*  Python2.7, and Python3
 
-* Linux: Fedora, CentOS, Debian, and Raspbian 
+**Python Implementation Support**
 
-* BSD: OpenBSD, FreeBSD
+*  CPython, IPython, IronPython, Jython, and PyPy
+
+**OS on Server, Workstation, Laptops, Virtual Machines, and Containers**
+
+* Linux: AlpineLinux, ArchLinux, CentOS, Debian, Fedora, Gentoo, OpenSUSE, Raspbian, RHEL, Slackware, SLES, Ubuntu, ...  
+
+* BSD: DragonFlyBSD, FreeBSD, NetBSD, OpenBSD, GhostBSD, TrueOS, NomadBSD
 
 * OS-X: Snow Leopard
 
-* Windows: Win7, Win10
+* Windows: Win10, Win8.1, Win7, WinXP, Win2019, Win2016, Win2012, Win2008, Win2000
+
+* WSL-1.0: Alpine, Debian, KaliLinux, openSUSE, SLES, Ubuntu
 
 * Cygwin
 
-* UNIX: Solaris
+* UNIX: Solaris10, Solaris11
 
+* Minix: Minix3
 
-**Current Release**
+* ReactOS
+
+**Network and Security**
+
+* Network Devices: OpenWRT
+
+* Security: KaliLinux, pfSense, BlackArch, ParrotOS, Pentoo
+
+**OS on Embedded Devices**
+
+* RaspberryPI: ArchLinux, CentOS, OpenBSD, OpenWRT, Raspbian
+
+* ASUS-TinkerBoard: Armbian
+
+Current Release
+---------------
 
 Major Changes:
 
-* Python2.6 support dropped.
+* Minor fixes
 
-* Python3.5+ support introduced.
+* extended *helper.getpythonpath*, and *helper.getpythonpath_rel*
 
-* PyPy tests added.
+* added *helper.getpythonpath_rel_oid*
 
-* Changed module structure and fitting names into overall category based naming schema.
+* added support for Python3.x
 
-* Split more stack related parts into package *PyStackInfo*
+* added support for various Python implementations
 
-* Added special support for decorators.
+* additionally tested on various Linux, BSD, Windows, see documents section 'Install'
 
-* Added support for some special cases of Python syntax elements, e.g. support of nested-classes.
+* Changed to *ReadTheDocs* as he the default template for the documentation
 
-* Added several new functions.
+* Added API reference documentation by Epydoc 
 
-* Enhanced documentation
+ToDo:
+
+* AIX
+
+* MicroPython, CircuitPython
+
+* test OpenBSD on rpi3
+
+* test Windows10IoT-Core
 

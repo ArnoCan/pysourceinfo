@@ -13,6 +13,13 @@
 /**/backup/
 /**/tmp/
 
+.vsd
+.VSD
+setenv-acue2.sh
+setenv-acue3.sh
+setenv.sh
+
+
 #Python + stuptools + sphinx
 /**/build/
 /**/dist/
@@ -187,3 +194,7 @@ ide/eclipse/.metadata/.plugins/org.eclipse.core.runtime/*
 !.gitignore
 
 
+setenv-acue2.sh
+setenv-acue3.sh
+setenv.sh
+setenv.bat

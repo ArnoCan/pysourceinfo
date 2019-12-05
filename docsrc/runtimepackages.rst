@@ -1,3 +1,6 @@
+
+.. _RUNTIMEPACKAGES:
+
 Runtime Packages
 ================
 
@@ -75,6 +78,7 @@ the OID of the module path, while the zipfile name is part of the filename path
 provided by the *__file__* attribute.
 
 E.g. the file structure:
+
 ::
 
    +--test01
@@ -142,10 +146,7 @@ The contained code could now be imported and used as:
    print(test01.test01.func_test01.__name__)
    print(test01.A.a.func_a.__name__)
 
-Resulting in the output:
-
-.. code-block:: python
-   :linenos:
+Resulting in the output::
 
    [acue@lap001 zip-packages]$ python main.py
    pkg_test01.zip
