@@ -1,0 +1,590 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>5.4. sourceinfo.helper &mdash; setupdocx  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="5.5. sourceinfo.infolists" href="sourceinfo.infolists.html" />
+    <link rel="prev" title="5.3. sourceinfo.fileinfo" href="sourceinfo.fileinfo.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.36
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Shortcuts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">SourceInfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index_part_cockpit.html">apidoc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index_part_apiref_scaled.html">apiref</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index_part_abstract.html">1. Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index_part_platform_support.html">2. Platform Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index_part_blueprint.html">3. Blueprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index_part_documents.html">4. Documents</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index_modules.html">5. Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="sourceinfo.html">5.1. sourceinfo.__init__</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sourceinfo.bininfo.html">5.2. sourceinfo.bininfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sourceinfo.fileinfo.html">5.3. sourceinfo.fileinfo</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5.4. sourceinfo.helper</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#functions">5.4.1. Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#getfilepathname-type">5.4.1.1. getfilepathname_type</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getpythonpath">5.4.1.2. getpythonpath</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getpythonpath-rel">5.4.1.3. getpythonpath_rel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getpythonpath-rel-oid">5.4.1.4. getpythonpath_rel_oid</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getstack-frame">5.4.1.5. getstack_frame</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getstack-len">5.4.1.6. getstack_len</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matchpath">5.4.1.7. matchpath</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sourceinfo.infolists.html">5.5. sourceinfo.infolists</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sourceinfo.objectinfo.html">5.6. sourceinfo.objectinfo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index_part_indices.html">6. Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index_part_resources.html">7. Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">8. Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">9. External References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index_part_license.html">10. Licenses</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Application</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="howto/index.html">Howto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help/index.html">Help</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">setupdocx</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index_modules.html">5. Modules</a> &raquo;</li>
+        
+      <li>5.4. sourceinfo.helper</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/sourceinfo.helper.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="module-sourceinfo.helper">
+<span id="sourceinfo-helper"></span><span id="pysourceinfo-helper"></span><h1>5.4. sourceinfo.helper<a class="headerlink" href="#module-sourceinfo.helper" title="Permalink to this headline">¶</a></h1>
+<p>pysourceinfo.helper - miscellaneous utilities - details see manuals</p>
+<p>The provided interfaces are foreseen for the bottom layer of the software stack,
+thus provide basic handling only. This includes special cases of the file system
+parameters. For more advanced file system path processing refer to <em>filesysobjects</em>.</p>
+<div class="section" id="functions">
+<h2>5.4.1. Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="getfilepathname-type">
+<span id="def-getfilepathname-type"></span><h3>5.4.1.1. getfilepathname_type<a class="headerlink" href="#getfilepathname-type" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="sourceinfo.helper.getfilepathname_type">
+<code class="sig-prename descclassname">sourceinfo.helper.</code><code class="sig-name descname">getfilepathname_type</code><span class="sig-paren">(</span><em class="sig-param">fpath</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sourceinfo/helper.html#getfilepathname_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sourceinfo.helper.getfilepathname_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Type for stored module as defined by <em>imp</em>.
+:param fpath: Module path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><p>Returns the type of the file.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="p">:</span><span class="o">=</span> <span class="p">(</span>
+      <span class="n">C_BUILTIN</span>
+    <span class="o">|</span> <span class="n">C_EXTENSION</span>
+    <span class="o">|</span> <span class="n">PKG_DIRECTORY</span>
+    <span class="o">|</span> <span class="n">PY_COMPILED</span>
+    <span class="o">|</span> <span class="n">PY_FROZEN</span>
+    <span class="o">|</span> <span class="n">PY_SOURCE</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><p><strong>pass-through</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="getpythonpath">
+<span id="def-getpythonpath"></span><h3>5.4.1.2. getpythonpath<a class="headerlink" href="#getpythonpath" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="sourceinfo.helper.getpythonpath">
+<code class="sig-prename descclassname">sourceinfo.helper.</code><code class="sig-name descname">getpythonpath</code><span class="sig-paren">(</span><em class="sig-param">pname</em>, <em class="sig-param">plist=None</em>, <em class="sig-param">**kw</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sourceinfo/helper.html#getpythonpath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sourceinfo.helper.getpythonpath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Matches prefix from sys.path.
+Foreseen to be used for canonical base references in unit tests.
+This enables in particular for generic tests of file system positions
+where originally absolute pathnames were required.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pname</strong> – Path name to be searched an appropriate
+pythonpath prefix for, either absolute
+or relative to an item of <em>plist</em>.</p></li>
+<li><p><strong>plist</strong> – <p>List of possible python paths.
+Alternative to <em>sys.path</em>.</p>
+<p>default := sys.path</p>
+</p></li>
+<li><p><strong>kw</strong> – <dl>
+<dt>ispre:</dt><dd><p>If <em>True</em> adds a postfix path separator.</p>
+</dd>
+<dt>presolve:</dt><dd><p>Defines the path resolution
+strategy:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">presolve</span> <span class="p">:</span><span class="o">=</span> <span class="p">(</span>
+      <span class="n">P_FIRST</span>
+    <span class="o">|</span> <span class="n">P_LAST</span>
+    <span class="o">|</span> <span class="n">P_LONGEST</span>
+    <span class="o">|</span> <span class="n">P_SHORTEST</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>The default is stored in:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sourceinfo</span><span class="o">.</span><span class="n">presolve</span> <span class="o">=</span> <span class="n">P_FIRST</span>
+</pre></div>
+</div>
+</dd>
+<dt>verify:</dt><dd><p>Verify against the filesystem, else no checks
+are done.</p>
+<p>default := True</p>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>Returns the first matching path prefix from sys.path,
+as ‘normpath’.
+Else:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ispre</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span> <span class="n">returns</span> <span class="n">empty</span> <span class="nb">str</span> <span class="o">-</span> <span class="s1">&#39;&#39;</span>
+<span class="k">else</span><span class="p">:</span>          <span class="n">returns</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="sourceinfo.html#sourceinfo.__init__.SourceInfoError" title="sourceinfo.__init__.SourceInfoError"><strong>SourceInfoError</strong></a> – </p></li>
+<li><p><strong>pass-through</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="getpythonpath-rel">
+<span id="def-getpythonpath-rel"></span><h3>5.4.1.3. getpythonpath_rel<a class="headerlink" href="#getpythonpath-rel" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="sourceinfo.helper.getpythonpath_rel">
+<code class="sig-prename descclassname">sourceinfo.helper.</code><code class="sig-name descname">getpythonpath_rel</code><span class="sig-paren">(</span><em class="sig-param">pname</em>, <em class="sig-param">plist=None</em>, <em class="sig-param">**kw</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sourceinfo/helper.html#getpythonpath_rel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sourceinfo.helper.getpythonpath_rel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Verifies an absolute or relative path name to be
+reachable as a relative path to one item of the search
+list <em>plist</em>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pname</strong> – Path name of a path searched for relative to
+an item of <em>plist</em>. Absolute is cut, relative
+is searched literally.</p></li>
+<li><p><strong>plist</strong> – <p>Search path alternative to <em>sys.path</em>.</p>
+<p><em>default := sys.path</em></p>
+</p></li>
+<li><p><strong>kargs</strong> – <dl>
+<dt>presolve:</dt><dd><p>The type of path resolution:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pname</span> <span class="ow">is</span> <span class="n">relative</span><span class="p">:</span>
+
+    <span class="n">presolve</span> <span class="p">:</span><span class="o">=</span> <span class="p">(</span>
+        <span class="n">P_FIRST</span>
+    <span class="p">)</span>
+
+<span class="n">pname</span> <span class="ow">is</span> <span class="n">absolute</span><span class="p">:</span>
+
+   <span class="n">presolve</span> <span class="p">:</span><span class="o">=</span> <span class="p">(</span>
+        <span class="n">P_FIRST</span>
+      <span class="o">|</span> <span class="n">P_LAST</span>
+      <span class="o">|</span> <span class="n">P_LONGEST</span>
+      <span class="o">|</span> <span class="n">P_SHORTEST</span>
+   <span class="p">)</span>
+</pre></div>
+</div>
+<p><em>default := pysourceinfo.presolve(P_FIRST)</em></p>
+</dd>
+<dt>raw:</dt><dd><p>If <em>True</em> suppresses the call of ‘os.path.normpath()’:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">raw</span> <span class="p">:</span><span class="o">=</span> <span class="p">(</span>
+      <span class="kc">True</span>   <span class="c1"># keep e.g. multiple and trailing *os.sep*</span>
+    <span class="o">|</span> <span class="kc">False</span>  <span class="c1"># apply os.path.normpath()</span>
+<span class="p">)</span>
+<span class="n">default</span> <span class="p">:</span><span class="o">=</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</dd>
+<dt>normpath:</dt><dd><p>The method to be called for the normalization of the provided
+input path. This is in particular required when cross-platform
+path strings are provided. These are by default processed
+internally with the <em>os.sep</em> of the current platform only.</p>
+<p>The <em>API</em> is as defined by ‘os.path.normpath’:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">normapth</span> <span class="p">:</span><span class="o">=</span> <span class="p">(</span>
+      <span class="o">&lt;</span><span class="n">custom</span><span class="o">-</span><span class="n">call</span><span class="o">&gt;</span>
+    <span class="o">|</span> <span class="o">&lt;</span><span class="n">default</span><span class="o">-</span><span class="n">call</span><span class="o">&gt;</span>
+<span class="p">)</span>
+<span class="n">custom</span><span class="o">-</span><span class="n">call</span> <span class="p">:</span><span class="o">=</span> <span class="p">(</span>
+      <span class="n">ntpath</span>
+    <span class="o">|</span> <span class="n">posixpath</span>
+    <span class="o">|</span> <span class="o">&lt;</span><span class="nb">any</span><span class="o">-</span><span class="n">compatible</span><span class="o">-</span><span class="n">api</span><span class="o">&gt;</span>
+<span class="p">)</span>
+<span class="n">default</span><span class="o">-</span><span class="n">call</span> <span class="p">:</span><span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span>
+</pre></div>
+</div>
+</dd>
+<dt>verify:</dt><dd><p>Verify against the file system, else no checks
+are done.</p>
+<p><em>default := True</em></p>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><p>First matched path from <em>sys.path</em> as normalized path.
+Else:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">PYTHONPATH</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">pname</span><span class="p">:</span>   <span class="n">returns</span> <span class="n">empty</span> <span class="nb">str</span> <span class="o">-</span> <span class="s1">&#39;&#39;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">verify</span><span class="p">:</span>               <span class="k">raise</span> <span class="n">SourceInfoError</span>
+    <span class="k">else</span><span class="p">:</span>                    <span class="n">returns</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="sourceinfo.html#sourceinfo.__init__.SourceInfoError" title="sourceinfo.__init__.SourceInfoError"><strong>SourceInfoError</strong></a> – </p></li>
+<li><p><strong>pass-through</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="getpythonpath-rel-oid">
+<span id="def-getpythonpath-rel-oid"></span><h3>5.4.1.4. getpythonpath_rel_oid<a class="headerlink" href="#getpythonpath-rel-oid" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="sourceinfo.helper.getpythonpath_rel_oid">
+<code class="sig-prename descclassname">sourceinfo.helper.</code><code class="sig-name descname">getpythonpath_rel_oid</code><span class="sig-paren">(</span><em class="sig-param">pname</em>, <em class="sig-param">plist=None</em>, <em class="sig-param">**kw</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sourceinfo/helper.html#getpythonpath_rel_oid"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sourceinfo.helper.getpythonpath_rel_oid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls <em>getpythonpath_rel</em>, returns the relative
+path as dotted <em>OID</em> relative to the search path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>interface parameters refer to::</strong> (<em>For</em>) – sourceinfo.helper.getpythonpath_rel()</p></li>
+<li><p><strong>kargs</strong> – <p>For remaining parameters refer to
+<em>getpythonpath_rel</em>.</p>
+<dl>
+<dt>restype:</dt><dd><p>Result type:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">restype</span> <span class="o">=</span> <span class="p">(</span>
+      <span class="n">OID_STR</span>    <span class="c1"># OID as dottedt string representation</span>
+    <span class="o">|</span> <span class="n">OID_TUPLE</span>  <span class="c1"># OID as tuple</span>
+    <span class="o">|</span> <span class="n">OID_LIST</span>   <span class="c1"># OID as list</span>
+<span class="p">)</span>
+
+<span class="n">default</span> <span class="p">:</span><span class="o">=</span> <span class="n">OID_STR</span>
+</pre></div>
+</div>
+</dd>
+<dt>sepin:</dt><dd><p>The path separator:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">default</span> <span class="p">:</span><span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span>
+</pre></div>
+</div>
+<p>The function internally checks the presence of the provided path.
+This is not cross-converted, thus requires native separator
+characters. While the <em>NT</em> file system supports multiple separators,
+the <em>posix</em> based file systems support regularly the slash ‘/’ only.
+Thus these fail when other separator characters are provided. For
+advanced cross-capabilities refer to <em>filesysobjects</em>.</p>
+</dd>
+<dt>sepout:</dt><dd><p>The path separator:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">default</span> <span class="p">:</span><span class="o">=</span> <span class="s1">&#39;.&#39;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns the provided result by <em>getpythonpath_rel</em> in accordance to
+the requested result type - see <em>restype</em>.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><a class="reference internal" href="sourceinfo.html#sourceinfo.__init__.SourceInfoError" title="sourceinfo.__init__.SourceInfoError"><strong>SourceInfoError</strong></a> – </p></li>
+<li><p><strong>pass-through</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="getstack-frame">
+<span id="def-getstack-frame"></span><h3>5.4.1.5. getstack_frame<a class="headerlink" href="#getstack-frame" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="sourceinfo.helper.getstack_frame">
+<code class="sig-prename descclassname">sourceinfo.helper.</code><code class="sig-name descname">getstack_frame</code><span class="sig-paren">(</span><em class="sig-param">spos=1</em>, <em class="sig-param">fromtop=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sourceinfo/helper.html#getstack_frame"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sourceinfo.helper.getstack_frame" title="Permalink to this definition">¶</a></dt>
+<dd><p>List of current mem-addresses on stack frames.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>spos</strong> – Stack position.</p></li>
+<li><p><strong>fromtop</strong> – Start on top, default from bottom.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns the specified frame.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>passed through exceptions</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="getstack-len">
+<span id="def-getstack-len"></span><h3>5.4.1.6. getstack_len<a class="headerlink" href="#getstack-len" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="sourceinfo.helper.getstack_len">
+<code class="sig-prename descclassname">sourceinfo.helper.</code><code class="sig-name descname">getstack_len</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/sourceinfo/helper.html#getstack_len"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sourceinfo.helper.getstack_len" title="Permalink to this definition">¶</a></dt>
+<dd><p>Length of current stack.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>none.</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns the length of current stack.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>pass-through</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="matchpath">
+<span id="def-matchpath"></span><h3>5.4.1.7. matchpath<a class="headerlink" href="#matchpath" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="sourceinfo.helper.matchpath">
+<code class="sig-prename descclassname">sourceinfo.helper.</code><code class="sig-name descname">matchpath</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">pathlist=None</em>, <em class="sig-param">pmatch=1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sourceinfo/helper.html#matchpath"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sourceinfo.helper.matchpath" title="Permalink to this definition">¶</a></dt>
+<dd><p>Match a file pathname of pathname on a pathlist.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – Path to be searched in <em>pathlist</em>.</p></li>
+<li><p><strong>pathlist</strong> – <p>Search path for a given <em>path</em>.</p>
+<p>default := <em>sys.path</em></p>
+</p></li>
+<li><p><strong>pmatch</strong> – <p>Match criteria for search.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pmatch</span> <span class="p">:</span><span class="o">=</span> <span class="p">(</span>
+    <span class="n">P_FIRST</span><span class="p">,</span> <span class="n">P_LAST</span><span class="p">,</span> <span class="n">P_SHORTEST</span><span class="p">,</span>
+    <span class="n">P_LONGEST</span><span class="p">,</span> <span class="n">P_IGNORE0</span>
+ <span class="p">)</span>
+</pre></div>
+</div>
+<p>default := <em>P_FIRST</em></p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns the matched pathname from pathlist.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>pass-through</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sourceinfo.infolists.html" class="btn btn-neutral float-right" title="5.5. sourceinfo.infolists" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sourceinfo.fileinfo.html" class="btn btn-neutral float-left" title="5.3. sourceinfo.fileinfo" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright Copyright (C) 2016 Arno-Can Uestuensoez @Ingenieurbuero Arno-Can Uestuensoez
+      <span class="lastupdated">
+        Last updated on Dec 05, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

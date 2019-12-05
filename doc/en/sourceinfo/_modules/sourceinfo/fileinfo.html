@@ -1,0 +1,673 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sourceinfo.fileinfo &mdash; setupdocx  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.36
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Shortcuts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">SourceInfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index_part_cockpit.html">apidoc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index_part_apiref_scaled.html">apiref</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index_part_abstract.html">1. Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index_part_platform_support.html">2. Platform Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index_part_blueprint.html">3. Blueprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index_part_documents.html">4. Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index_modules.html">5. Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index_part_indices.html">6. Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index_part_resources.html">7. Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">8. Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">9. External References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index_part_license.html">10. Licenses</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Application</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/index.html">Howto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../help/index.html">Help</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">setupdocx</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>sourceinfo.fileinfo</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for sourceinfo.fileinfo</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;pysourceinfo.fileinfo - information on source files.</span>
+
+<span class="sd">Based on the stack-frames of *inspect*, *__file__*, and additional </span>
+<span class="sd">attributes.</span>
+
+<span class="sd">Details see manuals.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+<span class="kn">from</span> <span class="nn">inspect</span> <span class="k">import</span> <span class="n">stack</span><span class="p">,</span> <span class="n">getmodule</span><span class="p">,</span> <span class="n">isbuiltin</span><span class="p">,</span> <span class="n">ismodule</span><span class="p">,</span> <span class="n">getsourcefile</span>
+
+<span class="kn">from</span> <span class="nn">pythonids</span> <span class="k">import</span> <span class="n">PYV35Plus</span>
+<span class="kn">from</span> <span class="nn">sourceinfo</span> <span class="k">import</span> <span class="n">presolve</span>
+<span class="kn">from</span> <span class="nn">sourceinfo.helper</span> <span class="k">import</span> <span class="n">matchpath</span><span class="p">,</span> <span class="n">getpythonpath</span><span class="p">,</span> <span class="n">getpythonpath_rel</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Arno-Can Uestuensoez&#39;</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s2">&quot;Artistic-License-2.0 + Forced-Fairplay-Constraints&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright (C) 2010-2017 Arno-Can Uestuensoez&quot;</span> \
+    <span class="s2">&quot; @Ingenieurbuero Arno-Can Uestuensoez&quot;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.1.34&#39;</span>
+<span class="n">__uuid__</span> <span class="o">=</span> <span class="s1">&#39;9de52399-7752-4633-9fdc-66c87a9200b8&#39;</span>
+
+<span class="n">__docformat__</span> <span class="o">=</span> <span class="s2">&quot;restructuredtext en&quot;</span>
+
+
+<span class="c1">#---</span>
+<span class="c1">#</span>
+<span class="c1"># redundant for autonomous load-independence by reduction of dependencies</span>
+<span class="c1">#</span>
+<span class="n">__gmn</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^.*[.]&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">__getmodule_name</span><span class="p">(</span><span class="n">mod</span><span class="p">):</span>
+    <span class="c1">#&quot;&quot;&quot;Name similar to basename of loaded module, same as getmodule_oid.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">mod</span> <span class="ow">and</span> <span class="n">ismodule</span><span class="p">(</span><span class="n">mod</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="s1">&#39;__name__&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">__gmn</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">mod</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="c1">#---</span>
+
+<div class="viewcode-block" id="getcaller_filename"><a class="viewcode-back" href="../../sourceinfo.fileinfo.html#sourceinfo.fileinfo.getcaller_filename">[docs]</a><span class="k">def</span> <span class="nf">getcaller_filename</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Filename of caller&#39;s module.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        spos:</span>
+<span class="sd">            Caller position on the stack.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the filename.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        pass-through</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">getcaller_filepathname</span><span class="p">(</span><span class="n">spos</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="getcaller_filepathname"><a class="viewcode-back" href="../../sourceinfo.fileinfo.html#sourceinfo.fileinfo.getcaller_filepathname">[docs]</a><span class="k">def</span> <span class="nf">getcaller_filepathname</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;File pathname of caller&#39;s module.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spos:</span>
+<span class="sd">            Caller position on the stack.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the file pathname.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_sf</span> <span class="o">=</span> <span class="n">stack</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">_sf</span><span class="p">[</span><span class="n">spos</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span></div>
+
+
+<span class="k">def</span> <span class="nf">getcaller_filepathname_rel</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;File pathname of caller&#39;s module relative to sys.path.&quot;&quot;&quot;</span>
+    <span class="n">_sf</span> <span class="o">=</span> <span class="n">stack</span><span class="p">()</span>
+    <span class="n">_cf</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">_sf</span><span class="p">[</span><span class="n">spos</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="k">for</span> <span class="n">sx</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">_cf</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">sx</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">_cf</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">sx</span><span class="p">))]</span>
+
+
+<div class="viewcode-block" id="getcaller_linenumber"><a class="viewcode-back" href="../../sourceinfo.fileinfo.html#sourceinfo.fileinfo.getcaller_linenumber">[docs]</a><span class="k">def</span> <span class="nf">getcaller_linenumber</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Source line number of call.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spos:</span>
+<span class="sd">            Caller position on the stack.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the line number of the parent call.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        pass-through</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">stack</span><span class="p">()[</span><span class="n">spos</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="getcaller_linenumber_def"><a class="viewcode-back" href="../../sourceinfo.fileinfo.html#sourceinfo.fileinfo.getcaller_linenumber_def">[docs]</a><span class="k">def</span> <span class="nf">getcaller_linenumber_def</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;First line number of enclosing caller function/method definition.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        spos:</span>
+<span class="sd">            Caller position on the stack.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the first linenumber of the calling functions/method definition.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        pass-through</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">stack</span><span class="p">()[</span><span class="n">spos</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">f_code</span><span class="o">.</span><span class="n">co_firstlineno</span></div>
+
+<div class="viewcode-block" id="getcaller_package_filename"><a class="viewcode-back" href="../../sourceinfo.fileinfo.html#sourceinfo.fileinfo.getcaller_package_filename">[docs]</a><span class="k">def</span> <span class="nf">getcaller_package_filename</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Args:</span>
+<span class="sd">        spos:</span>
+<span class="sd">            Caller position on the stack.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the file name of the package.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        pass-through</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">getcaller_package_filepathname</span><span class="p">(</span><span class="n">spos</span><span class="p">))</span></div>
+
+
+<span class="n">__comp_package_filepathname</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    (</span>
+<span class="s2">        ([/\\\\]*([^/\\\\]+.py)[oc]{0,1}$)</span>
+<span class="s2">        | ([/\\\\]*([^/\\\\]+).*.py[oc]{0,1}$)</span>
+<span class="s2">        | ([/\\\\]*([^/\\\\]+).*$)</span>
+<span class="s2">    )</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">VERBOSE</span>  <span class="c1"># @UndefinedVariable</span>
+<span class="p">)</span>
+<div class="viewcode-block" id="getcaller_package_filepathname"><a class="viewcode-back" href="../../sourceinfo.fileinfo.html#sourceinfo.fileinfo.getcaller_package_filepathname">[docs]</a><span class="k">def</span> <span class="nf">getcaller_package_filepathname</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">pmatch</span><span class="o">=</span><span class="n">presolve</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Filepathname of the package from *sys.path*.</span>
+<span class="sd">    If not matched by *sys.path* returns the *dirname* of the caller.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        spos:</span>
+<span class="sd">            Caller position on the stack.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the file path name of the package.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        pass-through</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_sf</span> <span class="o">=</span> <span class="n">stack</span><span class="p">()</span>
+    <span class="n">_cf</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">_sf</span><span class="p">[</span><span class="n">spos</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="n">p0</span> <span class="o">=</span> <span class="n">matchpath</span><span class="p">(</span><span class="n">_cf</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">pmatch</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">p0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">_cf</span><span class="p">))</span>
+    
+    <span class="n">p0l</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">p0</span><span class="p">)</span>
+    <span class="n">p1</span> <span class="o">=</span> <span class="n">getcaller_filepathname</span><span class="p">(</span><span class="n">spos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)[</span><span class="n">p0l</span><span class="p">:]</span>
+    <span class="n">pfn</span> <span class="o">=</span> <span class="n">__comp_package_filepathname</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>
+
+    <span class="c1"># TODO: PEP420 - Implicit Namespace Packages</span>
+    <span class="k">if</span> <span class="n">pfn</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">p0</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">pfn</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">pfn</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">p0</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">pfn</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">pfn</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">p0</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">pfn</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="getcaller_package_pathname"><a class="viewcode-back" href="../../sourceinfo.fileinfo.html#sourceinfo.fileinfo.getcaller_package_pathname">[docs]</a><span class="k">def</span> <span class="nf">getcaller_package_pathname</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">pmatch</span><span class="o">=</span><span class="n">presolve</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Pathname of the package from *sys.path* as used for search of the package.</span>
+<span class="sd">    Relies on &#39;inspect&#39;.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        spos:</span>
+<span class="sd">            Caller position on the stack.__</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the path name to the package.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        pass-through</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">getcaller_package_filepathname</span><span class="p">(</span><span class="n">spos</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">pmatch</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="getcaller_pathname"><a class="viewcode-back" href="../../sourceinfo.fileinfo.html#sourceinfo.fileinfo.getcaller_pathname">[docs]</a><span class="k">def</span> <span class="nf">getcaller_pathname</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;pathname of caller source file.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        spos:</span>
+<span class="sd">            Caller position on the stack.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the filename.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        pass-through</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">PYV35Plus</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">getcaller_filepathname</span><span class="p">(</span><span class="n">spos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">_sf</span> <span class="o">=</span> <span class="n">stack</span><span class="p">()</span>
+        <span class="c1"># mx = _sf[spos][0].f_locals[&#39;module&#39;]</span>
+        <span class="n">module</span> <span class="o">=</span> <span class="n">getmodule</span><span class="p">(</span><span class="n">_sf</span><span class="p">[</span><span class="n">spos</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">module</span><span class="p">,</span> <span class="s1">&#39;__file__&#39;</span><span class="p">):</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="n">module</span><span class="o">.</span><span class="vm">__file__</span>
+            <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">f</span><span class="p">)</span></div>
+        <span class="c1"># PEP 3147 -- PYC Repository Directories</span>
+
+
+<span class="n">__comp_getcaller_pathname_rel</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    (</span>
+<span class="s2">     (()[/\\\\]*[^/\\\\]+.py[oc]{0,1}$)</span>
+<span class="s2">     |([/\\\\]*(.+)[/\\\\][^/\\\\]+.py[oc]{0,1}$)</span>
+<span class="s2">     |([/\\\\]*(.+))</span>
+<span class="s2">    )</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">VERBOSE</span>  <span class="c1"># @UndefinedVariable</span>
+<span class="p">)</span>
+
+
+<div class="viewcode-block" id="getcaller_pathname_rel"><a class="viewcode-back" href="../../sourceinfo.fileinfo.html#sourceinfo.fileinfo.getcaller_pathname_rel">[docs]</a><span class="k">def</span> <span class="nf">getcaller_pathname_rel</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Relative pathname to first matching package directory of caller.</span>
+<span class="sd">    Evaluates &#39;sys.path&#39; first, else switches to &#39;inspect&#39;.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        spos:</span>
+<span class="sd">            Caller position on the stack.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the path name to the package.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        pass-through</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">getcaller_filepathname</span><span class="p">(</span>
+        <span class="n">spos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>  <span class="c1"># TODO: check for normpath</span>
+    <span class="k">for</span> <span class="n">si</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
+        <span class="n">si</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">si</span><span class="p">)</span> 
+        <span class="k">if</span> <span class="n">ax</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">si</span><span class="p">):</span>
+            <span class="n">gx</span> <span class="o">=</span> <span class="n">__comp_getcaller_pathname_rel</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">ax</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">si</span><span class="p">):])</span>
+            <span class="k">if</span> <span class="n">gx</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">gx</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">gx</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">gx</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">gx</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">gx</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="getcaller_pathname_sub"><a class="viewcode-back" href="../../sourceinfo.fileinfo.html#sourceinfo.fileinfo.getcaller_pathname_sub">[docs]</a><span class="k">def</span> <span class="nf">getcaller_pathname_sub</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;sub-pathname to first matching module directory of caller.</span>
+<span class="sd">    Evaluates &#39;sys.path&#39; first, else switches to &#39;inspect&#39;.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        spos:</span>
+<span class="sd">            Caller position on the stack.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the path name to the package.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        pass-through</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[^/</span><span class="se">\\\\</span><span class="s2">]*[/</span><span class="se">\\\\</span><span class="s2">](.*)&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\1&quot;</span><span class="p">,</span> <span class="n">getcaller_pathname_rel</span><span class="p">(</span><span class="n">spos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="getcaller_python_pathname"><a class="viewcode-back" href="../../sourceinfo.fileinfo.html#sourceinfo.fileinfo.getcaller_python_pathname">[docs]</a><span class="k">def</span> <span class="nf">getcaller_python_pathname</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Alias for getcaller_package_pathname</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spos:</span>
+<span class="sd">            Caller position on the stack.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the name of caller module.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">getcaller_package_pathname</span><span class="p">(</span><span class="n">spos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="getcaller_source_filepathname"><a class="viewcode-back" href="../../sourceinfo.fileinfo.html#sourceinfo.fileinfo.getcaller_source_filepathname">[docs]</a><span class="k">def</span> <span class="nf">getcaller_source_filepathname</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Pathname of caller source.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spos:</span>
+<span class="sd">            Caller position on the stack.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the file pathname of the source for the caller,</span>
+<span class="sd">        else None.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        pass-through</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">getsourcefile</span><span class="p">(</span><span class="n">stack</span><span class="p">()[</span><span class="n">spos</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>  <span class="c1"># mx = _sf[spos][1]</span></div>
+
+
+<div class="viewcode-block" id="getmodule_filename"><a class="viewcode-back" href="../../sourceinfo.fileinfo.html#sourceinfo.fileinfo.getmodule_filename">[docs]</a><span class="k">def</span> <span class="nf">getmodule_filename</span><span class="p">(</span><span class="n">mod</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Basename of file for loaded module *mod*.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        mod:</span>
+<span class="sd">            Reference to a loaded module.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the basename of the loaded module.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        pass-through</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">mod</span> <span class="ow">and</span> <span class="n">ismodule</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">isbuiltin</span><span class="p">(</span><span class="n">mod</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="s1">&#39;__file__&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">mod</span><span class="o">.</span><span class="vm">__file__</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">mod</span><span class="o">.</span><span class="vm">__file__</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="getmodule_filepathname"><a class="viewcode-back" href="../../sourceinfo.fileinfo.html#sourceinfo.fileinfo.getmodule_filepathname">[docs]</a><span class="k">def</span> <span class="nf">getmodule_filepathname</span><span class="p">(</span><span class="n">mod</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;File pathname of loaded module *mod*.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mod:</span>
+<span class="sd">            Reference to a loaded module.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the file pathname of the loaded module.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        pass-through</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">mod</span> <span class="ow">and</span> <span class="n">ismodule</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">isbuiltin</span><span class="p">(</span><span class="n">mod</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">getsourcefile</span><span class="p">(</span><span class="n">mod</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="getmodule_package_pathname"><a class="viewcode-back" href="../../sourceinfo.fileinfo.html#sourceinfo.fileinfo.getmodule_package_pathname">[docs]</a><span class="k">def</span> <span class="nf">getmodule_package_pathname</span><span class="p">(</span><span class="n">mod</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Path name of package for loaded module.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        mod:</span>
+<span class="sd">            Reference to a loaded module.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the pathname of the package.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        pass-through</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mn</span> <span class="o">=</span> <span class="n">__getmodule_name</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span>  <span class="c1"># requires normalized path</span>
+    <span class="k">if</span> <span class="n">mn</span><span class="p">:</span>
+        <span class="n">mpn</span> <span class="o">=</span> <span class="n">getmodule_pathname</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">mpn</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">mpn</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="getmodule_pathname"><a class="viewcode-back" href="../../sourceinfo.fileinfo.html#sourceinfo.fileinfo.getmodule_pathname">[docs]</a><span class="k">def</span> <span class="nf">getmodule_pathname</span><span class="p">(</span><span class="n">mod</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Path name of loaded module.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mod:</span>
+<span class="sd">            Reference to a loaded module.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the pathname of the loaded module.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        pass-through</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">mod</span> <span class="ow">and</span> <span class="n">ismodule</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">isbuiltin</span><span class="p">(</span><span class="n">mod</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="s1">&#39;__file__&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">mod</span><span class="o">.</span><span class="vm">__file__</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="getmodule_pathname_rel"><a class="viewcode-back" href="../../sourceinfo.fileinfo.html#sourceinfo.fileinfo.getmodule_pathname_rel">[docs]</a><span class="k">def</span> <span class="nf">getmodule_pathname_rel</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">plist</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Relative path name to PYTHONPATH for loaded module.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mod:</span>
+<span class="sd">            Reference to a loaded module.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the relative pathname of the loaded module.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        pass-through</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">mod</span> <span class="ow">and</span> <span class="n">ismodule</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">isbuiltin</span><span class="p">(</span><span class="n">mod</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="s1">&#39;__file__&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">getpythonpath_rel</span><span class="p">(</span><span class="n">mod</span><span class="o">.</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">plist</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="getmodule_pathname_sub"><a class="viewcode-back" href="../../sourceinfo.fileinfo.html#sourceinfo.fileinfo.getmodule_pathname_sub">[docs]</a><span class="k">def</span> <span class="nf">getmodule_pathname_sub</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">plist</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Path name for loaded module, relative to package path.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        mod:</span>
+<span class="sd">            Reference to a loaded module.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the sub pathname of the loaded module.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        pass-through</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">getmodule_pathname_rel</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">plist</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">PYV35Plus</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[^/</span><span class="se">\\\\</span><span class="s2">]*[/</span><span class="se">\\\\</span><span class="s2">]&quot;</span><span class="p">,</span> <span class="sa">r</span><span class="s2">&quot;\1&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;[^/</span><span class="se">\\\\</span><span class="s2">]*[/</span><span class="se">\\\\</span><span class="s2">]&quot;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="sa">r</span><span class="s2">&quot;\1&quot;</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">),</span> <span class="n">ax</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="getmodule_python_pathname"><a class="viewcode-back" href="../../sourceinfo.fileinfo.html#sourceinfo.fileinfo.getmodule_python_pathname">[docs]</a><span class="k">def</span> <span class="nf">getmodule_python_pathname</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="n">plist</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Path name from PYTHONPATH of loaded module.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        mod:</span>
+<span class="sd">            Reference to a loaded module.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the pathname of the loaded module.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        pass-through</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">mod</span> <span class="ow">and</span> <span class="n">ismodule</span><span class="p">(</span><span class="n">mod</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">isbuiltin</span><span class="p">(</span><span class="n">mod</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">mod</span><span class="p">,</span> <span class="s1">&#39;__file__&#39;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">getpythonpath</span><span class="p">(</span><span class="n">mod</span><span class="o">.</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">plist</span><span class="p">)</span></div>
+
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright Copyright (C) 2016 Arno-Can Uestuensoez @Ingenieurbuero Arno-Can Uestuensoez
+      <span class="lastupdated">
+        Last updated on Dec 05, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,914 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sourceinfo.helper &mdash; setupdocx  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.36
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Shortcuts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">SourceInfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index_part_cockpit.html">apidoc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index_part_apiref_scaled.html">apiref</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index_part_abstract.html">1. Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index_part_platform_support.html">2. Platform Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index_part_blueprint.html">3. Blueprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index_part_documents.html">4. Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index_modules.html">5. Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index_part_indices.html">6. Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index_part_resources.html">7. Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">8. Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">9. External References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index_part_license.html">10. Licenses</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Application</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/index.html">Howto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../help/index.html">Help</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">setupdocx</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>sourceinfo.helper</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for sourceinfo.helper</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;pysourceinfo.helper - miscellaneous utilities - details see manuals</span>
+
+<span class="sd">The provided interfaces are foreseen for the bottom layer of the software stack,</span>
+<span class="sd">thus provide basic handling only. This includes special cases of the file system </span>
+<span class="sd">parameters. For more advanced file system path processing refer to *filesysobjects*. </span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">print_function</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">inspect</span> <span class="k">import</span> <span class="n">stack</span>
+<span class="kn">from</span> <span class="nn">imp</span> <span class="k">import</span> <span class="n">PY_SOURCE</span><span class="p">,</span> <span class="n">PY_COMPILED</span><span class="p">,</span> <span class="n">C_EXTENSION</span><span class="p">,</span> <span class="n">PKG_DIRECTORY</span><span class="p">,</span> <span class="n">C_BUILTIN</span><span class="p">,</span> <span class="n">PY_FROZEN</span>
+
+<span class="kn">from</span> <span class="nn">pythonids</span> <span class="k">import</span> <span class="n">PYV35Plus</span><span class="p">,</span> <span class="n">ISSTR</span>
+
+<span class="kn">from</span> <span class="nn">sourceinfo</span> <span class="k">import</span> <span class="n">SourceInfoError</span><span class="p">,</span> \
+    <span class="n">presolve</span><span class="p">,</span> <span class="n">P_FIRST</span><span class="p">,</span> <span class="n">P_LAST</span><span class="p">,</span> <span class="n">P_LONGEST</span><span class="p">,</span> <span class="n">P_SHORTEST</span><span class="p">,</span> <span class="n">P_IGNORE0</span><span class="p">,</span> \
+    <span class="n">OID_STR</span><span class="p">,</span> <span class="n">OID_TUPLE</span><span class="p">,</span> <span class="n">OID_LIST</span>
+
+<span class="k">if</span> <span class="n">PYV35Plus</span><span class="p">:</span>
+    <span class="c1"># pylint: disable-msg=F0401</span>
+    <span class="kn">from</span> <span class="nn">importlib.machinery</span> <span class="k">import</span> <span class="n">SOURCE_SUFFIXES</span><span class="p">,</span> <span class="n">DEBUG_BYTECODE_SUFFIXES</span><span class="p">,</span> <span class="n">OPTIMIZED_BYTECODE_SUFFIXES</span><span class="p">,</span> <span class="n">BYTECODE_SUFFIXES</span><span class="p">,</span> <span class="n">EXTENSION_SUFFIXES</span>  <span class="c1"># @UnresolvedImport</span>
+    <span class="kn">from</span> <span class="nn">importlib</span> <span class="k">import</span> <span class="n">util</span>  <span class="c1"># @UnresolvedImport</span>
+    <span class="c1"># pylint: enable-msg=F0401</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">inspect</span> <span class="k">import</span> <span class="n">getmoduleinfo</span>  <span class="c1"># @UnresolvedImport</span>
+
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Arno-Can Uestuensoez&#39;</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s2">&quot;Artistic-License-2.0 + Forced-Fairplay-Constraints&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright (C) 2010-2017 Arno-Can Uestuensoez&quot;</span> \
+    <span class="s2">&quot; @Ingenieurbuero Arno-Can Uestuensoez&quot;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.1.21&#39;</span>
+<span class="n">__uuid__</span> <span class="o">=</span> <span class="s1">&#39;9de52399-7752-4633-9fdc-66c87a9200b8&#39;</span>
+
+<span class="n">__docformat__</span> <span class="o">=</span> <span class="s2">&quot;restructuredtext en&quot;</span>
+
+
+<span class="c1"># redundant for dependency reduction - keep in sync with pysourceinfo.objectinfo</span>
+<span class="n">__MT_UNKNOWN</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">__MT_SOURCE</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># PY_SOURCE #1</span>
+<span class="n">__MT_COMPILED</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># PY_COMPILED #2</span>
+<span class="n">__MT_EXTENSION</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># C_EXTENSION #3</span>
+<span class="n">__MT_DIRECTORY</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># PKG_DIRECTORY #5</span>
+<span class="n">__MT_BUILTIN</span> <span class="o">=</span> <span class="mi">6</span>  <span class="c1"># C_BUILTIN #6</span>
+<span class="n">__MT_FROZEN</span> <span class="o">=</span> <span class="mi">7</span>  <span class="c1"># PY_FROZEN #7</span>
+<span class="n">__MT_COMPILED_OPT1</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># PY_COMPILED | &lt;opt1&gt; # 2 | 8</span>
+<span class="n">__MT_COMPILED_OPT2</span> <span class="o">=</span> <span class="mi">18</span>  <span class="c1"># PY_COMPILED | &lt;opt2&gt; # 2 | 16</span>
+<span class="n">__MT_COMPILED_DEBUG</span> <span class="o">=</span> <span class="mi">34</span>  <span class="c1"># PY_COMPILED # 2</span>
+
+
+<span class="n">_scname</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span>
+    <span class="sa">r</span><span class="sd">&#39;&#39;&#39;.*[\\\\/]([^.]+)[.]([^-]+)-([0-9]{2})[.](opt-[012])*([.].+)$&#39;&#39;&#39;</span><span class="p">)</span>
+
+<span class="c1"># removes init file from path - foreseen for package path to OID processing</span>
+<span class="n">CUT_INIT_PY</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;__init__.py&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="getfilepathname_type"><a class="viewcode-back" href="../../sourceinfo.helper.html#sourceinfo.helper.getfilepathname_type">[docs]</a><span class="k">def</span> <span class="nf">getfilepathname_type</span><span class="p">(</span><span class="n">fpath</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Type for stored module as defined by *imp*.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        fpath:</span>
+<span class="sd">            Module path.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the type of the file. ::</span>
+<span class="sd">        </span>
+<span class="sd">            result := (</span>
+<span class="sd">                  C_BUILTIN</span>
+<span class="sd">                | C_EXTENSION</span>
+<span class="sd">                | PKG_DIRECTORY</span>
+<span class="sd">                | PY_COMPILED</span>
+<span class="sd">                | PY_FROZEN</span>
+<span class="sd">                | PY_SOURCE</span>
+<span class="sd">            )</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">          pass-through</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">PYV35Plus</span><span class="p">:</span>  <span class="c1"># for now the more frequent call</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">fpath</span><span class="p">):</span>
+            <span class="k">return</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="n">getmoduleinfo</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ret</span> <span class="ow">and</span> <span class="n">ret</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="ow">in</span> <span class="p">(</span><span class="n">PY_SOURCE</span><span class="p">,</span> <span class="n">PY_COMPILED</span><span class="p">,</span> <span class="n">C_EXTENSION</span><span class="p">,</span> <span class="n">PKG_DIRECTORY</span><span class="p">,</span> <span class="n">C_BUILTIN</span><span class="p">,</span> <span class="n">PY_FROZEN</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">ret</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">fpath</span><span class="p">):</span>
+            <span class="k">return</span>
+
+        <span class="c1">#</span>
+        <span class="c1"># the redundnacy of type-postfixes requires now prefix-analysis by &#39;_scname&#39;</span>
+        <span class="c1">#</span>
+        
+        <span class="c1"># In [1]: from importlib.machinery import SOURCE_SUFFIXES, DEBUG_BYTECODE_SUFFIXES</span>
+        <span class="c1">#    ...: , OPTIMIZED_BYTECODE_SUFFIXES, BYTECODE_SUFFIXES, EXTENSION_SUFFIXES</span>
+        <span class="c1"># </span>
+        <span class="c1"># In [3]: SOURCE_SUFFIXES</span>
+        <span class="c1"># Out[3]: [&#39;.py&#39;]</span>
+        <span class="c1"># </span>
+        <span class="c1"># In [4]: DEBUG_BYTECODE_SUFFIXES</span>
+        <span class="c1"># Out[4]: [&#39;.pyc&#39;]</span>
+        <span class="c1"># </span>
+        <span class="c1"># In [5]: OPTIMIZED_BYTECODE_SUFFIXES</span>
+        <span class="c1"># Out[5]: [&#39;.pyc&#39;]</span>
+        <span class="c1"># </span>
+        <span class="c1"># In [6]: BYTECODE_SUFFIXES</span>
+        <span class="c1"># Out[6]: [&#39;.pyc&#39;]</span>
+        <span class="c1"># </span>
+        <span class="c1"># In [7]: EXTENSION_SUFFIXES</span>
+        <span class="c1"># Out[7]: [&#39;.cpython-36m-x86_64-linux-gnu.so&#39;, &#39;.abi3.so&#39;, &#39;.so&#39;]</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="n">_scname</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">x</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># trust...</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">fpath</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">SOURCE_SUFFIXES</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">__MT_SOURCE</span>
+        <span class="k">elif</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">EXTENSION_SUFFIXES</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">__MT_EXTENSION</span>
+        <span class="k">elif</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">BYTECODE_SUFFIXES</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="n">__MT_COMPILED</span>
+        <span class="k">elif</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">OPTIMIZED_BYTECODE_SUFFIXES</span> <span class="ow">and</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;opt-1&#39;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">__MT_COMPILED_OPT1</span>
+            <span class="k">if</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;opt-2&#39;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">__MT_COMPILED_OPT2</span>
+            <span class="k">raise</span> <span class="n">SourceInfoError</span><span class="p">(</span>
+                <span class="s2">&quot;Unknown opt:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">fpath</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="n">x</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="n">DEBUG_BYTECODE_SUFFIXES</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">__MT_COMPILED_DEBUG</span>
+    <span class="k">return</span> <span class="n">__MT_UNKNOWN</span></div>
+
+
+<span class="k">def</span> <span class="nf">get_oid_filepathname</span><span class="p">(</span><span class="n">oid</span><span class="p">,</span> <span class="n">spath</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;File path name for OID.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">find_spec</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">find_spec</span><span class="p">(</span><span class="n">oid</span><span class="p">,</span> <span class="n">spath</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">find_spec</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">find_spec</span><span class="o">.</span><span class="n">origin</span>
+
+
+<div class="viewcode-block" id="getpythonpath"><a class="viewcode-back" href="../../sourceinfo.helper.html#sourceinfo.helper.getpythonpath">[docs]</a><span class="k">def</span> <span class="nf">getpythonpath</span><span class="p">(</span><span class="n">pname</span><span class="p">,</span> <span class="n">plist</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Matches prefix from sys.path.</span>
+<span class="sd">    Foreseen to be used for canonical base references in unit tests.</span>
+<span class="sd">    This enables in particular for generic tests of file system positions</span>
+<span class="sd">    where originally absolute pathnames were required.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        pname: </span>
+<span class="sd">            Path name to be searched an appropriate</span>
+<span class="sd">            pythonpath prefix for, either absolute</span>
+<span class="sd">            or relative to an item of *plist*.</span>
+<span class="sd">    </span>
+<span class="sd">        plist:</span>
+<span class="sd">            List of possible python paths.</span>
+<span class="sd">            Alternative to *sys.path*.</span>
+
+<span class="sd">            default := sys.path</span>
+<span class="sd">    </span>
+<span class="sd">        kw:</span>
+<span class="sd">            ispre:</span>
+<span class="sd">                If *True* adds a postfix path separator.</span>
+
+<span class="sd">            presolve: </span>
+<span class="sd">                Defines the path resolution</span>
+<span class="sd">                strategy::</span>
+
+<span class="sd">                    presolve := (</span>
+<span class="sd">                          P_FIRST</span>
+<span class="sd">                        | P_LAST</span>
+<span class="sd">                        | P_LONGEST</span>
+<span class="sd">                        | P_SHORTEST</span>
+<span class="sd">                        ) </span>
+<span class="sd">        </span>
+<span class="sd">                The default is stored in:: </span>
+<span class="sd">    </span>
+<span class="sd">                    sourceinfo.presolve = P_FIRST</span>
+<span class="sd">    </span>
+<span class="sd">            verify:</span>
+<span class="sd">                Verify against the filesystem, else no checks</span>
+<span class="sd">                are done.</span>
+<span class="sd">                </span>
+<span class="sd">                default := True</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the first matching path prefix from sys.path,</span>
+<span class="sd">        as &#39;normpath&#39;.</span>
+<span class="sd">        Else::</span>
+
+<span class="sd">            ispre == True: returns empty str - &#39;&#39;</span>
+<span class="sd">            else:          returns None</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        SourceInfoError</span>
+
+<span class="sd">        pass-through</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_pre</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;ispre&#39;</span><span class="p">)</span>
+    <span class="n">_verify</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;verify&#39;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span> 
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">pname</span><span class="p">:</span>
+        <span class="c1"># shortcut for empty/None - so following check know a parameter is provided</span>
+        <span class="k">if</span> <span class="n">_verify</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">SourceInfoError</span><span class="p">(</span><span class="s1">&#39;no valid param pname = &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pname</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="n">_pre</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">plist</span><span class="p">:</span>
+        <span class="n">plist</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span>
+
+    <span class="n">_presolve</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;presolve&#39;</span><span class="p">,</span> <span class="n">presolve</span><span class="p">)</span>
+
+    <span class="c1"># path or object name</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_fp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">pname</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">_fp</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">pname</span><span class="o">.</span><span class="vm">__file__</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">_verify</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">SourceInfoError</span><span class="p">(</span><span class="s1">&#39;not valid pname = </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pname</span><span class="p">)))</span>
+
+    <span class="c1">#</span>
+    <span class="c1"># now shure, &#39;pname&#39; is s.th. valid</span>
+    <span class="c1">#</span>
+    
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isabs</span><span class="p">(</span><span class="n">_fp</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">pname</span> <span class="ow">in</span> <span class="n">plist</span><span class="p">:</span>
+            <span class="c1"># is a search path itself</span>
+
+            <span class="k">if</span> <span class="n">_verify</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">pname</span><span class="p">):</span>
+                <span class="c1"># absolute is has to exist itself</span>
+                <span class="k">raise</span> <span class="n">SourceInfoError</span><span class="p">(</span><span class="s1">&#39;does not exist: </span><span class="se">\n</span><span class="s1">   abs: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pname</span><span class="p">)))</span>
+
+            <span class="c1"># simply not searched</span>
+            <span class="k">if</span> <span class="n">_pre</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">_fp</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span>
+            <span class="k">return</span> <span class="n">_fp</span>
+
+        <span class="k">if</span> <span class="n">_verify</span><span class="p">:</span>
+            <span class="n">_fplst</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">plist</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">_fp</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="ow">and</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+                    <span class="n">_fplst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">_fplst</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">plist</span> <span class="k">if</span> <span class="n">_fp</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">_fplst</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">_sp</span> <span class="ow">in</span> <span class="n">plist</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">_verify</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">_sp</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">_fp</span><span class="p">):</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">_pre</span><span class="p">:</span>
+                <span class="n">_fplst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_sp</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">_fplst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_sp</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">_verify</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">_fplst</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">SourceInfoError</span><span class="p">(</span><span class="s1">&#39;does not exist: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pname</span><span class="p">)))</span>
+
+    <span class="k">if</span> <span class="n">_presolve</span> <span class="o">==</span> <span class="n">P_FIRST</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">_verify</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">_fplst</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="k">raise</span> <span class="n">SourceInfoError</span><span class="p">(</span><span class="s1">&#39;does not exist: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">_fplst</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+        <span class="k">return</span> <span class="n">_fplst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="k">elif</span> <span class="n">_presolve</span> <span class="o">==</span> <span class="n">P_LAST</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">_verify</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">_fplst</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="k">raise</span> <span class="n">SourceInfoError</span><span class="p">(</span><span class="s1">&#39;does not exist: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">_fplst</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])))</span>
+        <span class="k">return</span> <span class="n">_fplst</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="k">elif</span> <span class="n">_presolve</span> <span class="o">==</span> <span class="n">P_LONGEST</span><span class="p">:</span>
+        <span class="n">_fpnew</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">_fplst</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">_verify</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">))</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">_fpnew</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)):</span>  <span class="c1"># number of path-items</span>
+                <span class="n">_fpnew</span> <span class="o">=</span> <span class="n">x</span>
+
+    <span class="k">elif</span> <span class="n">_presolve</span> <span class="o">==</span> <span class="n">P_SHORTEST</span><span class="p">:</span>
+        <span class="n">_fpnew</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">_fplst</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">_verify</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">_fpnew</span><span class="p">:</span>
+                <span class="n">_fpnew</span> <span class="o">=</span> <span class="n">x</span> 
+
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">))</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">_fpnew</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)):</span>  <span class="c1"># number of path-items</span>
+                <span class="n">_fpnew</span> <span class="o">=</span> <span class="n">x</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">SourceInfoError</span><span class="p">(</span><span class="s2">&quot;unknown presolve = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">presolve</span><span class="p">))</span>
+
+
+    <span class="k">if</span> <span class="n">_verify</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">_fpnew</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">SourceInfoError</span><span class="p">(</span><span class="s1">&#39;does not exist: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pname</span><span class="p">)))</span>
+
+    <span class="k">return</span> <span class="n">_fpnew</span></div>
+
+
+<div class="viewcode-block" id="getpythonpath_rel"><a class="viewcode-back" href="../../sourceinfo.helper.html#sourceinfo.helper.getpythonpath_rel">[docs]</a><span class="k">def</span> <span class="nf">getpythonpath_rel</span><span class="p">(</span><span class="n">pname</span><span class="p">,</span> <span class="n">plist</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Verifies an absolute or relative path name to be</span>
+<span class="sd">    reachable as a relative path to one item of the search</span>
+<span class="sd">    list *plist*.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        pname:</span>
+<span class="sd">            Path name of a path searched for relative to</span>
+<span class="sd">            an item of *plist*. Absolute is cut, relative</span>
+<span class="sd">            is searched literally.</span>
+
+<span class="sd">        plist:</span>
+<span class="sd">            Search path alternative to *sys.path*.</span>
+<span class="sd">            </span>
+<span class="sd">            *default := sys.path*</span>
+
+<span class="sd">        kargs:</span>
+<span class="sd">            presolve:</span>
+<span class="sd">                The type of path resolution: ::</span>
+
+<span class="sd">                   pname is relative:</span>
+
+<span class="sd">                       presolve := (</span>
+<span class="sd">                           P_FIRST</span>
+<span class="sd">                       )</span>
+
+<span class="sd">                   pname is absolute:</span>
+
+<span class="sd">                      presolve := (</span>
+<span class="sd">                           P_FIRST</span>
+<span class="sd">                         | P_LAST</span>
+<span class="sd">                         | P_LONGEST</span>
+<span class="sd">                         | P_SHORTEST</span>
+<span class="sd">                      )</span>
+
+<span class="sd">                *default := pysourceinfo.presolve(P_FIRST)*</span>
+
+<span class="sd">            raw:</span>
+<span class="sd">                If *True* suppresses the call of &#39;os.path.normpath()&#39;::</span>
+
+<span class="sd">                    raw := (</span>
+<span class="sd">                          True   # keep e.g. multiple and trailing *os.sep*</span>
+<span class="sd">                        | False  # apply os.path.normpath()</span>
+<span class="sd">                    )</span>
+<span class="sd">                    default := False</span>
+
+<span class="sd">            normpath:</span>
+<span class="sd">                The method to be called for the normalization of the provided</span>
+<span class="sd">                input path. This is in particular required when cross-platform</span>
+<span class="sd">                path strings are provided. These are by default processed </span>
+<span class="sd">                internally with the *os.sep* of the current platform only.</span>
+
+<span class="sd">                The *API* is as defined by &#39;os.path.normpath&#39;::</span>
+
+<span class="sd">                    normapth := (</span>
+<span class="sd">                          &lt;custom-call&gt;</span>
+<span class="sd">                        | &lt;default-call&gt;</span>
+<span class="sd">                    )</span>
+<span class="sd">                    custom-call := (</span>
+<span class="sd">                          ntpath</span>
+<span class="sd">                        | posixpath</span>
+<span class="sd">                        | &lt;any-compatible-api&gt;</span>
+<span class="sd">                    )</span>
+<span class="sd">                    default-call := os.path.normpath</span>
+
+<span class="sd">            verify:</span>
+<span class="sd">                Verify against the file system, else no checks</span>
+<span class="sd">                are done.</span>
+<span class="sd">                </span>
+<span class="sd">                *default := True*</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        First matched path from *sys.path* as normalized path.</span>
+<span class="sd">        Else::</span>
+
+<span class="sd">            if PYTHONPATH[i] == pname:   returns empty str - &#39;&#39;</span>
+<span class="sd">            else:</span>
+<span class="sd">                if verify:               raise SourceInfoError </span>
+<span class="sd">                else:                    returns None</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        SourceInfoError</span>
+
+<span class="sd">        pass-through</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_normpath</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;normpath&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">)</span> 
+    <span class="n">_raw</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;raw&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span> 
+    <span class="n">_verify</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;verify&#39;</span><span class="p">)</span> 
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">pname</span><span class="p">:</span>
+        <span class="c1"># shortcut for empty/None - so following check know a parameter is provided</span>
+        <span class="k">if</span> <span class="n">_verify</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">SourceInfoError</span><span class="p">(</span><span class="s1">&#39;no valid param pname = &quot;</span><span class="si">%s</span><span class="s1">&quot;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pname</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="n">pname</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">plist</span><span class="p">:</span>
+        <span class="n">plist</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span>
+
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isabs</span><span class="p">(</span><span class="n">pname</span><span class="p">):</span>
+        <span class="n">_presolve</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;presolve&#39;</span><span class="p">,</span> <span class="n">presolve</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">_presolve</span> <span class="o">=</span> <span class="n">P_FIRST</span>
+
+
+    <span class="c1"># path or object name</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">_raw</span> <span class="ow">and</span> <span class="n">_normpath</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">_fp</span> <span class="o">=</span> <span class="n">_normpath</span><span class="p">(</span><span class="n">pname</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">_fp</span> <span class="o">=</span> <span class="n">_normpath</span><span class="p">(</span><span class="n">pname</span><span class="o">.</span><span class="vm">__file__</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">_verify</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="n">SourceInfoError</span><span class="p">(</span><span class="s1">&#39;not valid pname = </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pname</span><span class="p">)))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">_fp</span> <span class="o">=</span> <span class="n">pname</span>
+
+
+    <span class="c1">#</span>
+    <span class="c1"># now shure, &#39;pname&#39; is s.th. valid</span>
+    <span class="c1">#</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isabs</span><span class="p">(</span><span class="n">_fp</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">pname</span> <span class="ow">in</span> <span class="n">plist</span><span class="p">:</span>
+            <span class="c1"># is a search path itself</span>
+
+            <span class="k">if</span> <span class="n">_verify</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">pname</span><span class="p">):</span>
+                <span class="c1"># absolute is has to exist itself</span>
+                <span class="k">raise</span> <span class="n">SourceInfoError</span><span class="p">(</span><span class="s1">&#39;does not exist: </span><span class="se">\n</span><span class="s1">   abs: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pname</span><span class="p">)))</span>
+            <span class="k">if</span> <span class="n">pname</span> <span class="o">==</span> <span class="n">_fp</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">return</span> <span class="n">_fp</span>
+
+        <span class="c1"># for now assume x==&#39;&#39; is not valid</span>
+        <span class="n">_fplst</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">plist</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">and</span> <span class="n">_fp</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">x</span><span class="p">)]</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">_fplst</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">_sp</span> <span class="ow">in</span> <span class="n">plist</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">_sp</span> <span class="o">+</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span> <span class="o">+</span> <span class="n">_fp</span><span class="p">):</span>
+                <span class="n">_fplst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_sp</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">continue</span>
+    
+    <span class="c1"># no plist</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">_fplst</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">pname</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">_verify</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">_verify</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">raise</span> <span class="n">SourceInfoError</span><span class="p">(</span><span class="s1">&#39;does not exist: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pname</span><span class="p">)))</span>
+
+    <span class="k">if</span> <span class="n">_presolve</span> <span class="o">==</span> <span class="n">P_FIRST</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">_verify</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">_fplst</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="k">raise</span> <span class="n">SourceInfoError</span><span class="p">(</span><span class="s1">&#39;does not exist: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">_fplst</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isabs</span><span class="p">(</span><span class="n">_fp</span><span class="p">):</span>
+            <span class="n">_ret</span> <span class="o">=</span> <span class="n">_fp</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">_fplst</span><span class="p">[</span><span class="mi">0</span><span class="p">]):]</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isabs</span><span class="p">(</span><span class="n">_ret</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">_ret</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_fp</span>
+
+    <span class="k">elif</span> <span class="n">_presolve</span> <span class="o">==</span> <span class="n">P_LAST</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">_verify</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">_fplst</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="k">raise</span> <span class="n">SourceInfoError</span><span class="p">(</span><span class="s1">&#39;does not exist: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">_fplst</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])))</span>
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isabs</span><span class="p">(</span><span class="n">_fp</span><span class="p">):</span>
+            <span class="n">_ret</span> <span class="o">=</span> <span class="n">_fp</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">_fplst</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]):]</span>
+            <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isabs</span><span class="p">(</span><span class="n">_ret</span><span class="p">):</span>
+                <span class="k">return</span> <span class="n">_ret</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">_fp</span>
+
+    <span class="k">elif</span> <span class="n">_presolve</span> <span class="o">==</span> <span class="n">P_LONGEST</span><span class="p">:</span>
+        <span class="n">_fpnew</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+
+        <span class="n">_shortest</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">_fplst</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">_verify</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">_shortest</span><span class="p">:</span>
+                <span class="n">_shortest</span> <span class="o">=</span> <span class="n">x</span>
+
+            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">plist</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">y</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">y</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">))</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">_shortest</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)):</span>  
+                        <span class="n">_shortest</span> <span class="o">=</span> <span class="n">y</span>
+
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">_fpnew</span><span class="p">:</span>
+                <span class="n">_fpnew</span> <span class="o">=</span> <span class="n">x</span> 
+
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">))</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">_fpnew</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)):</span>  
+                <span class="c1"># number of path-items - search longest relative sub, neef shortest python path</span>
+                <span class="n">_fpnew</span> <span class="o">=</span> <span class="n">x</span>
+
+
+        <span class="k">if</span> <span class="n">_fpnew</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">_fpnew</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">pname</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">_fpnew</span><span class="p">):]</span>
+            <span class="k">return</span> <span class="n">pname</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">_fpnew</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span>
+
+    <span class="k">elif</span> <span class="n">_presolve</span> <span class="o">==</span> <span class="n">P_SHORTEST</span><span class="p">:</span>
+        <span class="c1"># simple literal static sub directories only</span>
+        <span class="n">kw</span><span class="p">[</span><span class="s1">&#39;presolve&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">P_LONGEST</span>
+        <span class="n">_longest</span> <span class="o">=</span> <span class="n">getpythonpath</span><span class="p">(</span><span class="n">_fp</span><span class="p">,</span> <span class="n">plist</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+        <span class="n">_sp</span> <span class="o">=</span> <span class="n">_fp</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">_longest</span><span class="p">):]</span>
+
+        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isabs</span><span class="p">(</span><span class="n">_sp</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">_sp</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+        <span class="k">return</span> <span class="n">_sp</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">SourceInfoError</span><span class="p">(</span><span class="s2">&quot;unknown presolve = &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">presolve</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">_verify</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">_fpnew</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">SourceInfoError</span><span class="p">(</span><span class="s1">&#39;does not exist: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pname</span><span class="p">)))</span>
+
+    <span class="k">return</span> <span class="n">_fpnew</span></div>
+
+
+<div class="viewcode-block" id="getpythonpath_rel_oid"><a class="viewcode-back" href="../../sourceinfo.helper.html#sourceinfo.helper.getpythonpath_rel_oid">[docs]</a><span class="k">def</span> <span class="nf">getpythonpath_rel_oid</span><span class="p">(</span><span class="n">pname</span><span class="p">,</span> <span class="n">plist</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Calls *getpythonpath_rel*, returns the relative</span>
+<span class="sd">    path as dotted *OID* relative to the search path.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        For interface parameters refer to::</span>
+
+<span class="sd">            sourceinfo.helper.getpythonpath_rel()</span>
+<span class="sd">        </span>
+<span class="sd">        kargs:</span>
+<span class="sd">            For remaining parameters refer to</span>
+<span class="sd">            *getpythonpath_rel*. </span>
+
+<span class="sd">            restype:</span>
+<span class="sd">                Result type::</span>
+
+<span class="sd">                    restype = (</span>
+<span class="sd">                          OID_STR    # OID as dottedt string representation</span>
+<span class="sd">                        | OID_TUPLE  # OID as tuple</span>
+<span class="sd">                        | OID_LIST   # OID as list</span>
+<span class="sd">                    )</span>
+
+<span class="sd">                    default := OID_STR</span>
+
+<span class="sd">            sepin:</span>
+<span class="sd">                The path separator::</span>
+
+<span class="sd">                    default := os.sep</span>
+
+<span class="sd">                The function internally checks the presence of the provided path.</span>
+<span class="sd">                This is not cross-converted, thus requires native separator </span>
+<span class="sd">                characters. While the *NT* file system supports multiple separators,</span>
+<span class="sd">                the *posix* based file systems support regularly the slash &#39;/&#39; only.</span>
+<span class="sd">                Thus these fail when other separator characters are provided. For</span>
+<span class="sd">                advanced cross-capabilities refer to *filesysobjects*.</span>
+
+<span class="sd">            sepout:</span>
+<span class="sd">                The path separator::</span>
+
+<span class="sd">                    default := &#39;.&#39;</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the provided result by *getpythonpath_rel* in accordance to</span>
+<span class="sd">        the requested result type - see *restype*.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        SourceInfoError</span>
+
+<span class="sd">        pass-through</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_restype</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;restype&#39;</span><span class="p">,</span> <span class="n">OID_STR</span><span class="p">)</span>
+    <span class="n">_sepin</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sepin&#39;</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span>
+    <span class="n">_sepout</span> <span class="o">=</span> <span class="n">kw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sepout&#39;</span><span class="p">,</span> <span class="s1">&#39;.&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">pname</span><span class="p">,</span> <span class="n">ISSTR</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">SourceInfoError</span><span class="p">(</span><span class="s2">&quot;Supports string input only, got:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">pname</span><span class="p">))</span>
+
+    <span class="c1"># __init__.py is not part of OID naming convention, so cut it off</span>
+    <span class="n">_res</span> <span class="o">=</span> <span class="n">getpythonpath_rel</span><span class="p">(</span><span class="n">CUT_INIT_PY</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">pname</span><span class="p">),</span> <span class="n">plist</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">_res</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">_res</span><span class="p">,</span> <span class="n">ISSTR</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">_restype</span> <span class="o">==</span> <span class="n">OID_STR</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">_sepin</span><span class="p">),</span> <span class="n">_sepout</span><span class="p">,</span> <span class="n">_res</span><span class="p">)</span> 
+        <span class="k">elif</span> <span class="n">_restype</span> <span class="o">==</span> <span class="n">OID_TUPLE</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">_sepin</span><span class="p">),</span> <span class="n">_res</span><span class="p">))</span> 
+        <span class="k">elif</span> <span class="n">_restype</span> <span class="o">==</span> <span class="n">OID_LIST</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">_sepin</span><span class="p">),</span> <span class="n">_res</span><span class="p">))</span> 
+
+    <span class="k">raise</span> <span class="n">SourceInfoError</span><span class="p">(</span><span class="s2">&quot;Supports string conversion only, got:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">_res</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="getstack_frame"><a class="viewcode-back" href="../../sourceinfo.helper.html#sourceinfo.helper.getstack_frame">[docs]</a><span class="k">def</span> <span class="nf">getstack_frame</span><span class="p">(</span><span class="n">spos</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">fromtop</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;List of current mem-addresses on stack frames.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spos:</span>
+<span class="sd">            Stack position.</span>
+<span class="sd">        </span>
+<span class="sd">        fromtop:</span>
+<span class="sd">            Start on top, default from bottom.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the specified frame.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">fromtop</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">stack</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">spos</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">stack</span><span class="p">()[</span><span class="n">spos</span><span class="p">]</span></div>
+
+
+<div class="viewcode-block" id="getstack_len"><a class="viewcode-back" href="../../sourceinfo.helper.html#sourceinfo.helper.getstack_len">[docs]</a><span class="k">def</span> <span class="nf">getstack_len</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Length of current stack.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        none.</span>
+<span class="sd">        </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the length of current stack.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        pass-through</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">stack</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="matchpath"><a class="viewcode-back" href="../../sourceinfo.helper.html#sourceinfo.helper.matchpath">[docs]</a><span class="k">def</span> <span class="nf">matchpath</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">pathlist</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pmatch</span><span class="o">=</span><span class="n">P_FIRST</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Match a file pathname of pathname on a pathlist.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        path:</span>
+<span class="sd">            Path to be searched in *pathlist*.</span>
+<span class="sd">        </span>
+<span class="sd">        pathlist:</span>
+<span class="sd">            Search path for a given *path*.</span>
+<span class="sd">        </span>
+<span class="sd">            default := *sys.path*</span>
+<span class="sd">        </span>
+<span class="sd">        pmatch:</span>
+<span class="sd">            Match criteria for search. ::</span>
+<span class="sd">        </span>
+<span class="sd">                pmatch := (</span>
+<span class="sd">                    P_FIRST, P_LAST, P_SHORTEST,</span>
+<span class="sd">                    P_LONGEST, P_IGNORE0</span>
+<span class="sd">                 )</span>
+<span class="sd">        </span>
+<span class="sd">            default := *P_FIRST*</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the matched pathname from pathlist.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        pass-through</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_buf</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">pathlist</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">pathlist</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">path</span>
+        
+    <span class="k">if</span> <span class="n">pmatch</span> <span class="o">&amp;</span> <span class="n">P_IGNORE0</span><span class="p">:</span>
+        <span class="n">_pl</span> <span class="o">=</span> <span class="n">pathlist</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">_pl</span> <span class="o">=</span> <span class="n">pathlist</span>
+    <span class="k">for</span> <span class="n">sx</span> <span class="ow">in</span> <span class="n">_pl</span><span class="p">:</span>
+        <span class="n">p0</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">sx</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">p0</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">pmatch</span> <span class="o">&amp;</span> <span class="n">P_FIRST</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">p0</span>
+            <span class="k">elif</span> <span class="n">pmatch</span> <span class="o">&amp;</span> <span class="n">P_LAST</span><span class="p">:</span>
+                <span class="n">_buf</span> <span class="o">=</span> <span class="n">p0</span>
+            <span class="k">elif</span> <span class="n">pmatch</span> <span class="o">&amp;</span> <span class="n">P_LONGEST</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">p0</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">_buf</span><span class="p">):</span>
+                    <span class="n">_buf</span> <span class="o">=</span> <span class="n">p0</span>
+            <span class="k">elif</span> <span class="n">pmatch</span> <span class="o">&amp;</span> <span class="n">P_SHORTEST</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">p0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">_buf</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">_buf</span><span class="p">:</span>
+                    <span class="n">_buf</span> <span class="o">=</span> <span class="n">p0</span>
+    <span class="k">return</span> <span class="n">_buf</span></div>
+
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright Copyright (C) 2016 Arno-Can Uestuensoez @Ingenieurbuero Arno-Can Uestuensoez
+      <span class="lastupdated">
+        Last updated on Dec 05, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

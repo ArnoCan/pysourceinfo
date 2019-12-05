@@ -1,0 +1,20 @@
+**Product Data**
+
+* MISSION=Utilities for simplified gain of runtime information on source code and binary locations.
+
+* AUTHOR=Arno-Can Uestuensoez
+
+* PROJECT=sourceinfo
+
+* COPYRIGHT=(C)2019 Arno-Can Uestuensoez
+
+* LICENSE=Artistic-License-2.0 + Forced-Fairplay-Constraints
+
+* VERSION=0.1.38
+
+* RELEASE=0.1.38
+
+* STATUS=Unknown
+
+* BUILDDATE=2019.12.05-03:17
+

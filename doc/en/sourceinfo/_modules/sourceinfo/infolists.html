@@ -1,0 +1,497 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sourceinfo.infolists &mdash; setupdocx  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html">
+          
+
+          
+            
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.36
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Shortcuts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">SourceInfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index_part_cockpit.html">apidoc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index_part_apiref_scaled.html">apiref</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index_part_abstract.html">1. Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index_part_platform_support.html">2. Platform Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index_part_blueprint.html">3. Blueprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index_part_documents.html">4. Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index_modules.html">5. Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index_part_indices.html">6. Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index_part_resources.html">7. Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">8. Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../references.html">9. External References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../index_part_license.html">10. Licenses</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Application</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../howto/index.html">Howto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../help/index.html">Help</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">setupdocx</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+        
+      <li>sourceinfo.infolists</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <h1>Source code for sourceinfo.infolists</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&quot;&quot;&quot;pysourceinfo.infolists - lists.</span>
+
+<span class="sd">Details see @local-manuals or @[https://pythonhosted.org/pysourceinfo/]</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="k">import</span> <span class="n">absolute_import</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">itertools</span> <span class="k">import</span> <span class="n">groupby</span>
+
+<span class="kn">from</span> <span class="nn">sourceinfo</span> <span class="k">import</span> <span class="n">P_LONGEST</span><span class="p">,</span> <span class="n">P_SHORTEST</span>
+<span class="kn">from</span> <span class="nn">sourceinfo.helper</span> <span class="k">import</span> <span class="n">getpythonpath</span><span class="p">,</span> <span class="n">getpythonpath_rel</span>
+
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Arno-Can Uestuensoez&#39;</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s2">&quot;Artistic-License-2.0 + Forced-Fairplay-Constraints&quot;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s2">&quot;Copyright (C) 2010-2018 Arno-Can Uestuensoez&quot;</span> \
+    <span class="s2">&quot; @Ingenieurbuero Arno-Can Uestuensoez&quot;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.1.34&#39;</span>
+<span class="n">__uuid__</span> <span class="o">=</span> <span class="s1">&#39;9de52399-7752-4633-9fdc-66c87a9200b8&#39;</span>
+
+<span class="n">__docformat__</span> <span class="o">=</span> <span class="s2">&quot;restructuredtext en&quot;</span>
+
+
+<span class="c1">#---</span>
+<span class="c1">#</span>
+<span class="c1"># redundant for autonomous load-independence by reduction of dependencies</span>
+<span class="c1">#</span>
+
+
+<span class="k">def</span> <span class="nf">__sortu</span><span class="p">(</span><span class="n">sequence</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;sort unique&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">groupby</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">sequence</span><span class="p">)))</span>
+
+
+<span class="c1">#---</span>
+
+<div class="viewcode-block" id="getsysmodules_filepathname_list"><a class="viewcode-back" href="../../sourceinfo.infolists.html#sourceinfo.infolists.getsysmodules_filepathname_list">[docs]</a><span class="k">def</span> <span class="nf">getsysmodules_filepathname_list</span><span class="p">(</span><span class="n">spat</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the list of file pathnames of all loaded modules</span>
+<span class="sd">    from *sys.modules*.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        spat:</span>
+<span class="sd">            Search pattern, if provided it is used as pattern</span>
+<span class="sd">            to search on each module name, returns matches only.</span>
+<span class="sd">            Else returns the whole list.</span>
+
+<span class="sd">        kargs:</span>
+<span class="sd">            abs:</span>
+<span class="sd">                If *True* transforms each module name by  </span>
+<span class="sd">                *helper.getpythonpath* before further</span>
+<span class="sd">                processing.</span>
+
+<span class="sd">                default := False</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the list of file path names for the loaded modules,</span>
+<span class="sd">        or empty list.</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        pass-through</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_abs</span> <span class="o">=</span>  <span class="n">kargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;abs&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">spat</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">_abs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">getpythonpath</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">ispre</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">+</span> <span class="n">x</span><span class="o">.</span><span class="vm">__file__</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="n">x</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;__file__&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">x</span><span class="o">.</span><span class="vm">__file__</span> 
+                <span class="p">]</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span>
+                <span class="p">[</span>
+                    <span class="n">x</span><span class="o">.</span><span class="vm">__file__</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="n">x</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;__file__&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">x</span><span class="o">.</span><span class="vm">__file__</span>
+                <span class="p">]</span>
+            <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">kargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;abs&#39;</span><span class="p">):</span>
+        <span class="n">_res</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;__file__&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">x</span><span class="o">.</span><span class="vm">__file__</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">spat</span><span class="p">),</span> <span class="n">x</span><span class="o">.</span><span class="vm">__file__</span><span class="p">):</span>
+                    <span class="n">_mp</span> <span class="o">=</span> <span class="n">getpythonpath</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">ispre</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">presolve</span><span class="o">=</span><span class="n">P_LONGEST</span><span class="p">)</span>
+                    <span class="n">_mprel</span> <span class="o">=</span> <span class="n">getpythonpath_rel</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">ispre</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">presolve</span><span class="o">=</span><span class="n">P_SHORTEST</span><span class="p">)</span>
+            
+                <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isabs</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="vm">__file__</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">spat</span><span class="p">),</span> <span class="n">x</span><span class="o">.</span><span class="vm">__file__</span><span class="p">):</span>
+                        <span class="n">_res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="vm">__file__</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">_mp</span> <span class="o">=</span> <span class="n">getpythonpath</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">ispre</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">presolve</span><span class="o">=</span><span class="n">P_LONGEST</span><span class="p">)</span>
+                    <span class="n">_mprel</span> <span class="o">=</span> <span class="n">getpythonpath_rel</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">presolve</span><span class="o">=</span><span class="n">P_SHORTEST</span><span class="p">)</span>
+
+                    <span class="k">if</span> <span class="n">_mp</span><span class="p">:</span>
+                        <span class="n">_sx</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">spat</span><span class="p">),</span> <span class="n">_mp</span> <span class="o">+</span> <span class="n">_mprel</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">_sx</span><span class="p">:</span>
+                            <span class="n">_res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_mp</span> <span class="o">+</span> <span class="n">_mprel</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">_res</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">x</span><span class="o">.</span><span class="vm">__file__</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">x</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;__file__&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">x</span><span class="o">.</span><span class="vm">__file__</span> <span class="ow">and</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">spat</span><span class="p">),</span> <span class="n">x</span><span class="o">.</span><span class="vm">__file__</span><span class="p">)</span>
+            <span class="p">]</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="getsysmodules_id_list"><a class="viewcode-back" href="../../sourceinfo.infolists.html#sourceinfo.infolists.getsysmodules_id_list">[docs]</a><span class="k">def</span> <span class="nf">getsysmodules_id_list</span><span class="p">(</span><span class="n">r</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the list of the IDs of the loaded modules.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">    </span>
+<span class="sd">        r: </span>
+<span class="sd">            regexpr to be applied on the IDs.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">    </span>
+<span class="sd">        Returns the list of the loaded modules.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">    </span>
+<span class="sd">        pass-through</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">r</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">([</span><span class="nb">id</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="n">x</span><span class="p">])</span>
+    <span class="k">return</span> <span class="nb">sorted</span><span class="p">([</span><span class="nb">id</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+                   <span class="k">if</span> <span class="n">x</span> <span class="ow">and</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="nb">str</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">x</span><span class="p">)))])</span></div>
+
+
+<div class="viewcode-block" id="getsysmodules_list"><a class="viewcode-back" href="../../sourceinfo.infolists.html#sourceinfo.infolists.getsysmodules_list">[docs]</a><span class="k">def</span> <span class="nf">getsysmodules_list</span><span class="p">(</span><span class="n">r</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the list of the loaded modules.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        r:</span>
+<span class="sd">            regexpr to be applied on the module names.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the list of the loaded modules.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        pass-through</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">r</span><span class="p">:</span>
+        <span class="n">ml</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+                     <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">x</span><span class="p">]])</span>
+        <span class="k">return</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">ml</span><span class="p">)</span>
+        
+    <span class="n">ml</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+                 <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="ow">and</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">x</span><span class="p">)])</span>
+    <span class="k">return</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">ml</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="getsysmodules_name_list"><a class="viewcode-back" href="../../sourceinfo.infolists.html#sourceinfo.infolists.getsysmodules_name_list">[docs]</a><span class="k">def</span> <span class="nf">getsysmodules_name_list</span><span class="p">(</span><span class="n">r</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the list of the loaded modules.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        r:</span>
+<span class="sd">            regexpr to be applied on the module names.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the list of the names of the loaded modules.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        passed through exceptions</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">r</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+                       <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">x</span><span class="p">]])</span>
+    <span class="k">return</span> <span class="nb">sorted</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+                   <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="ow">and</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">x</span><span class="p">)])</span></div>
+
+
+<div class="viewcode-block" id="getsysmodules_pathname_list"><a class="viewcode-back" href="../../sourceinfo.infolists.html#sourceinfo.infolists.getsysmodules_pathname_list">[docs]</a><span class="k">def</span> <span class="nf">getsysmodules_pathname_list</span><span class="p">(</span><span class="n">r</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the list of path names of the loaded modules.</span>
+<span class="sd">    </span>
+<span class="sd">    Args:</span>
+<span class="sd">        r:</span>
+<span class="sd">            regexpr to be applied on the module path names.</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the list of pathnames of the loaded modules.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        pass-through</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">r</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">__sortu</span><span class="p">([</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="vm">__file__</span><span class="p">))</span>
+                             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;__file__&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">x</span><span class="o">.</span><span class="vm">__file__</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">__sortu</span><span class="p">([</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="vm">__file__</span><span class="p">))</span>
+                         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+                         <span class="k">if</span> <span class="n">x</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;__file__&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">x</span><span class="o">.</span><span class="vm">__file__</span> <span class="ow">and</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">x</span><span class="o">.</span><span class="vm">__file__</span><span class="p">)]))</span></div>
+
+
+<div class="viewcode-block" id="getsysmodules_pathname_rel_list"><a class="viewcode-back" href="../../sourceinfo.infolists.html#sourceinfo.infolists.getsysmodules_pathname_rel_list">[docs]</a><span class="k">def</span> <span class="nf">getsysmodules_pathname_rel_list</span><span class="p">(</span><span class="n">r</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">plist</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns for the loaded modules the list of</span>
+<span class="sd">    path names relative to PYTHONPATH.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        r:</span>
+<span class="sd">            regexpr to be applied on the module path names.</span>
+<span class="sd">        </span>
+<span class="sd">        plist:</span>
+<span class="sd">            alternate search path list</span>
+<span class="sd">    </span>
+<span class="sd">    Returns:</span>
+<span class="sd">        Returns the list of pathnames of the loaded modules.</span>
+<span class="sd">    </span>
+<span class="sd">    Raises:</span>
+<span class="sd">        pass-through</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">r</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">__sortu</span><span class="p">([</span><span class="n">getpythonpath_rel</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">plist</span><span class="p">)</span>
+                             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+                             <span class="k">if</span> <span class="n">x</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;__file__&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">x</span><span class="o">.</span><span class="vm">__file__</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">__sortu</span><span class="p">([</span><span class="n">getpythonpath_rel</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">plist</span><span class="p">)</span>
+                         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+                         <span class="k">if</span> <span class="n">x</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;__file__&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">x</span><span class="o">.</span><span class="vm">__file__</span> <span class="ow">and</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">x</span><span class="o">.</span><span class="vm">__file__</span><span class="p">)]))</span></div>
+
+
+<div class="viewcode-block" id="getsysmodules_python_pathname_list"><a class="viewcode-back" href="../../sourceinfo.infolists.html#sourceinfo.infolists.getsysmodules_python_pathname_list">[docs]</a><span class="k">def</span> <span class="nf">getsysmodules_python_pathname_list</span><span class="p">(</span><span class="n">pname</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">plist</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns the list of packages path names for the loaded</span>
+<span class="sd">    modules from PYTHONPATH. This is as mentioned related to the</span>
+<span class="sd">    containing package itself.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        </span>
+<span class="sd">        **pname**:</span>
+<span class="sd">            pathname</span>
+
+<span class="sd">        **plist**:</span>
+<span class="sd">            Search path list.</span>
+<span class="sd">            </span>
+<span class="sd">            default := sys.path</span>
+
+<span class="sd">        kargs:</span>
+<span class="sd">            **presolve**:</span>
+<span class="sd">                The type of path resolution: ::</span>
+
+<span class="sd">                   presolve := (</span>
+<span class="sd">                        P_FIRST</span>
+<span class="sd">                      | P_LAST</span>
+<span class="sd">                      | P_LONGEST</span>
+<span class="sd">                      | P_SHORTEST</span>
+<span class="sd">                   )</span>
+
+<span class="sd">                default := pysourceinfo.presolve(P_FIRST)</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List of paths</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        pass-through</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">pname</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">__sortu</span><span class="p">([</span><span class="n">getpythonpath</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">plist</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">)</span>
+                             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+                             <span class="k">if</span> <span class="n">x</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;__file__&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">x</span><span class="o">.</span><span class="vm">__file__</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">__sortu</span><span class="p">([</span><span class="n">getpythonpath</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="vm">__file__</span><span class="p">,</span> <span class="n">plist</span><span class="p">,</span> <span class="o">**</span><span class="n">kargs</span><span class="p">)</span>
+                         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+                         <span class="k">if</span> <span class="n">x</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="s1">&#39;__file__&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">x</span><span class="o">.</span><span class="vm">__file__</span> <span class="ow">and</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">pname</span><span class="p">),</span> <span class="n">x</span><span class="o">.</span><span class="vm">__file__</span><span class="p">)]))</span></div>
+
+
+</pre></div>
+
+           </div>
+           
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright Copyright (C) 2016 Arno-Can Uestuensoez @Ingenieurbuero Arno-Can Uestuensoez
+      <span class="lastupdated">
+        Last updated on Dec 05, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

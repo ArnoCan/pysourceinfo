@@ -1,0 +1,460 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>5.5. sourceinfo.infolists &mdash; setupdocx  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="5.6. sourceinfo.objectinfo" href="sourceinfo.objectinfo.html" />
+    <link rel="prev" title="5.4. sourceinfo.helper" href="sourceinfo.helper.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html">
+          
+
+          
+            
+            <img src="_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.36
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Shortcuts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">SourceInfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index_part_cockpit.html">apidoc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index_part_apiref_scaled.html">apiref</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Documentation</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index_part_abstract.html">1. Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index_part_platform_support.html">2. Platform Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index_part_blueprint.html">3. Blueprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index_part_documents.html">4. Documents</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index_modules.html">5. Modules</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="sourceinfo.html">5.1. sourceinfo.__init__</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sourceinfo.bininfo.html">5.2. sourceinfo.bininfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sourceinfo.fileinfo.html">5.3. sourceinfo.fileinfo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sourceinfo.helper.html">5.4. sourceinfo.helper</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">5.5. sourceinfo.infolists</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-sourceinfo.infolists">5.5.1. Modules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#functions">5.5.2. Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#getsysmodules-filepathname-list">5.5.2.1. getsysmodules_filepathname_list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getsysmodules-id-list">5.5.2.2. getsysmodules_id_list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getsysmodules-list">5.5.2.3. getsysmodules_list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getsysmodules-name-list">5.5.2.4. getsysmodules_name_list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getsysmodules-pathname-list">5.5.2.5. getsysmodules_pathname_list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getsysmodules-python-pathname-list">5.5.2.6. getsysmodules_python_pathname_list</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#getsysmodules-pathname-rel-list">5.5.2.7. getsysmodules_pathname_rel_list</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#resources">5.5.3. Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="sourceinfo.objectinfo.html">5.6. sourceinfo.objectinfo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index_part_indices.html">6. Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index_part_resources.html">7. Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install.html">8. Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="references.html">9. External References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index_part_license.html">10. Licenses</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Application</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="howto/index.html">Howto</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="help/index.html">Help</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">setupdocx</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index_modules.html">5. Modules</a> &raquo;</li>
+        
+      <li>5.5. sourceinfo.infolists</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/sourceinfo.infolists.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sourceinfo-infolists">
+<span id="pysourceinfo-infolists"></span><h1>5.5. sourceinfo.infolists<a class="headerlink" href="#sourceinfo-infolists" title="Permalink to this headline">¶</a></h1>
+<p>Lists and items of source information for runtime components.</p>
+<div class="section" id="module-sourceinfo.infolists">
+<span id="modules"></span><h2>5.5.1. Modules<a class="headerlink" href="#module-sourceinfo.infolists" title="Permalink to this headline">¶</a></h2>
+<p>pysourceinfo.infolists - lists.</p>
+<p>Details see &#64;local-manuals or &#64;[<a class="reference external" href="https://pythonhosted.org/pysourceinfo/">https://pythonhosted.org/pysourceinfo/</a>]</p>
+</div>
+<div class="section" id="functions">
+<h2>5.5.2. Functions<a class="headerlink" href="#functions" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="getsysmodules-filepathname-list">
+<span id="def-getsysmodules-filepathname-list"></span><h3>5.5.2.1. getsysmodules_filepathname_list<a class="headerlink" href="#getsysmodules-filepathname-list" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="sourceinfo.infolists.getsysmodules_filepathname_list">
+<code class="sig-prename descclassname">sourceinfo.infolists.</code><code class="sig-name descname">getsysmodules_filepathname_list</code><span class="sig-paren">(</span><em class="sig-param">spat=None</em>, <em class="sig-param">**kargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sourceinfo/infolists.html#getsysmodules_filepathname_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sourceinfo.infolists.getsysmodules_filepathname_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list of file pathnames of all loaded modules
+from <em>sys.modules</em>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>spat</strong> – Search pattern, if provided it is used as pattern
+to search on each module name, returns matches only.
+Else returns the whole list.</p></li>
+<li><p><strong>kargs</strong> – <dl>
+<dt>abs:</dt><dd><p>If <em>True</em> transforms each module name by
+<em>helper.getpythonpath</em> before further
+processing.</p>
+<p>default := False</p>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns the list of file path names for the loaded modules,
+or empty list.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>pass-through</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="getsysmodules-id-list">
+<span id="def-getsysmodules-id-list"></span><h3>5.5.2.2. getsysmodules_id_list<a class="headerlink" href="#getsysmodules-id-list" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="sourceinfo.infolists.getsysmodules_id_list">
+<code class="sig-prename descclassname">sourceinfo.infolists.</code><code class="sig-name descname">getsysmodules_id_list</code><span class="sig-paren">(</span><em class="sig-param">r=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sourceinfo/infolists.html#getsysmodules_id_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sourceinfo.infolists.getsysmodules_id_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list of the IDs of the loaded modules.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>r</strong> – regexpr to be applied on the IDs.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns the list of the loaded modules.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>pass-through</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="getsysmodules-list">
+<span id="def-getsysmodules-list"></span><h3>5.5.2.3. getsysmodules_list<a class="headerlink" href="#getsysmodules-list" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="sourceinfo.infolists.getsysmodules_list">
+<code class="sig-prename descclassname">sourceinfo.infolists.</code><code class="sig-name descname">getsysmodules_list</code><span class="sig-paren">(</span><em class="sig-param">r=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sourceinfo/infolists.html#getsysmodules_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sourceinfo.infolists.getsysmodules_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list of the loaded modules.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>r</strong> – regexpr to be applied on the module names.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns the list of the loaded modules.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>pass-through</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="getsysmodules-name-list">
+<span id="def-getsysmodules-name-list"></span><h3>5.5.2.4. getsysmodules_name_list<a class="headerlink" href="#getsysmodules-name-list" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="sourceinfo.infolists.getsysmodules_name_list">
+<code class="sig-prename descclassname">sourceinfo.infolists.</code><code class="sig-name descname">getsysmodules_name_list</code><span class="sig-paren">(</span><em class="sig-param">r=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sourceinfo/infolists.html#getsysmodules_name_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sourceinfo.infolists.getsysmodules_name_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list of the loaded modules.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>r</strong> – regexpr to be applied on the module names.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns the list of the names of the loaded modules.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>passed through exceptions</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="getsysmodules-pathname-list">
+<span id="def-getsysmodules-pathname-list"></span><h3>5.5.2.5. getsysmodules_pathname_list<a class="headerlink" href="#getsysmodules-pathname-list" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="sourceinfo.infolists.getsysmodules_pathname_list">
+<code class="sig-prename descclassname">sourceinfo.infolists.</code><code class="sig-name descname">getsysmodules_pathname_list</code><span class="sig-paren">(</span><em class="sig-param">r=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sourceinfo/infolists.html#getsysmodules_pathname_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sourceinfo.infolists.getsysmodules_pathname_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list of path names of the loaded modules.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>r</strong> – regexpr to be applied on the module path names.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns the list of pathnames of the loaded modules.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>pass-through</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="getsysmodules-python-pathname-list">
+<span id="def-getsysmodules-python-pathname-list"></span><h3>5.5.2.6. getsysmodules_python_pathname_list<a class="headerlink" href="#getsysmodules-python-pathname-list" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="sourceinfo.infolists.getsysmodules_python_pathname_list">
+<code class="sig-prename descclassname">sourceinfo.infolists.</code><code class="sig-name descname">getsysmodules_python_pathname_list</code><span class="sig-paren">(</span><em class="sig-param">pname=None</em>, <em class="sig-param">plist=None</em>, <em class="sig-param">**kargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sourceinfo/infolists.html#getsysmodules_python_pathname_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sourceinfo.infolists.getsysmodules_python_pathname_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the list of packages path names for the loaded
+modules from PYTHONPATH. This is as mentioned related to the
+containing package itself.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>**pname**</strong> – pathname</p></li>
+<li><p><strong>**plist**</strong> – <p>Search path list.</p>
+<p>default := sys.path</p>
+</p></li>
+<li><p><strong>kargs</strong> – <dl>
+<dt><strong>presolve</strong>:</dt><dd><p>The type of path resolution:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">presolve</span> <span class="p">:</span><span class="o">=</span> <span class="p">(</span>
+     <span class="n">P_FIRST</span>
+   <span class="o">|</span> <span class="n">P_LAST</span>
+   <span class="o">|</span> <span class="n">P_LONGEST</span>
+   <span class="o">|</span> <span class="n">P_SHORTEST</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<p>default := pysourceinfo.presolve(P_FIRST)</p>
+</dd>
+</dl>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of paths</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>pass-through</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="getsysmodules-pathname-rel-list">
+<span id="def-getsysmodules-pathname-rel-list"></span><h3>5.5.2.7. getsysmodules_pathname_rel_list<a class="headerlink" href="#getsysmodules-pathname-rel-list" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="sourceinfo.infolists.getsysmodules_pathname_rel_list">
+<code class="sig-prename descclassname">sourceinfo.infolists.</code><code class="sig-name descname">getsysmodules_pathname_rel_list</code><span class="sig-paren">(</span><em class="sig-param">r=None</em>, <em class="sig-param">plist=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sourceinfo/infolists.html#getsysmodules_pathname_rel_list"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sourceinfo.infolists.getsysmodules_pathname_rel_list" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns for the loaded modules the list of
+path names relative to PYTHONPATH.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>r</strong> – regexpr to be applied on the module path names.</p></li>
+<li><p><strong>plist</strong> – alternate search path list</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns the list of pathnames of the loaded modules.</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>pass-through</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="resources">
+<h2>5.5.3. Resources<a class="headerlink" href="#resources" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>inspect Python2 - <a class="reference internal" href="references.html#inspect2" id="id1"><span>[inspect2]</span></a></p></li>
+<li><p>inspect Python3 - <a class="reference internal" href="references.html#inspect3" id="id2"><span>[inspect3]</span></a></p></li>
+<li><p>types Python2 - <a class="reference internal" href="references.html#types2" id="id3"><span>[types2]</span></a></p></li>
+<li><p>types Python3 - <a class="reference internal" href="references.html#types3" id="id4"><span>[types3]</span></a></p></li>
+<li><p>pystackinfo package; Arno-Can Uestuensoez <a class="reference internal" href="references.html#pystackinfo" id="id5"><span>[pystackinfo]</span></a></p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sourceinfo.objectinfo.html" class="btn btn-neutral float-right" title="5.6. sourceinfo.objectinfo" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sourceinfo.helper.html" class="btn btn-neutral float-left" title="5.4. sourceinfo.helper" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright Copyright (C) 2016 Arno-Can Uestuensoez @Ingenieurbuero Arno-Can Uestuensoez
+      <span class="lastupdated">
+        Last updated on Dec 05, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,0 +1,281 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Get PYTHONPATH Prefix &mdash; setupdocx  documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Get Package Name" href="GetPackageName.html" />
+    <link rel="prev" title="Get Module OID" href="GetModuleOID.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html">
+          
+
+          
+            
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1.36
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Shortcuts</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">SourceInfo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index_part_cockpit.html">apidoc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index_part_apiref_scaled.html">apiref</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Documentation</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../index_part_abstract.html">1. Abstract</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index_part_platform_support.html">2. Platform Support</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index_part_blueprint.html">3. Blueprint</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index_part_documents.html">4. Documents</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index_modules.html">5. Modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index_part_indices.html">6. Indices and tables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index_part_resources.html">7. Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">8. Install</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../references.html">9. External References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index_part_license.html">10. Licenses</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Application</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Howto</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#basic">Basic</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="GetCallerOID.html">Get Caller OID</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GetCallerSourceLineNumber.html">Get Caller Source Line Number</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GetModuleFilePath.html">Get Module File Path</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GetModuleOID.html">Get Module OID</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Get PYTHONPATH Prefix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="GetPackageName.html">Get Package Name</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ObjectAccessviaNameBinding.html">Object Access via Name Binding</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../help/index.html">Help</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">setupdocx</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="index.html">Howto</a> &raquo;</li>
+        
+      <li>Get PYTHONPATH Prefix</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/howto/GetPYTHONPATHPrefix.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="get-pythonpath-prefix">
+<h1>Get PYTHONPATH Prefix<a class="headerlink" href="#get-pythonpath-prefix" title="Permalink to this headline">¶</a></h1>
+<p>The “PYTHONPATH Prefix” is defined as the full qualified
+directory entry from the variable <em>sys.path</em>, or similar <em>PYTHONPATH</em>.
+The program may alter the <em>sys.path</em> variable, the resulting content at the time
+of call is used. Thus this may eventually deviate from the expected <em>PYTHONPATH</em>
+entries.</p>
+<p>The algorithm matches the first pathname entry which could be validated as prefix
+for the loaded module name.
+Again, this could have been altered by the program, thus the current state of the <em>sys.path</em>
+is relied on as the final anchor, even though it may eventually not accurate
+<a class="reference internal" href="../namebinding.html#objectnamebinding"><span class="std std-ref">[Object-Namebinding]</span></a>:</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">PYTHONPATH</span><span class="o">&gt;</span>
+</pre></div>
+</td></tr></table></div>
+<p>The call signature is <a class="reference external" href="namebinding.html#filesystem-binding-functions">[Filesystem Binding Functions]</a>:</p>
+<div class="highlight-python notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="n">get</span><span class="o">&lt;</span><span class="n">obj</span><span class="o">&gt;</span><span class="n">_python_pathname</span><span class="p">()</span>
+</pre></div>
+</td></tr></table></div>
+<p>Where <em>&lt;obj&gt;</em> is resolved to one of:</p>
+<ul class="simple">
+<li><p>Caller</p></li>
+<li><p>Frame</p></li>
+<li><p>Module</p></li>
+</ul>
+<p>E.g. in case of an <em>Caller</em> by the relative stack position
+<a class="reference internal" href="../sourceinfo.fileinfo.html#def-getmodule-python-pathname"><span class="std std-ref">[API]</span></a>:</p>
+<pre class="literal-block"><a class="reference external" href="fileinfo.html#getmodule-python-pathname">fileinfo.getcaller_python_pathname</a></pre>
+<p>or in case of a <em>Module</em> by reference to the object
+<a class="reference internal" href="../sourceinfo.fileinfo.html#def-getmodule-python-pathname"><span class="std std-ref">[API]</span></a>:</p>
+<pre class="literal-block"><a class="reference external" href="fileinfo.html#getmodule-python-pathname">fileinfo.getmodule_python_pathname</a></pre>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="GetPackageName.html" class="btn btn-neutral float-right" title="Get Package Name" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="GetModuleOID.html" class="btn btn-neutral float-left" title="Get Module OID" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright Copyright (C) 2016 Arno-Can Uestuensoez @Ingenieurbuero Arno-Can Uestuensoez
+      <span class="lastupdated">
+        Last updated on Dec 05, 2019.
+      </span>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
