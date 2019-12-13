@@ -1,0 +1,7 @@
+Artistic License-2.0 + peer-to-peer-fairplay
+
+See enclosed:
+
+- Artistic License-2.0:   ArtisticLicense20.html
+- peer-to-peer-fairplay:  licenses-amendments.txt
+
